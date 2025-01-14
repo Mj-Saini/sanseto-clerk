@@ -108,6 +108,10 @@
   accent-color: red;
 }
 
+::-webkit-scrollbar{
+  display: none;
+}
+
 .custom-select {
   position: relative;
   display: inline-block;

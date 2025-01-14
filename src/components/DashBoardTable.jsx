@@ -18,34 +18,24 @@ const DashboardTable = () => {
 
   const {
     data,
-    setData,
     itemsPerPage,
     currentPage,
     totalPages,
     handlePageChange,
-    handleItemsPerPageChange,isToastVisible
+    handleItemsPerPageChange,isToastVisible,
+    addBroker, setAddBroker
   } = useContextProvider();
   const [show, setShow] = useState(false);
 
   const handleRefresh = () => {
     window.location.reload();
   };
-
   const isAdminDashboard = location.pathname.startsWith("/admin-dashboard");
-
-  const [previousData, setPreviousData] = useState([]);
-  const [addBroker, setAddBroker] = useState(false);
-  const [activePopupIndex, setActivePopupIndex] = useState(null);
   if (addBroker) {
     document.body.style.overflow = "clip";
   } else {
     document.body.style.overflow = "auto";
   }
-
-
-
-
-
 
   return (
     <div className="">
@@ -74,12 +64,12 @@ const DashboardTable = () => {
 
       <div className="h-full">
         <div className="flex justify-between items-center mb-4">
-          <div className=" py-3 w-full mt-3">
+          <div className=" py-3 w-full">
             {/* Table */}
             {/* Action Buttons */}
-            <div
+          {isAdminDashboard &&  <div
               style={{ display: "flex", justifyContent: "space-between" }}
-              className="mb-3 bg-white shadow-sm p-3 rounded-lg flex flex-col sm:!flex-row gap-3"
+              className="my-3 bg-white shadow-sm p-3 rounded-lg flex flex-col sm:!flex-row gap-3"
             >
               <div className="d-flex gap-2">
                 <button
@@ -100,7 +90,7 @@ const DashboardTable = () => {
                   Open 1Cliq Window
                 </button>
               </div>
-            </div>
+            </div>}
             {[0, 0].map((item, index) => (
               <div key={index} className="mt-3">
                 {index === 0 ? (

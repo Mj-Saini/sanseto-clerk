@@ -129,11 +129,11 @@ const DashBoard = () => {
                 >
                   <MenuIcon />
                 </div>
-                <div className="relative">
+                <div className="relative p-2">
                   <div className="flex items-center space-x-2 text-gray-700 hover:text-gray-900">
                     {isAdminDashboard ? (
                       <button
-                        className="block w-full text-left px-4 py-2 text-lg btn_light"
+                        className="block w-full text-left px-4 py-1 text-lg btn_light"
                         onClick={() => {
                           localStorage.clear();
                           navigate("/admin-login");

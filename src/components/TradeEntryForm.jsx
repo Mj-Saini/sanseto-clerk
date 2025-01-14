@@ -6,8 +6,10 @@ import { push, set, ref, onValue, update, get } from "firebase/database";
 import { useNavigate, useParams } from "react-router-dom";
 import { collection, getDocs } from "firebase/firestore";
 import Select from "react-select";
+import { useContextProvider } from "../context/ContextProvider";
 
-const TradeEntryForm = ({ showToast, setAddBroker }) => {
+const TradeEntryForm = ({ showToast, }) => {
+  const { setAddBroker } = useContextProvider();
   const { id } = useParams();
   const navigate = useNavigate();
   const [symbols, setSymbols] = useState([]);
@@ -190,189 +192,201 @@ const TradeEntryForm = ({ showToast, setAddBroker }) => {
   };
 
   return (
-    <div
-      id="TradeForm"
-      className="w-full md:w-1/2 mx-auto p-3 bg-white shadow-lg rounded-lg z-10"
-    >
-      <form onSubmit={handleSubmit}>
-        <div className="mb-2">
-          <label className="block text-[#6b3e37] mb-1" htmlFor="symbol">
-            Choose Symbol
-          </label>
-          <Select
-            options={symbols}
-            value={symbols.find((symbol) => symbol.value === formData.symbol)}
-            placeholder="Search or select a symbol"
-            onChange={handleSymbolChange}
-            className="w-full outline-none"
-            styles={{
-              control: (provided, state) => ({
-                ...provided,
-                height: "30px",
-                minHeight: "30px",
-                borderRadius: "0.375rem",
-                outline: "none",
-                boxShadow: "none",
-                borderColor: state.isFocused ? "#6b3e37" : "#6b3e37",
-              }),
-              singleValue: (provided) => ({
-                ...provided,
-                color: "#6b3e37",
-                outline: "none",
-                boxShadow: "none",
-              }),
-              menu: (provided) => ({
-                ...provided,
-                color: "#6b3e37",
-                outline: "none",
-                boxShadow: "none",
-              }),
-              valueContainer: (provided) => ({
-                ...provided,
-                height: "30px",
-                padding: "0",
-                boxShadow: "none",
-              }),
+    <>
+      {/* <div
+        onClick={() => setAddBroker(false)}
+        className="fixed top-0 left-0 h-screen w-full flex justify-center items-center bg-black/50"
+      ></div> */}
+      <div
+        id="TradeForm"
+        className="w-full md:w-1/2 mx-auto p-3 bg-white shadow-lg rounded-lg z-10"
+      >
+        <form onSubmit={handleSubmit}>
+          <div className="mb-2">
+            <label className="block text-[#6b3e37] mb-1" htmlFor="symbol">
+              Choose Symbol
+            </label>
+            <Select
+              options={symbols}
+              value={symbols.find((symbol) => symbol.value === formData.symbol)}
+              placeholder="Search or select a symbol"
+              onChange={handleSymbolChange}
+              className="w-full outline-none"
+              styles={{
+                control: (provided, state) => ({
+                  ...provided,
+                  height: "30px",
+                  minHeight: "30px",
+                  borderRadius: "0.375rem",
+                  outline: "none",
+                  boxShadow: "none",
+                  borderColor: state.isFocused ? "#6b3e37" : "#6b3e37",
+                }),
+                singleValue: (provided) => ({
+                  ...provided,
+                  color: "#6b3e37",
+                  outline: "none",
+                  boxShadow: "none",
+                }),
+                menu: (provided) => ({
+                  ...provided,
+                  color: "#6b3e37",
+                  outline: "none",
+                  boxShadow: "none",
+                }),
+                valueContainer: (provided) => ({
+                  ...provided,
+                  height: "30px",
+                  padding: "0",
+                  boxShadow: "none",
+                }),
 
-              indicatorsContainer: (provided) => ({
-                ...provided,
-                height: "30px",
-                boxShadow: "none",
-              }),
-            }}
-          />
-        </div>
-        <div className="mb-2">
-          <label className="block text-[#6b3e37] mb-1" htmlFor="dateTime">
-            Date & Time
-          </label>
-          <input
-            // required
-            type="datetime-local"
-            id="dateTime"
-            name="dateTime"
-            value={formData.dateTime}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 text-[#97514b] rounded-md outline-none "
-          />
-        </div>
-        <div className="mb-2">
-          <label className="block text-[#6b3e37] mb-1" htmlFor="entryPriceFrom">
-            position
-          </label>
-          <input
-            required
-            type="text"
-            id="position"
-            name="position"
-            value={formData.position}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 text-[#97514b] rounded-md outline-none "
-          />
-        </div>
-
-        <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-2">
-          <div>
+                indicatorsContainer: (provided) => ({
+                  ...provided,
+                  height: "30px",
+                  boxShadow: "none",
+                }),
+              }}
+            />
+          </div>
+          <div className="mb-2">
+            <label className="block text-[#6b3e37] mb-1" htmlFor="dateTime">
+              Date & Time
+            </label>
+            <input
+              // required
+              type="datetime-local"
+              id="dateTime"
+              name="dateTime"
+              value={formData.dateTime}
+              onChange={handleChange}
+              className="w-full p-2 border border-gray-300 text-[#97514b] rounded-md outline-none "
+            />
+          </div>
+          <div className="mb-2">
             <label
               className="block text-[#6b3e37] mb-1"
               htmlFor="entryPriceFrom"
             >
-              Entry Price From
+              Position
             </label>
             <input
               required
               type="text"
-              id="entryPriceFrom"
-              name="entryPriceFrom"
-              value={formData.entryPriceFrom}
+              id="position"
+              name="position"
+              value={formData.position}
               onChange={handleChange}
               className="w-full p-2 border border-gray-300 text-[#97514b] rounded-md outline-none "
             />
           </div>
-          <div>
-            <label className="block text-[#6b3e37] mb-1" htmlFor="entryPriceTo">
-              Entry Price To
-            </label>
-            <input
-              required
-              type="text"
-              id="entryPriceTo"
-              name="entryPriceTo"
-              value={formData.entryPriceTo}
-              onChange={handleChange}
-              className="w-full p-2 border border-gray-300 text-[#97514b] rounded-md outline-none "
-            />
-          </div>
-        </div>
 
-        <div className="mb-2">
-          <label className="block text-[#6b3e37] mb-1" htmlFor="stopLoss">
-            Stop Loss
-          </label>
-          <input
-            required
-            type="text"
-            id="stopLoss"
-            name="stopLoss"
-            value={formData.stopLoss}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 text-[#97514b] rounded-md outline-none "
-          />
-        </div>
-
-        <div className="mb-2 grid grid-cols-2 gap-x-4 gap-y-2">
-          {[1, 2, 3, 4].map((target) => (
-            <div key={target}>
+          <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-2">
+            <div>
               <label
                 className="block text-[#6b3e37] mb-1"
-                htmlFor={`target${target}`}
+                htmlFor="entryPriceFrom"
               >
-                Target {target}
+                Entry Price From
               </label>
-              <div className=" d-flex align-items-center gap-2">
-                <input
-                  className="w-[24px] h-[24px]"
-                  type="checkbox"
-                  // checked={!!formData.targetsChecked[`target${target}`]}
-                  onChange={(e) =>
-                    handleCheckboxChange(`target${target}`, e.target.checked)
-                  }
-                />
-                <input
-                  required={target === 1}
-                  type="text"
-                  id={`target${target}`}
-                  name={`target${target}`}
-                  value={formData[`target${target}`]}
-                  onChange={handleChange}
-                  className="w-full p-2 border border-gray-300 text-[#97514b] rounded-md outline-none"
-                />
-              </div>
+              <input
+                required
+                type="text"
+                id="entryPriceFrom"
+                name="entryPriceFrom"
+                value={formData.entryPriceFrom}
+                onChange={handleChange}
+                className="w-full p-2 border border-gray-300 text-[#97514b] rounded-md outline-none "
+              />
             </div>
-          ))}
-        </div>
-        <div className="mb-2">
-          <label className="block text-[#6b3e37] mb-1" htmlFor="comment">
-            Comment
-          </label>
-          <textarea
-            id="comment"
-            name="comment"
-            value={formData.comment}
-            onChange={handleChange}
-            rows="4"
-            className="w-full h-[50px] p-2 border border-gray-300 text-[#97514b] rounded-md outline-none resize-none"
-          />
-        </div>
+            <div>
+              <label
+                className="block text-[#6b3e37] mb-1"
+                htmlFor="entryPriceTo"
+              >
+                Entry Price To
+              </label>
+              <input
+                required
+                type="text"
+                id="entryPriceTo"
+                name="entryPriceTo"
+                value={formData.entryPriceTo}
+                onChange={handleChange}
+                className="w-full p-2 border border-gray-300 text-[#97514b] rounded-md outline-none "
+              />
+            </div>
+          </div>
 
-        <button
-          type="submit"
-          className="w-full btn_dark text-white py-0 h-[30px] rounded-md  transition duration-300"
-        >
-          Submit
-        </button>
-      </form>
-    </div>
+          <div className="mb-2">
+            <label className="block text-[#6b3e37] mb-1" htmlFor="stopLoss">
+              Stop Loss
+            </label>
+            <input
+              required
+              type="text"
+              id="stopLoss"
+              name="stopLoss"
+              value={formData.stopLoss}
+              onChange={handleChange}
+              className="w-full p-2 border border-gray-300 text-[#97514b] rounded-md outline-none "
+            />
+          </div>
+
+          <div className="mb-2 grid grid-cols-2 gap-x-4 gap-y-2">
+            {[1, 2, 3, 4].map((target) => (
+              <div key={target}>
+                <label
+                  className="block text-[#6b3e37] mb-1"
+                  htmlFor={`target${target}`}
+                >
+                  Target {target}
+                </label>
+                <div className=" d-flex align-items-center gap-2">
+                  <input
+                    className="w-[24px] h-[24px]"
+                    type="checkbox"
+                    // checked={!!formData.targetsChecked[`target${target}`]}
+                    onChange={(e) =>
+                      handleCheckboxChange(`target${target}`, e.target.checked)
+                    }
+                  />
+                  <input
+                    required={target === 1}
+                    type="text"
+                    id={`target${target}`}
+                    name={`target${target}`}
+                    value={formData[`target${target}`]}
+                    onChange={handleChange}
+                    className="w-full p-2 border border-gray-300 text-[#97514b] rounded-md outline-none"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="mb-2">
+            <label className="block text-[#6b3e37] mb-1" htmlFor="comment">
+              Comment
+            </label>
+            <textarea
+              id="comment"
+              name="comment"
+              value={formData.comment}
+              onChange={handleChange}
+              rows="4"
+              className="w-full h-[50px] p-2 border border-gray-300 text-[#97514b] rounded-md outline-none resize-none"
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="w-full btn_dark text-white py-0 h-[30px] rounded-md  transition duration-300"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+    </>
   );
 };
 

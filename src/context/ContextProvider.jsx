@@ -17,7 +17,7 @@ export const ContextProvider = ({ children }) => {
   const totalPages = Math.ceil(data.length / itemsPerPage);
   const [isToastVisible, setIsToastVisible] = useState(false);
 
-
+  const [addBroker, setAddBroker] = useState(false);
 
   const showToast = () => {
     setIsToastVisible(true);
@@ -27,7 +27,7 @@ export const ContextProvider = ({ children }) => {
   };
 
   //   GET DATA FROM REALTIME DB
-  
+
   useEffect(() => {
     const fetchData = () => {
       const tradesRef = ref(realtimeDb, "trades");
@@ -42,7 +42,7 @@ export const ContextProvider = ({ children }) => {
                 ...value,
               })
             );
-            showToast()
+            showToast();
             setData(tradeData);
           } else {
             console.log("No data available");
@@ -71,7 +71,7 @@ export const ContextProvider = ({ children }) => {
 
   const handleItemsPerPageChange = (num) => {
     setItemsPerPage(num);
-    setCurrentPage(1); 
+    setCurrentPage(1);
   };
 
   const deleteData = async (id) => {
@@ -85,7 +85,6 @@ export const ContextProvider = ({ children }) => {
     }
   };
 
- 
   const currentData = data.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
@@ -94,13 +93,19 @@ export const ContextProvider = ({ children }) => {
   const value = {
     data,
     setData,
-    itemsPerPage, setItemsPerPage,currentPage, setCurrentPage,isToastVisible,
+    itemsPerPage,
+    setItemsPerPage,
+    currentPage,
+    setCurrentPage,
+    isToastVisible,
     formatDate,
     handlePageChange,
     handleItemsPerPageChange,
     currentData,
     totalPages,
-    deleteData
+    deleteData,
+    addBroker,
+    setAddBroker,
   };
 
   return <MyContext.Provider value={value}>{children}</MyContext.Provider>;

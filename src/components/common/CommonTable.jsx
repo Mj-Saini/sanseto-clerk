@@ -15,13 +15,13 @@ const CommonTable = () => {
   const isAdminDashboard = location.pathname.startsWith("/admin-dashboard");
 
   return (
-    <div className="py-3">
+    <div className="py-3 ">
       {/* Table Section */}
 
-      <div className="w-[1100px] xl:w-full px-3">
+      <div className="w-[1100px] h-[325px] xl:w-full px-3">
         <Table responsive="sm" className="mb-0">
           <thead>
-            <tr>
+            <tr className="sticky top-0 z-10">
               <th
                 style={{
                   textAlign: "start",
@@ -377,34 +377,26 @@ const CommonTable = () => {
                         ></span>
                       </div>
                       {activePopupIndex === index && (
-                        <div className="absolute top-10 right-5 bg-white shadow-md rounded-lg w-28 z-40">
-                          <button
-                            onClick={() => togglePopup(index)}
-                            className="absolute text-xl top-2 right-2 text-gray-500 hover:text-gray-700"
-                          >
-                            &times;
-                          </button>
-                          <ul className="flex flex-col items-start p-0 mt-3 pt-2 space-y-2">
-                            <li>
+                        <div className="absolute top-10 right-5 bg-[#fff] shadow-lg rounded w-28 z-40 overflow-hidden">
+                          
+                        
                               <Link
                                 to={`/admin-dashboard/trade-call-form/${item.id}`}
-                                className="w-full px-3 py-2 text-left text-sm text-gray-700 rounded"
+                               className="w-full px-3 py-2 text-left text-sm text-[#6e3b37] hover:text-[#c42b1e] hover:bg-[#c42b1e29] flex"
                               >
                                 Edit
                               </Link>
-                            </li>
-                            <li>
+                         
                               <button
                                 onClick={() => {
                                   deleteData(item.id);
                                   togglePopup(index);
                                 }}
-                                className="w-full px-3 py-2 text-left text-sm text-red-600 rounded"
+                                className="w-full px-3 py-2 text-left text-sm text-[#6e3b37] hover:text-[#c42b1e] hover:bg-[#c42b1e29]"
                               >
                                 Delete
                               </button>
-                            </li>
-                          </ul>
+                         
                         </div>
                       )}
                     </td>
