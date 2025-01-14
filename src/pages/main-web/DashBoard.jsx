@@ -79,27 +79,27 @@ const DashBoard = () => {
 
   return (
     <div className="min-h-screen bg-gray-900 flex justify-center">
-      <div className="bg-white shadow-lg w-full flex justify-end px-3 lg:pe-3 overflow relative">
+      <div className="bg-[#F5F5F9] w-full flex justify-end px-3 lg:pe-3 overflow relative">
         <div
-          className={` w-4/5  group lg:hover:w-1/5 duration-300  bg-white shadow-lg px-3 h-full z-20 
+          className={` w-4/5  group lg:hover:w-1/5 duration-300  bg-white fixed  left-0 top-0 h-full z-20 
         ${openSideBar ? "left-0" : "max-lg:-left-full"}
-        ${sidebarFixed ? "lg:w-1/5 lg:-translate-x-4" : " lg:w-[69px] fixed left-0 top-0"}
+        ${sidebarFixed ? "lg:w-1/5 " : "lg:w-[70px] "}
           `}
         >
           <span
             onClick={() => setSidebarFixed(!sidebarFixed)}
-            className="w-[36px] h-[36px] rounded-full bg-[white] shadow-lg hidden justify-center items-center absolute top-6 -right-3 lg:group-hover:flex"
+            className={`w-[36px] h-[36px] rounded-full bg-[#F5F5F9] hidden justify-center items-center absolute top-6 -right-3 lg:group-hover:flex duration-300 `}
           >
-            <RedArrowIcon />
+            <RedArrowIcon sidebarFixed={sidebarFixed}/>
           </span>
-          <Sidebar sideMenu={toggleSideBar} />
+          <Sidebar sidebarFixed={sidebarFixed} sideMenu={toggleSideBar} />
         </div>
         {/* Main Content */}
         <div
-          className={` pb-5 duration-300 ${sidebarFixed ? "w-full lg:w-4/5" : "w-full lg:w-[94%]"}`}
+          className={` pb-5 duration-300 ${sidebarFixed ? "w-full lg:w-4/5 ps-2" : "w-full lg:w-[94%]"}`}
         >
           <div className="sticky top-0 bg-white z-10">
-            <div className="flex justify-between lg:justify-end items-center bg-white shadow-lg rounded-lg px-3 py-1 mt-2">
+            <div className="flex justify-between lg:justify-end items-center bg-white  rounded-lg px-3 py-1 mt-2">
               <div onClick={toggleSideBar} className="cursor-pointer lg:hidden">
                 <MenuIcon />
               </div>
