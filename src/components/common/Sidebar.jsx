@@ -9,7 +9,7 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
   const isAdminDashboard = location.pathname.startsWith("/admin-dashboard");
   return (
     <div className="top-0 sticky overflow-hidden">
-      <div className="pt-6 flex justify-between">
+      <div className="pt-6 flex justify-between relative z-0">
         <div className="px-3">
           {/* {sidebarFixed ? */}
           <img
@@ -53,7 +53,7 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
               >  <Link
                 onClick={sideMenu}
                 to={""}
-                className={`flex items-center py-2.5 text-[#6e3b37] font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] relative after:absolute after:bg-[red] after:right-0 after:top-0 after:h-full after:w-1 ${
+                className={`flex items-center py-2.5 text-[#6e3b37] font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] F ${
                   location.pathname === "/admin-dashboard"
                     ? "bg-[#C42B1E29]"
                     : ""

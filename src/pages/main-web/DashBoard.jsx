@@ -88,7 +88,7 @@ const DashBoard = () => {
         >
           <span
             onClick={() => setSidebarFixed(!sidebarFixed)}
-            className={`w-[36px] h-[36px] rounded-full bg-[#F5F5F9] hidden justify-center items-center absolute top-6 -right-3 lg:group-hover:flex duration-300 `}
+            className={`w-[36px] h-[36px] rounded-full bg-[#F5F5F9] hidden justify-center items-center absolute top-6 -right-3 lg:group-hover:flex duration-300 z-10`}
           >
             <RedArrowIcon sidebarFixed={sidebarFixed}/>
           </span>
