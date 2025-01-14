@@ -11,7 +11,7 @@ const PricePlan = () => {
         ""
       ) : (
         <div>
-          <div className="text-center mb-3 bg-white shadow-lg p-3 rounded-lg">
+          <div className="text-center mb-3 bg-white shadow-sm p-3 rounded-lg">
             <h5 className="text-[#6e3b37] mb-3 text-base">
               Brokers Available in 1Cliq
             </h5>
@@ -51,7 +51,7 @@ const PricePlan = () => {
 
           <div className="row ">
             <div className="col-md-6 mb-4">
-              <div className="text-center h-100 flex flex-col justify-between bg-white shadow-lg rounded-md !border !border-[#C42B1E] p-3">
+              <div className="text-center h-100 flex flex-col justify-between bg-white rounded-md !border !border-[#C42B1E] p-3">
                 <div className="">
                   <div className="card-header flex flex-col items-center">
                     <PlanHandIcon />
@@ -116,7 +116,7 @@ const PricePlan = () => {
 
             {/* Card 2 */}
             <div className="col-md-6 mb-4">
-              <div className="text-center h-100 flex flex-col justify-between bg-white shadow-lg rounded-md !border !border-[#C42B1E] p-3">
+              <div className="text-center h-100 flex flex-col justify-between bg-white  rounded-md !border !border-[#C42B1E] p-3">
                 <div className="flex flex-col items-center">
                   <PlanHandIcon />
                   <h5 className="my-2 text-[#6e3b37] text-lg sm:text-xl lg:text-2xl">
@@ -194,7 +194,7 @@ const PricePlan = () => {
             </p>
           <div className="text-center mt-3 border-b pb-3">
             <h5 className="text-lg md:text-xl text-[#6e3b37]">Note</h5>
-            <p className="text-lg md:text-xl text-[#6e3b37]">
+            <p className="text-lg md:text-xl text-[#6e3b37] font-semibold">
               We are not SEBI Registered Advisor and We are NOT responsible for
               your trading profits/losses if you use our charts and data for
               trading. Please consult your investment advisor.

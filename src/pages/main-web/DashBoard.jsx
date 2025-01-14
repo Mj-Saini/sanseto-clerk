@@ -79,16 +79,20 @@ const DashBoard = () => {
 
   return (
     <div className="min-h-screen bg-gray-900 flex justify-center">
-      <div className="bg-white shadow-lg w-full flex justify-end px-3 lg:pe-3 overflow relative">
+      <div className="bg-[#F5F5F9]  w-full flex justify-end px-3 lg:pe-3 overflow relative ">
         <div
-          className={` w-4/5  group lg:hover:w-1/5 duration-300  bg-white shadow-lg px-3 h-full z-20 
+          className={` w-4/5  group lg:hover:w-1/5 duration-300  bg-white  px-3 h-full z-20 
         ${openSideBar ? "left-0" : "max-lg:-left-full"}
-        ${sidebarFixed ? "lg:w-1/5 lg:-translate-x-4" : " lg:w-[69px] fixed left-0 top-0"}
+        ${
+          sidebarFixed
+            ? "lg:w-1/5 lg:-translate-x-4"
+            : " lg:w-[69px] fixed left-0 top-0"
+        }
           `}
         >
           <span
             onClick={() => setSidebarFixed(!sidebarFixed)}
-            className="w-[36px] h-[36px] rounded-full bg-[white] shadow-lg hidden justify-center items-center absolute top-6 -right-3 lg:group-hover:flex"
+            className="w-[36px] h-[36px] rounded-full bg-[white]  hidden justify-center items-center absolute top-6 -right-3 lg:group-hover:flex"
           >
             <RedArrowIcon />
           </span>
@@ -96,10 +100,12 @@ const DashBoard = () => {
         </div>
         {/* Main Content */}
         <div
-          className={` pb-5 duration-300 ${sidebarFixed ? "w-full lg:w-4/5" : "w-full lg:w-[94%]"}`}
+          className={` pb-5 duration-300 ${
+            sidebarFixed ? "w-full lg:w-4/5" : "w-full lg:w-[94%]"
+          }`}
         >
           <div className="sticky top-0 bg-white z-10">
-            <div className="flex justify-between lg:justify-end items-center bg-white shadow-lg rounded-lg px-3 py-1 mt-2">
+            <div className="flex justify-between lg:justify-end items-center bg-white  rounded-lg px-3 py-1 mt-2 shadow-sm">
               <div onClick={toggleSideBar} className="cursor-pointer lg:hidden">
                 <MenuIcon />
               </div>
@@ -117,10 +123,6 @@ const DashBoard = () => {
                     </button>
                   ) : (
                     <>
-                      <button className="block w-full whitespace-nowrap px-2 sm:px-4 bg-[#C42B1E29] py-2 text-xs sm:text-base text-[#C42B1E] rounded-md !font-semibold relative">
-                        CHRISTMAS OFFER
-                      </button>
-
                       <button
                         onClick={toggleDropdown}
                         className="block w-full text-center whitespace-nowrap ps-2 sm:ps-4 py-2 text-base text-gray-700 "
@@ -142,7 +144,7 @@ const DashBoard = () => {
                 </div>
                 {/* {isDropdownOpen && ( */}
                 <div
-                  className={`absolute right-0 mt-6  bg-white border border-gray-200 rounded-lg shadow-md duration-300 overflow-hidden ${
+                  className={`absolute right-0 mt-6  bg-white border border-gray-200 rounded-lg  duration-300 overflow-hidden ${
                     isDropdownOpen ? "w-56 h-56" : "w-[1px] h-[1px]"
                   }`}
                 >

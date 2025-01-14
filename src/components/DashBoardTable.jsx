@@ -79,25 +79,25 @@ const DashboardTable = () => {
             {/* Action Buttons */}
             <div
               style={{ display: "flex", justifyContent: "space-between" }}
-              className="mb-3 bg-white shadow-lg p-3 rounded-lg flex flex-col sm:!flex-row gap-3"
+              className="mb-3 bg-white shadow-sm p-3 rounded-lg flex flex-col sm:!flex-row gap-3"
             >
               <div className="d-flex gap-2">
                 <button
                   onClick={() => setAddBroker(true)}
-                  className="btn_dark shadow-sm max-sm:w-full text-xs px-2"
+                  className="btn_dark shadow-sm max-sm:w-full text-xs px-[14px] uppercase"
                 >
                   Add broker
                 </button>
                 <button
                   onClick={handleRefresh}
-                  className="btn_light max-sm:w-full text-xs px-2"
+                  className="btn_light max-sm:w-full text-xs px-[14px]"
                 >
                   Refresh
                 </button>
               </div>
               <div>
-                <button className="btn_dark shadow-sm w-full text-xs px-2">
-                  Open Solo Window
+                <button className="btn_dark shadow-sm w-full text-xs px-[14px] uppercase">
+                  Open 1Cliq Window
                 </button>
               </div>
             </div>
@@ -113,7 +113,7 @@ const DashboardTable = () => {
                   </h2>
                 )}
 
-                <div className="  shadow-lg bg-white rounded-lg">
+                <div className="  box_shadow_tabel bg-white rounded-lg">
                   <div
                     className={`overflow-auto ${
                       isAdminDashboard ? "pb-[120px]" : ""
@@ -122,7 +122,7 @@ const DashboardTable = () => {
                     <CommonTable />
                   </div>
                   {/* Pagination Controls */}
-                  <div className="d-flex flex-col sm:flex-row justify-end items-end sm:items-center gap-3 pb-3">
+                  <div className="d-flex flex-col sm:flex-row justify-end items-end sm:items-center gap-3 pb-3 px-3">
                     <Dropdown>
                       <span
                         style={{
@@ -184,7 +184,7 @@ const DashboardTable = () => {
                       <li>
                         <button
                           type="button"
-                          className="!-scale-110"
+                          className=" rotate-180"
                           onClick={() => handlePageChange(currentPage + 1)}
                           disabled={currentPage === totalPages}
                         >
