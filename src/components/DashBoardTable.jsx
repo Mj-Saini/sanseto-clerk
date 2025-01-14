@@ -104,11 +104,11 @@ const DashboardTable = () => {
             {[0, 0].map((item, index) => (
               <div key={index} className="mt-4">
                 {index === 0 ? (
-                  <h2 className="text-red-500 text-base md:text-lg font-medium mt-5 bg-white inline-block p-2 shadow-sm  rounded-md">
+                  <h2 className="text-red-500 tracking-wide text-base md:text-lg font-medium mt-5 bg-white inline-block p-2 shadow-sm  rounded-md">
                     Progress Table
                   </h2>
                 ) : (
-                  <h2 className="text-red-500 text-base md:text-lg font-medium mt-5 bg-white inline-block p-2 shadow-sm  rounded-md">
+                  <h2 className="text-red-500 tracking-wide text-base md:text-lg font-medium mt-5 bg-white inline-block p-2 shadow-sm  rounded-md">
                     Completed Table
                   </h2>
                 )}
@@ -130,17 +130,18 @@ const DashboardTable = () => {
                           color: "#6e3b37",
                           fontSize: "14px",
                         }}
-                        className="me-4"
+                        className="me-4 "
                       >
                         Items per page:
                       </span>{" "}
-                      <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+                      <Dropdown.Toggle  variant="secondary" id="dropdown-basic">
                         {itemsPerPage}
                       </Dropdown.Toggle>
                       <Dropdown.Menu>
                         {[1, 5, 10, 15, 20].map((num) => (
                           <Dropdown.Item
                             key={num}
+                           
                             onClick={() => handleItemsPerPageChange(num)}
                           >
                             {num}

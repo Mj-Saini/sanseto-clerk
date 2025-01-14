@@ -63,6 +63,10 @@
   
 }
 
+.select_btn{
+  border: 10px solid #C6B6B4 !important;
+}
+
 .btn_secondary:hover {
   background-color: #e2e6ea; /* Slightly darker shade */
 }

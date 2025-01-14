@@ -25,7 +25,9 @@ export const ContextProvider = ({ children }) => {
       setIsToastVisible(false); // Hide the toast after 2 seconds
     }, 2000);
   };
+
   //   GET DATA FROM REALTIME DB
+  
   useEffect(() => {
     const fetchData = () => {
       const tradesRef = ref(realtimeDb, "trades");
