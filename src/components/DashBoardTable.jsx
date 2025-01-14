@@ -74,7 +74,7 @@ const DashboardTable = () => {
 
       <div className="h-full">
         <div className="flex justify-between items-center mb-4">
-          <div className=" py-3 w-full">
+          <div className=" py-3 w-full mt-1">
             {/* Table */}
             {/* Action Buttons */}
             <div
@@ -102,13 +102,13 @@ const DashboardTable = () => {
               </div>
             </div>
             {[0, 0].map((item, index) => (
-              <div key={index} className="mt-4">
+              <div key={index} className="mt-3">
                 {index === 0 ? (
-                  <h2 className="text-red-500 text-base md:text-lg font-medium mt-5 bg-white inline-block p-2 shadow-sm  rounded-md">
+                  <h2 className="text-red-500 tracking-wide text-base md:text-lg font-medium  bg-white inline-block p-2 shadow-sm  rounded-md">
                     Progress Table
                   </h2>
                 ) : (
-                  <h2 className="text-red-500 text-base md:text-lg font-medium mt-5 bg-white inline-block p-2 shadow-sm  rounded-md">
+                  <h2 className="text-red-500 tracking-wide text-base md:text-lg font-medium  bg-white inline-block p-2 shadow-sm  rounded-md">
                     Completed Table
                   </h2>
                 )}
@@ -122,7 +122,7 @@ const DashboardTable = () => {
                     <CommonTable />
                   </div>
                   {/* Pagination Controls */}
-                  <div className="d-flex flex-col sm:flex-row justify-end items-end sm:items-center gap-3 pb-3 px-3">
+                  <div className="d-flex flex-col sm:flex-row justify-end items-end sm:items-center gap-3 py-3 px-3">
                     <Dropdown>
                       <span
                         style={{
@@ -130,17 +130,18 @@ const DashboardTable = () => {
                           color: "#6e3b37",
                           fontSize: "14px",
                         }}
-                        className="me-4"
+                        className="me-4 "
                       >
                         Items per page:
                       </span>{" "}
-                      <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+                      <Dropdown.Toggle  variant="secondary" id="dropdown-basic">
                         {itemsPerPage}
                       </Dropdown.Toggle>
                       <Dropdown.Menu>
                         {[1, 5, 10, 15, 20].map((num) => (
                           <Dropdown.Item
                             key={num}
+                           
                             onClick={() => handleItemsPerPageChange(num)}
                           >
                             {num}

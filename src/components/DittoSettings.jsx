@@ -31,8 +31,6 @@ const DittoSettings = () => {
 
   return (
     <div className="py-2">
-
-
       {show && (
         <div className="fixed top-0 left-0 h-screen w-full flex justify-center items-center ">
           <div
@@ -45,47 +43,47 @@ const DittoSettings = () => {
       )}
       {/* Parent Broker Section */}
 
-      <div className="flex flex-col sm:flex-row items-center justify-between bg-white shadow-lg rounded-lg p-3 mb-2 ">
+      <div className="flex flex-col sm:flex-row items-center justify-between bg-white shadow-xs rounded-lg p-3 mb-2 mt-3">
         {/* Parent Broker Section */}
-        <div className="flex flex-col lg:items-center lg:flex-row gap-2 w-full lg:w-4/5">
-          <div className="flex flex-col mb-4 sm:mb-0 text-base text-[#6e3b37]">
-            <span className="font-medium mr-2 whitespace-nowrap">
+        <div className="flex flex-col lg:items-center lg:flex-row gap-2 w-full lg:w-4/5 ">
+          <div className="flex flex-col mb-1 sm:mb-0 text-base text-[#6e3b37]">
+            <span className="mr-2 whitespace-nowrap font-extrabold">
               Parent Broker:
             </span>
             <span className="font-normal">No Parent</span>
           </div>{" "}
-          <div className="flex flex-wrap lg:flex-nowrap w-full">
-            <div className="w-full sm:w-1/2 lg:w-1/4 p-1">
+          <div className="flex flex-wrap lg:flex-nowrap w-full items-center">
+            <div className="w-[135px] p-[6px]">
               <button
-                className="bg-gray-100 text-gray-400 border whitespace-nowrap border-gray-300 px-4 py-2 rounded cursor-not-allowed w-full"
+                className=" text-[#C6B6B4] border whitespace-nowrap border-[#E9E3E2] px-2 py-2 rounded cursor-not-allowed w-full"
                 disabled
               >
                 Max Allowed...
               </button>
             </div>
-            <div className="w-full sm:w-1/2 lg:w-1/4 p-1">
+            <div className="w-[135px] p-[6px]">
               <button
-                className="bg-gray-100 text-gray-400 border whitespace-nowrap border-gray-300 px-4 py-2 rounded cursor-not-allowed w-full"
+                className=" text-[#C6B6B4] border whitespace-nowrap border-[#E9E3E2] px-2 py-2 rounded cursor-not-allowed w-full"
                 disabled
               >
                 Max multiple...
               </button>
             </div>
             {/* Functional Buttons */}
-            <div className="w-full sm:w-1/2 lg:w-1/4 p-1">
-              <button className="bg-red-100 text-red-600 border whitespace-nowrap border-red-400 px-4 py-2 rounded hover:bg-red-200 w-full">
+            <div className=" p-[6px]">
+              <button className="bg-[#F6E7E5] hover:bg-[#F1DAD6] uppercase text-[#c42b1e]  font-bold whitespace-nowrap border-red-400 px-4 py-[10px] rounded  w-full text-sm">
                 Change Parent
               </button>
             </div>
-            <div className="w-full sm:w-1/2 lg:w-1/4 p-1">
-              <button className="bg-red-100 text-red-600 border whitespace-nowrap border-red-400 px-4 py-2 rounded hover:bg-red-200 w-full">
+            <div className=" p-[6px]">
+              <button className="bg-[#F6E7E5] hover:bg-[#F1DAD6] uppercase text-[#c42b1e] text-sm  font-bold whitespace-nowrap border-red-400 px-4 py-[10px] rounded  w-full">
                 Attach Child
               </button>
             </div>
-            <div className="w-full sm:w-1/2 p-1 block lg:hidden">
+            <div className="w-full sm:w-1/2 p-[6px] block lg:hidden">
               <button
                 onClick={handleRefresh}
-                className="bg-white text-red-600 border border-red-400 px-4 py-2 rounded hover:bg-red-50 w-full"
+                className="bg-white text-[#c42b1e] uppercase font-bold border border-[c42b1e] px-4 py-2 rounded hover:bg-[#F1DAD6] w-full"
               >
                 Refresh
               </button>
@@ -96,7 +94,7 @@ const DittoSettings = () => {
         <div className="space-x-2 hidden lg:flex">
           <button
             onClick={handleRefresh}
-            className="bg-white text-red-600 border border-red-400 px-4 py-2 rounded hover:bg-red-50"
+            className="bg-white text-[#c42b1e] uppercase font-bold  font-sm border-1 !border-[#c42b1e] px-4 py-2 rounded hover:bg-[#F1DAD6]"
           >
             Refresh
           </button>
@@ -104,10 +102,11 @@ const DittoSettings = () => {
       </div>
 
       {/* Table Section */}
-      <div className="  shadow-lg pe-3 bg-white rounded-lg">
-        <div className={`overflow-auto ${isAdminDashboard ? "pb-[120px]":""}`}>
-        <CommonTable/>
-
+      <div className="  shadow-sm pe-3 bg-white rounded-lg">
+        <div
+          className={`overflow-auto ${isAdminDashboard ? "pb-[120px]" : ""}`}
+        >
+          <CommonTable />
         </div>
         {/* Pagination Controls */}
         <div className="d-flex flex-col sm:flex-row justify-end items-end sm:items-center gap-3 mt-3 pb-3">

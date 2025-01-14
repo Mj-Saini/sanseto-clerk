@@ -205,8 +205,8 @@ export const Settings = () => {
 export const PlanHandIcon = () => {
   return (
     <svg
-      width={48}
-      height={48}
+      width={72}
+      height={72}
       viewBox="0 0 32 32"
       xmlns="http://www.w3.org/2000/svg"
       // style="width: 72px; margin-bottom: 12px;"

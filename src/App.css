@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 
 *{
-  font-family: "Nunito", serif;
+  font-family: "Nunito", sans-serif;
   text-decoration: none !important;
 }
 
@@ -9,7 +9,7 @@
 .btn_dark {
   background-color: #C42B1E;
   color: white;
-  padding: 0.5rem 1rem;
+  padding: 0.45rem 1rem;
   border-radius: 6px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
   transition: background-color 0.3s ease;
@@ -26,14 +26,12 @@
   color: #C42B1E;
   border: 1px solid #C42B1E;
   font-size: 12px;
-  padding: 0.5rem 1rem;
+  padding: 0rem 1rem;
   border-radius: 0.25rem;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 6px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
   transition: background-color 0.3s ease;
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 700 ;
   letter-spacing: .025rem
 }
 
@@ -56,15 +54,30 @@
 .btn_secondary {
   background-color: #f8f9fa; /* Light gray */
   color: #6c757d; /* Dark gray text */
-  padding: 0.5rem 1rem;
+  padding: 0.45rem 1rem;
   border-radius: 0.25rem;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease;
   
+
+
+}
+
+.dropdown-toggle{
+  border: 1px solid #C6B6B4 !important;
+  padding: 4px 14px !important;
+}
+.dropdown-toggle:hover{
+  border: 1px solid #6e3b37 !important;
+  color:  #6e3b37 !important;
+}
+
+.dropdown-toggle::after {
+  margin-left: 10px !important;
 }
 
 .btn_secondary:hover {
-  background-color: #e2e6ea; /* Slightly darker shade */
+  background-color: #e2e6ea; 
 }
 
 /* Link Button */
@@ -200,7 +213,7 @@
 @media (min-width: 992px) {
   .custom-grid {
     grid-template-columns: 33% 33% 33%;
-    grid-template-rows: 80px 80px;
+    grid-template-rows: 70px 80px;
   }
 
   .d_none {
@@ -210,8 +223,8 @@
 
 @media (min-width: 1400px) {
   .custom-grid {
-    grid-template-columns: 209px 209px 209px 209px 209px;
-    grid-template-rows: 80px 60px;
+    grid-template-columns: 19% 19% 19% 19% 19%;
+    grid-template-rows: 70px 60px;
   }
 
   .d_xl_flex {
