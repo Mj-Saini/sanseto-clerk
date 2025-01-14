@@ -116,7 +116,7 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                     sidebarFixed ? "" : ""
                   }  ${
                     location.pathname === "/dashboard"
-                      ? "bg-[#C42B1E29] text-[#C42B1E] hover:!bg-[#C42B1E30]"
+                      ? "bg-[#B5392A29] text-[#B5392A] hover:!bg-[#B5392A30]"
                       : ""
                   }`}
                 >
