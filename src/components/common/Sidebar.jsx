@@ -14,7 +14,7 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
           {/* {sidebarFixed ? */}
           <img
             className={` hidden group-hover:lg:hidden lg:flex ${
-              sidebarFixed ? "hidden" : "flex"
+              sidebarFixed ? "!hidden" : "flex"
             }`}
             width={40}
             height={40}

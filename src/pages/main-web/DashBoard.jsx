@@ -117,7 +117,7 @@ const DashBoard = () => {
         {/* Main Content */}
         <div
           className={` pb-3 duration-300 flex flex-col justify-between ${
-            sidebarFixed ? "w-full lg:w-4/5 ps-2" : "w-full lg:w-[94%]"
+            sidebarFixed ? "w-full lg:w-4/5 ps-2" : "w-full lg:w-[calc(100%-84px)]"
           }`}
         >
           <div>

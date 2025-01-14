@@ -106,7 +106,6 @@
 
 .input_checkbox {
   accent-color: red;
-  border: #376e4d;
 }
 
 .custom-select {
@@ -173,7 +172,15 @@
 
 /* CHECKBOX CLASSES */
 
-
+.custom-checkbox {
+  appearance: none; /* Remove default checkbox styles */
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ccc; /* Default border color for unchecked */
+  border-radius: 4px; /* Optional: Rounded corners */
+  cursor: pointer;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
 
 
 

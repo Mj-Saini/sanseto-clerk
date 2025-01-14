@@ -244,7 +244,7 @@ const Settings = () => {
                       <div className="flex gap-2 items-center">
                         <input
                           type="checkbox"
-                          className="input_checkbox form-checkbox"
+                          className="input_checkbox form-checkbox custom-ch eckbox"
                         />
                         <input
                           type="number"
