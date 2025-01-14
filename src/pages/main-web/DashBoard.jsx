@@ -83,20 +83,22 @@ const DashBoard = () => {
         <div
           className={` w-4/5  group lg:hover:w-1/5 duration-300  bg-white fixed  left-0 top-0 h-full z-20 
         ${openSideBar ? "left-0" : "max-lg:-left-full"}
-        ${sidebarFixed ? "lg:w-1/5 " : "lg:w-[70px] "}
+        ${sidebarFixed ? "lg:w-1/5 " : "lg:w-[84px] "}
           `}
         >
           <span
             onClick={() => setSidebarFixed(!sidebarFixed)}
-            className={`w-[36px] h-[36px] rounded-full bg-[#F5F5F9] hidden justify-center items-center absolute top-6 -right-3 lg:group-hover:flex duration-300 z-10`}
+            className={`w-[36px] h-[36px] rounded-full bg-[#F5F5F9]  justify-center items-center absolute top-6 -right-3 lg:group-hover:flex duration-300 z-10 ${sidebarFixed ? "flex" : "hidden"}`}
           >
-            <RedArrowIcon sidebarFixed={sidebarFixed}/>
+            <RedArrowIcon sidebarFixed={sidebarFixed} />
           </span>
           <Sidebar sidebarFixed={sidebarFixed} sideMenu={toggleSideBar} />
         </div>
         {/* Main Content */}
         <div
-          className={` pb-5 duration-300 ${sidebarFixed ? "w-full lg:w-4/5 ps-2" : "w-full lg:w-[94%]"}`}
+          className={` pb-5 duration-300 ${
+            sidebarFixed ? "w-full lg:w-4/5 ps-2" : "w-full lg:w-[94%]"
+          }`}
         >
           <div className="sticky top-0 bg-white z-10">
             <div className="flex justify-between lg:justify-end items-center bg-white  rounded-lg px-3 py-1 mt-2 shadow-sm">

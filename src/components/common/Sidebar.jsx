@@ -44,26 +44,31 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
         <div className="flex flex-col gap-1">
           {isAdminDashboard ? (
             <>
-             <div
+              <div
                 className={` px-3 ${
                   location.pathname === "/admin-dashboard"
                     ? "relative after:absolute after:bg-[#c42b1e] after:rounded-md after:-right-3 after:top-0 after:h-full after:w-4 z-10"
                     : ""
                 }`}
-              >  <Link
-                onClick={sideMenu}
-                to={""}
-                className={`flex items-center py-2.5 text-[#6e3b37] font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] F ${
-                  location.pathname === "/admin-dashboard"
-                    ? "bg-[#C42B1E29]"
-                    : ""
-                }`}
               >
-                <span className="mr-6">
-                  <DashBoardIcon />
-                </span>{" "}
-                DashBoard
-              </Link></div>
+                {" "}
+                <Link
+                  onClick={sideMenu}
+                  to={""}
+                  className={`flex items-center py-2.5 text-[#6e3b37] font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] hover:text-[#C42B1E] ${
+                    location.pathname === "/admin-dashboard"
+                      ? "bg-[#C42B1E29] hover:!bg-[#C42B1E30] text-[#C42B1E]"
+                      : ""
+                  }`}
+                >
+                  <span className="ms-1.5 mr-6">
+                    <DashBoardIcon />
+                  </span>{" "}
+                  <span className={` duration-200 group-hover:-translate-x-3 ${sidebarFixed ? "-translate-x-3":"translate-x-3"}`}> 
+                  DashBoard
+                  </span>
+                </Link>
+              </div>
 
               <div
                 className={` px-3 ${
@@ -71,17 +76,28 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                     ? "relative after:absolute after:bg-[#c42b1e] after:rounded-md after:-right-3 after:top-0 after:h-full after:w-4 z-10"
                     : ""
                 }`}
-              > <Link
-                onClick={sideMenu}
-                to={"add-symbol"}
-                className={`flex items-center py-2.5 text-[#6e3b37] font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] ${
-                  location.pathname === "/admin-dashboard/add-symbol"
-                    ? "bg-[#C42B1E29]"
-                    : ""
-                }`}
               >
-                <span className="mr-6">👤</span> add symbol
-              </Link></div>
+                {" "}
+                <Link
+                  onClick={sideMenu}
+                  to={"add-symbol"}
+                  className={`flex items-center py-2.5 text-[#6e3b37] font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] hover:text-[#C42B1E] ${
+                    location.pathname === "/admin-dashboard/add-symbol"
+                      ? "bg-[#C42B1E29] hover:!bg-[#C42B1E30] text-[#C42B1E]"
+                      : ""
+                  }`}
+                >
+                  <span className="ms-1.5 mr-6">👤</span>
+                  <span
+                    className={` duration-200 group-hover:-translate-x-3 ${
+                      sidebarFixed ? "-translate-x-3" : "translate-x-3"
+                    }`}
+                  >
+                    {" "}
+                    add symbol
+                  </span>
+                </Link>
+              </div>
             </>
           ) : (
             <>
@@ -96,14 +112,25 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                 <Link
                   onClick={sideMenu}
                   to={""}
-                  className={`flex items-center py-2.5 text-[#6e3b37] font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09]  ${
-                    location.pathname === "/dashboard" ? "bg-[#C42B1E29]" : ""
+                  className={`flex items-center py-2.5 text-[#6e3b37] font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] group-hover: hover:text-[#C42B1E] ${
+                    sidebarFixed ? "" : ""
+                  }  ${
+                    location.pathname === "/dashboard"
+                      ? "bg-[#C42B1E29] text-[#C42B1E] hover:!bg-[#C42B1E30]"
+                      : ""
                   }`}
                 >
-                  <span className="mr-6">
+                  <span className="ms-1.5 mr-6">
                     <DashBoardIcon />
-                  </span>{" "}
-                  DashBoard
+                  </span>
+                  <span
+                    className={` duration-200 group-hover:-translate-x-3 ${
+                      sidebarFixed ? "-translate-x-3" : "translate-x-3"
+                    }`}
+                  >
+                    {" "}
+                    Brokers
+                  </span>
                 </Link>
               </div>
               <div
@@ -117,16 +144,22 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                 <Link
                   onClick={sideMenu}
                   to={"pricing"}
-                  className={`flex items-center py-2.5 text-[#6e3b37] font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] ${
+                  className={`flex items-center py-2.5 text-[#6e3b37] font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] hover:text-[#C42B1E] ${
                     location.pathname === "/dashboard/pricing"
-                      ? "bg-[#C42B1E29]"
+                      ? "bg-[#C42B1E29] hover:!bg-[#C42B1E30] text-[#C42B1E]"
                       : ""
                   }`}
                 >
-                  <span className="mr-6">
+                  <span className="ms-1.5 mr-6">
                     <ShareIcon />
-                  </span>{" "}
-                  !Cliq Plan
+                  </span>
+                  <span
+                    className={` duration-200 group-hover:-translate-x-3 ${
+                      sidebarFixed ? "-translate-x-3" : "translate-x-3"
+                    }`}
+                  >
+                    1Cliq Plan
+                  </span>
                 </Link>
               </div>
               <div
@@ -140,16 +173,22 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                 <Link
                   onClick={sideMenu}
                   to={"detto-settings"}
-                  className={`flex items-center py-2.5 text-[#6e3b37] font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] ${
+                  className={`flex items-center py-2.5 text-[#6e3b37] font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] hover:text-[#C42B1E] ${
                     location.pathname === "/dashboard/detto-settings"
-                      ? "bg-[#C42B1E29]"
+                      ? "bg-[#C42B1E29] hover:!bg-[#C42B1E30] text-[#C42B1E]"
                       : ""
                   }`}
                 >
-                  <span className="mr-6">
+                  <span className="ms-1.5 mr-6">
                     <DittoSettings />
                   </span>{" "}
-                  ditto settings
+                  <span
+                    className={` duration-200 group-hover:-translate-x-3 ${
+                      sidebarFixed ? "-translate-x-3" : "translate-x-3"
+                    }`}
+                  >
+                    ditto settings
+                  </span>
                 </Link>
               </div>
 
@@ -163,16 +202,22 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                 <Link
                   onClick={sideMenu}
                   to={"settings"}
-                  className={`flex items-center py-2.5 text-[#6e3b37] font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] ${
+                  className={`flex items-center py-2.5 text-[#6e3b37] font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] hover:text-[#C42B1E] ${
                     location.pathname === "/dashboard/settings"
-                      ? "bg-[#C42B1E29]"
+                      ? "bg-[#C42B1E29] hover:!bg-[#C42B1E30] text-[#C42B1E]"
                       : ""
                   }`}
                 >
-                  <span className="mr-6">
+                  <span className="ms-1.5 mr-6">
                     <Settings />
                   </span>{" "}
-                  favourite settings
+                  <span
+                    className={` duration-200 group-hover:-translate-x-3 ${
+                      sidebarFixed ? "-translate-x-3" : "translate-x-3"
+                    }`}
+                  >
+                    favourite settings
+                  </span>
                 </Link>
               </div>
             </>

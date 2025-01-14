@@ -292,7 +292,7 @@ export const MenuIcon = () => {
 };
 export const RedArrowIcon = ({ sidebarFixed }) => {
   return (
-    <span className="w-[22px] h-[22px] rounded-full bg-[red] flex justify-center items-center">
+    <span className="w-[22px] h-[22px] rounded-full bg-[#C42B1E] flex justify-center items-center">
       <svg
         className={` duration-200 ${sidebarFixed ? "rotate-0" : "rotate-180"}`}
         xmlns="http://www.w3.org/2000/svg"
