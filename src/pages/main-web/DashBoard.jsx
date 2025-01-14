@@ -90,15 +90,17 @@ const DashBoard = () => {
             onClick={() => setSidebarFixed(!sidebarFixed)}
             className={`w-[36px] h-[36px] rounded-full bg-[#F5F5F9] hidden justify-center items-center absolute top-6 -right-3 lg:group-hover:flex duration-300 z-10`}
           >
-            <RedArrowIcon sidebarFixed={sidebarFixed}/>
+            <RedArrowIcon sidebarFixed={sidebarFixed} />
           </span>
           <Sidebar sidebarFixed={sidebarFixed} sideMenu={toggleSideBar} />
         </div>
         {/* Main Content */}
         <div
-          className={` pb-5 duration-300 ${sidebarFixed ? "w-full lg:w-4/5 ps-2" : "w-full lg:w-[94%]"}`}
+          className={` pb-5 duration-300 ${
+            sidebarFixed ? "w-full lg:w-4/5 ps-2" : "w-full lg:w-[94%]"
+          }`}
         >
-          <div className="sticky top-0 bg-white z-10">
+          <div className="sticky top-0 bg-white z-10 rounded-lg">
             <div className="flex justify-between lg:justify-end items-center bg-white  rounded-lg px-3 py-1 mt-2 shadow-sm">
               <div onClick={toggleSideBar} className="cursor-pointer lg:hidden">
                 <MenuIcon />
@@ -119,7 +121,7 @@ const DashBoard = () => {
                     <>
                       <button
                         onClick={toggleDropdown}
-                        className="block w-full text-center whitespace-nowrap ps-2 sm:ps-4 py-2 text-base text-gray-700 "
+                        className="block w-full text-center whitespace-nowrap ps-2 sm:ps-4 py-3 text-base text-gray-700 "
                       >
                         {isLoaded && user ? (
                           <img
@@ -138,11 +140,11 @@ const DashBoard = () => {
                 </div>
                 {/* {isDropdownOpen && ( */}
                 <div
-                  className={`absolute right-0 mt-6  bg-white border border-gray-200 rounded-lg  duration-300 overflow-hidden ${
-                    isDropdownOpen ? "w-56 h-56" : "w-[1px] h-[1px]"
+                  className={`absolute right-0 mt-6 top-14  bg-white  shadow-md rounded-lg  duration-300 overflow-hidden ${
+                    isDropdownOpen ? "w-56" : "w-[1px] h-[1px]"
                   }`}
                 >
-                  <ul className={`p-0`}>
+                  <ul className={`p-0 mb-0`}>
                     {isAdminDashboard ? (
                       <button
                         className="block w-full text-left px-4 py-2 text-sm text-[#6b3e37] hover:bg-gray-100"
@@ -155,7 +157,7 @@ const DashBoard = () => {
                       </button>
                     ) : (
                       <>
-                        <button className="w-full text-center whitespace-nowrap px-4 py-2 text-base uppercase text-[#6b3e37] flex items-center font-medium gap-2 border-b ">
+                        <button className="w-full text-center whitespace-nowrap ps-3  py-2 pe-4 text-base uppercase text-[#6b3e37] flex items-center font-medium gap-2 border-b ">
                           {isLoaded && user ? (
                             <img
                               width={40}
@@ -172,19 +174,19 @@ const DashBoard = () => {
                         <Link
                           onClick={toggleDropdown}
                           to={`user-profile`}
-                          className="flex items-center gap-2 w-full text-left px-4 py-2 text-sm text-[#6b3e37] hover:bg-gray-100 no-underline"
+                          className="flex items-center gap-3 w-full text-left ps-3 pe-4 py-[12px] text-sm text-[#6b3e37] hover:bg-gray-100 no-underline"
                         >
                           <UserIcon /> Profile
                         </Link>
                         <Link
                           onClick={toggleDropdown}
                           to={`billing`}
-                          className="flex items-center gap-2 w-full text-left px-4 py-2 text-sm text-[#6b3e37] hover:bg-gray-100 no-underline"
+                          className="flex items-center gap-3 w-full text-left ps-3 pe-4 py-[12px] text-sm text-[#6b3e37] hover:bg-gray-100 no-underline"
                         >
-                          <BillingIcon /> Billing
+                          <BillingIcon /> Billings
                         </Link>
                         <button
-                          className="flex items-center gap-2 w-full text-left px-4 py-2 text-sm text-[#6b3e37] hover:bg-gray-100 no-underline border-t"
+                          className="flex items-center gap-3 w-full text-left ps-3 pe-4 py-[12px] text-sm text-[#6b3e37] hover:bg-gray-100 no-underline border-t"
                           onClick={handleLogout}
                         >
                           <SignOutIcon /> Logout

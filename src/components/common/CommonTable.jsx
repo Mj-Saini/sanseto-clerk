@@ -15,11 +15,11 @@ const CommonTable = () => {
   const isAdminDashboard = location.pathname.startsWith("/admin-dashboard");
 
   return (
-    <div className="py-2">
+    <div className="py-3">
       {/* Table Section */}
 
       <div className="w-[1100px] xl:w-full px-3">
-        <Table responsive="sm" className="mb-4">
+        <Table responsive="sm" className="mb-0">
           <thead>
             <tr>
               <th
@@ -169,7 +169,8 @@ const CommonTable = () => {
                       textAlign: "start",
                       color: "#6e3b37",
                       fontSize: "14px",
-                      fontWeight: "500",
+                      fontWeight: "400",
+                      padding:"10px"
                     }}
                   >
                     {index + 1}
@@ -182,7 +183,8 @@ const CommonTable = () => {
                       textAlign: "start",
                       color: "#6e3b37",
                       fontSize: "14px",
-                      fontWeight: "500",
+                      fontWeight: "400",
+                      padding:"10px"
                     }}
                   >
                     {formatDate(item.dateTime)}
@@ -200,7 +202,8 @@ const CommonTable = () => {
                       textAlign: "start",
                       color: "#6e3b37",
                       fontSize: "14px",
-                      fontWeight: "500",
+                      fontWeight: "400",
+                      padding:"10px"
                     }}
                   >
                     {item.symbol}
@@ -213,7 +216,8 @@ const CommonTable = () => {
                       textAlign: "start",
                       color: "#6e3b37",
                       fontSize: "14px",
-                      fontWeight: "500",
+                      fontWeight: "400",
+                      padding:"10px"
                     }}
                   >
                     {item.position}
@@ -226,7 +230,8 @@ const CommonTable = () => {
                       textAlign: "start",
                       color: "#6e3b37",
                       fontSize: "14px",
-                      fontWeight: "500",
+                      fontWeight: "400",
+                      padding:"10px"
                     }}
                   >
                     {item.entryPriceFrom}
@@ -239,7 +244,8 @@ const CommonTable = () => {
                       textAlign: "start",
                       color: "#6e3b37",
                       fontSize: "14px",
-                      fontWeight: "500",
+                      fontWeight: "400",
+                      padding:"10px"
                     }}
                   >
                     {item.entryPriceTo}
@@ -252,7 +258,8 @@ const CommonTable = () => {
                       textAlign: "start",
                       color: "#6e3b37",
                       fontSize: "14px",
-                      fontWeight: "500",
+                      fontWeight: "400",
+                      padding:"10px"
                     }}
                   >
                     {item.stopLoss}
@@ -265,7 +272,8 @@ const CommonTable = () => {
                       textAlign: "start",
                       color: "#6e3b37",
                       fontSize: "14px",
-                      fontWeight: "500",
+                      fontWeight: "400",
+                      padding:"10px"
                     }}
                   >
                     {item.target1}
@@ -278,7 +286,8 @@ const CommonTable = () => {
                       textAlign: "start",
                       color: "#6e3b37",
                       fontSize: "14px",
-                      fontWeight: "500",
+                      fontWeight: "400",
+                      padding:"10px"
                     }}
                   >
                     {item.target2}
@@ -291,7 +300,8 @@ const CommonTable = () => {
                       textAlign: "start",
                       color: "#6e3b37",
                       fontSize: "14px",
-                      fontWeight: "500",
+                      fontWeight: "400",
+                      padding:"10px"
                     }}
                   >
                     {item.target3}
@@ -304,7 +314,8 @@ const CommonTable = () => {
                       textAlign: "start",
                       color: "#6e3b37",
                       fontSize: "14px",
-                      fontWeight: "500",
+                      fontWeight: "400",
+                      padding:"10px"
                     }}
                   >
                     {item.target4}
@@ -317,7 +328,8 @@ const CommonTable = () => {
                       textAlign: "start",
                       color: "#6e3b37",
                       fontSize: "14px",
-                      fontWeight: "500",
+                      fontWeight: "400",
+                      padding:"10px"
                     }}
                   >
                     {item.comment}

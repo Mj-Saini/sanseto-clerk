@@ -1,15 +1,4 @@
-<svg
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="#7C4238"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
-  class="feather feather-chevron-up-down"
->
-  <polygon points="12 4, 6 10, 18 10" fill="#7C4238" />
-  <polygon points="12 20, 6 14, 18 14" fill="#7C4238" />
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M9 11L12.7059 6L16 11H9Z" fill="#7C4238" stroke="#7C4238"/>
+<path d="M9 14L12.7059 19L16 14H9Z" fill="#7C4238" stroke="#7C4238"/>
 </svg>
