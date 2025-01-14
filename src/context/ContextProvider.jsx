@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { onValue, ref } from "firebase/database";
+import { onValue, ref, remove } from "firebase/database";
 import { createContext, useContext, useEffect, useState } from "react";
 import { realtimeDb } from "../components/firebase";
 
@@ -71,8 +71,21 @@ export const ContextProvider = ({ children }) => {
 
   const handleItemsPerPageChange = (num) => {
     setItemsPerPage(num);
-    setCurrentPage(1); // Reset to the first page when items per page changes
+    setCurrentPage(1); 
   };
+
+  const deleteData = async (id) => {
+    const entryRef = ref(realtimeDb, `trades/${id}`);
+    try {
+      await remove(entryRef);
+      console.log(`Entry with ID: ${id} deleted successfully.`);
+      setData((prevData) => prevData.filter((item) => item.id !== id));
+    } catch (error) {
+      console.error("Error deleting data: ", error);
+    }
+  };
+
+ 
   const currentData = data.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
@@ -87,6 +100,7 @@ export const ContextProvider = ({ children }) => {
     handleItemsPerPageChange,
     currentData,
     totalPages,
+    deleteData
   };
 
   return <MyContext.Provider value={value}>{children}</MyContext.Provider>;
