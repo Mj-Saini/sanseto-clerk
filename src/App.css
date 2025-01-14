@@ -106,6 +106,7 @@
 
 .input_checkbox {
   accent-color: red;
+  border: #376e4d;
 }
 
 .custom-select {
@@ -168,6 +169,14 @@
 .css-1xc3v61-indicatorContainer {
   padding: 0 !important
 }
+
+
+/* CHECKBOX CLASSES */
+
+
+
+
+
 @media (min-width: 320px) {
   .custom-grid {
     grid-template-columns: 100%;

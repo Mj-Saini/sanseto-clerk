@@ -74,7 +74,7 @@ const DashboardTable = () => {
 
       <div className="h-full">
         <div className="flex justify-between items-center mb-4">
-          <div className=" py-3 w-full mt-1">
+          <div className=" py-3 w-full mt-3">
             {/* Table */}
             {/* Action Buttons */}
             <div

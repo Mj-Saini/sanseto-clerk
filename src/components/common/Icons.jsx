@@ -135,7 +135,7 @@ export const DashBoardIcon = () => {
       // xmlns:xlink="http://www.w3.org/1999/xlink"
       aria-hidden="true"
       role="img"
-       width="22"
+      width="22"
       height="22"
       viewBox="0 0 24 24"
     >
@@ -153,7 +153,7 @@ export const PricePlanIcon = () => {
       // xmlns:xlink="http://www.w3.org/1999/xlink"
       aria-hidden="true"
       role="img"
-       width="22"
+      width="22"
       height="22"
       viewBox="0 0 24 24"
     >
@@ -322,6 +322,40 @@ export const ShareIcon = () => {
       <path
         fill="currentColor"
         d="M20.56 3.34a1 1 0 0 0-1-.08l-17 8a1 1 0 0 0-.57.92a1 1 0 0 0 .6.9L8 15.45v6.72L13.84 18l4.76 2.08a.93.93 0 0 0 .4.09a1 1 0 0 0 .52-.15a1 1 0 0 0 .48-.79l1-15a1 1 0 0 0-.44-.89ZM18.1 17.68l-5.27-2.31L16 9.17l-7.65 4.25l-2.93-1.29l13.47-6.34Z"
+      ></path>
+    </svg>
+  );
+};
+export const HeartIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      role="img"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+    >
+      <path
+        fill="#C42b1e"
+        d="M12 4.595a5.904 5.904 0 0 0-3.996-1.558a5.942 5.942 0 0 0-4.213 1.758c-2.353 2.363-2.352 6.059.002 8.412l7.332 7.332c.17.299.498.492.875.492a.99.99 0 0 0 .792-.409l7.415-7.415c2.354-2.354 2.354-6.049-.002-8.416a5.938 5.938 0 0 0-4.209-1.754A5.906 5.906 0 0 0 12 4.595zm6.791 1.61c1.563 1.571 1.564 4.025.002 5.588L12 18.586l-6.793-6.793c-1.562-1.563-1.561-4.017-.002-5.584c.76-.756 1.754-1.172 2.799-1.172s2.035.416 2.789 1.17l.5.5a.999.999 0 0 0 1.414 0l.5-.5c1.512-1.509 4.074-1.505 5.584-.002z"
+      ></path>
+    </svg>
+  );
+};
+export const ScrollTopIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      role="img"
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+    >
+      <path
+        fill="#fff"
+        d="M11 8.414V18h2V8.414l4.293 4.293l1.414-1.414L12 4.586l-6.707 6.707l1.414 1.414z"
       ></path>
     </svg>
   );

@@ -8,12 +8,12 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
   const location = useLocation();
   const isAdminDashboard = location.pathname.startsWith("/admin-dashboard");
   return (
-    <div className="top-0 sticky overflow-hidden">
+    <div className="top-0 sticky overflow-hidden bg-[#fff] h-full">
       <div className="pt-6 flex justify-between relative z-0">
         <div className="px-3">
           {/* {sidebarFixed ? */}
           <img
-            className={`group-hover:hidden flex ${
+            className={` hidden group-hover:lg:hidden lg:flex ${
               sidebarFixed ? "hidden" : "flex"
             }`}
             width={40}
@@ -22,8 +22,8 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
             alt="logo"
           />
           <img
-            className={`hidden group-hover:flex ${
-              sidebarFixed ? "!flex" : "hidden"
+            className={`flex lg:hidden group-hover:lg:flex ${
+              sidebarFixed ? "lg:!flex" : "lg:hidden"
             }`}
             width={150}
             height={70}
@@ -64,8 +64,12 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                   <span className="ms-1.5 mr-6">
                     <DashBoardIcon />
                   </span>{" "}
-                  <span className={` duration-200 group-hover:-translate-x-3 ${sidebarFixed ? "-translate-x-3":"translate-x-3"}`}> 
-                  DashBoard
+                  <span
+                    className={` duration-200 group-hover:lg:-translate-x-3 ${
+                      sidebarFixed ? "-translate-x-3" : "lg:translate-x-3"
+                    }`}
+                  >
+                    DashBoard
                   </span>
                 </Link>
               </div>
@@ -89,8 +93,8 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                 >
                   <span className="ms-1.5 mr-6">👤</span>
                   <span
-                    className={` duration-200 group-hover:-translate-x-3 ${
-                      sidebarFixed ? "-translate-x-3" : "translate-x-3"
+                    className={` duration-200 group-hover:lg:-translate-x-3 ${
+                      sidebarFixed ? "-translate-x-3" : "lg:translate-x-3"
                     }`}
                   >
                     {" "}
@@ -124,8 +128,8 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                     <DashBoardIcon />
                   </span>
                   <span
-                    className={` duration-200 group-hover:-translate-x-3 ${
-                      sidebarFixed ? "-translate-x-3" : "translate-x-3"
+                    className={` duration-200 group-hover:lg:-translate-x-3 ${
+                      sidebarFixed ? "-translate-x-3" : "lg:translate-x-3"
                     }`}
                   >
                     {" "}
@@ -154,8 +158,8 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                     <ShareIcon />
                   </span>
                   <span
-                    className={` duration-200 group-hover:-translate-x-3 ${
-                      sidebarFixed ? "-translate-x-3" : "translate-x-3"
+                    className={` duration-200 group-hover:lg:-translate-x-3 ${
+                      sidebarFixed ? "-translate-x-3" : "lg:translate-x-3"
                     }`}
                   >
                     1Cliq Plan
@@ -183,11 +187,11 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                     <DittoSettings />
                   </span>{" "}
                   <span
-                    className={` duration-200 group-hover:-translate-x-3 ${
-                      sidebarFixed ? "-translate-x-3" : "translate-x-3"
+                    className={` duration-200 group-hover:lg:-translate-x-3 ${
+                      sidebarFixed ? "-translate-x-3" : "lg:translate-x-3"
                     }`}
                   >
-                    ditto settings
+                    ditto setting
                   </span>
                 </Link>
               </div>
@@ -212,11 +216,11 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                     <Settings />
                   </span>{" "}
                   <span
-                    className={` duration-200 group-hover:-translate-x-3 ${
-                      sidebarFixed ? "-translate-x-3" : "translate-x-3"
+                    className={` duration-200 group-hover:lg:-translate-x-3 ${
+                      sidebarFixed ? "-translate-x-3" : "lg:translate-x-3"
                     }`}
                   >
-                    favourite settings
+                    favourite setting
                   </span>
                 </Link>
               </div>

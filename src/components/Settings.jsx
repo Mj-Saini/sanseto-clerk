@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 const Settings = () => {
   return (
     <>
@@ -185,10 +186,10 @@ const Settings = () => {
                       </span>
                     </label>
                     <div className="flex gap-2 items-start w-full">
-                      <div className="flex gap-2">
+                      <div className="flex gap-2 items-center">
                         <input
                           type="checkbox"
-                          className="input_checkbox form-checkbox w-6"
+                          className="input_checkbox form-checkbox c w-6"
                         />
                         <input
                           type="number"
@@ -240,10 +241,10 @@ const Settings = () => {
                       </span>
                     </label>
                     <div className="flex gap-2 items-start w-full">
-                      <div className="flex gap-2">
+                      <div className="flex gap-2 items-center">
                         <input
                           type="checkbox"
-                          className="input_checkbox form-checkbox w-6"
+                          className="input_checkbox form-checkbox"
                         />
                         <input
                           type="number"
