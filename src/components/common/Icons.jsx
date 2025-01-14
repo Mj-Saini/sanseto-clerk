@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 export const GoogleAuthProviderIcon = () => {
   return (
     <svg
@@ -134,8 +135,8 @@ export const DashBoardIcon = () => {
       // xmlns:xlink="http://www.w3.org/1999/xlink"
       aria-hidden="true"
       role="img"
-      width="1em"
-      height="1em"
+       width="22"
+      height="22"
       viewBox="0 0 24 24"
     >
       <path
@@ -152,8 +153,8 @@ export const PricePlanIcon = () => {
       // xmlns:xlink="http://www.w3.org/1999/xlink"
       aria-hidden="true"
       role="img"
-      width="1em"
-      height="1em"
+       width="22"
+      height="22"
       viewBox="0 0 24 24"
     >
       <path
@@ -169,8 +170,8 @@ export const DittoSettings = () => {
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
       role="img"
-      width="1em"
-      height="1em"
+      width="22"
+      height="22"
       viewBox="0 0 24 24"
     >
       <path
@@ -186,8 +187,8 @@ export const Settings = () => {
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
       role="img"
-      width="1em"
-      height="1em"
+      width="22"
+      height="22"
       viewBox="0 0 24 24"
     >
       <path
@@ -289,16 +290,16 @@ export const MenuIcon = () => {
     </svg>
   );
 };
-export const RedArrowIcon = () => {
+export const RedArrowIcon = ({ sidebarFixed }) => {
   return (
     <span className="w-[22px] h-[22px] rounded-full bg-[red] flex justify-center items-center">
       <svg
+        className={` duration-200 ${sidebarFixed ? "rotate-0" : "rotate-180"}`}
         xmlns="http://www.w3.org/2000/svg"
         role="button"
         width="24"
         height="24"
         viewBox="0 0 24 24"
-        className="-scale-110"
       >
         <path
           fill="white"
@@ -306,5 +307,22 @@ export const RedArrowIcon = () => {
         ></path>
       </svg>
     </span>
+  );
+};
+export const ShareIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      role="img"
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+    >
+      <path
+        fill="currentColor"
+        d="M20.56 3.34a1 1 0 0 0-1-.08l-17 8a1 1 0 0 0-.57.92a1 1 0 0 0 .6.9L8 15.45v6.72L13.84 18l4.76 2.08a.93.93 0 0 0 .4.09a1 1 0 0 0 .52-.15a1 1 0 0 0 .48-.79l1-15a1 1 0 0 0-.44-.89ZM18.1 17.68l-5.27-2.31L16 9.17l-7.65 4.25l-2.93-1.29l13.47-6.34Z"
+      ></path>
+    </svg>
   );
 };

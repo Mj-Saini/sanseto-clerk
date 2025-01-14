@@ -104,12 +104,12 @@ const DashboardTable = () => {
             {[0, 0].map((item, index) => (
               <div key={index} className="mt-4">
                 {index === 0 ? (
-                  <h2 className="text-[#6e3b37] text-xl md:text-2xl font-bold">
-                    In Progress Calls
+                  <h2 className="text-red-500 text-base md:text-lg font-medium mt-5 bg-white inline-block p-2 shadow-sm  rounded-md">
+                    Progress Table
                   </h2>
                 ) : (
-                  <h2 className="text-[#6e3b37] text-xl md:text-2xl font-bold mt-5">
-                    Completed Calls
+                  <h2 className="text-red-500 text-base md:text-lg font-medium mt-5 bg-white inline-block p-2 shadow-sm  rounded-md">
+                    Completed Table
                   </h2>
                 )}
 
