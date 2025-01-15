@@ -5,8 +5,8 @@ import { useContextProvider } from "../../context/ContextProvider";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const CommonTable = () => {
-  const { formatDate, currentData, deleteData } = useContextProvider();
+const CommonTable = ({ tabledata }) => {
+  const { formatDate, deleteData } = useContextProvider();
 
   const [activePopupIndex, setActivePopupIndex] = useState(null);
   const togglePopup = (index) => {
@@ -158,8 +158,8 @@ const CommonTable = () => {
             </tr>
           </thead>
           <tbody>
-            {Array.isArray(currentData) && currentData.length > 0 ? (
-              currentData?.map((item, index) => (
+            {Array.isArray(tabledata) && tabledata.length > 0 ? (
+              tabledata?.map((item, index) => (
                 <tr key={index} className="relative">
                   <td
                     className={` ${

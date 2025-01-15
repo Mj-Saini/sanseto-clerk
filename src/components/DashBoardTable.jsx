@@ -18,11 +18,20 @@ const DashboardTable = () => {
 
   const {
     data,
+    completedata,
+    currentCompletePage,
+    currentProgressData,
     itemsPerPage,
+    itemsPerCompletePage,
+    currentCompleteData,
     currentPage,
     totalPages,
+    totalCompletePages,
     handlePageChange,
-    handleItemsPerPageChange,isToastVisible,
+    handleCompletePageChange,
+    handleItemsPerPageChange,
+    handleItemsPerCompletePageChange,
+    isToastVisible,
     addBroker, setAddBroker
   } = useContextProvider();
   const [show, setShow] = useState(false);
@@ -31,6 +40,7 @@ const DashboardTable = () => {
     window.location.reload();
   };
   const isAdminDashboard = location.pathname.startsWith("/admin-dashboard");
+
   if (addBroker) {
     document.body.style.overflow = "clip";
   } else {
@@ -67,7 +77,9 @@ const DashboardTable = () => {
           <div className=" py-3 w-full">
             {/* Table */}
             {/* Action Buttons */}
-          {isAdminDashboard &&  <div
+          {isAdminDashboard && 
+          <div>
+             <div
               style={{ display: "flex", justifyContent: "space-between" }}
               className="my-3 bg-white shadow-sm p-3 rounded-lg flex flex-col sm:!flex-row gap-3"
             >
@@ -90,112 +102,207 @@ const DashboardTable = () => {
                   Open 1Cliq Window
                 </button>
               </div>
-            </div>}
-            {[0, 0].map((item, index) => (
-              <div key={index} className="mt-3">
-                {index === 0 ? (
-                  <h2 className="text-red-500 tracking-wide text-base md:text-lg font-medium  bg-white inline-block p-2 shadow-sm  rounded-md">
-                    Progress Table
-                  </h2>
-                ) : (
-                  <h2 className="text-red-500 tracking-wide text-base md:text-lg font-medium  bg-white inline-block p-2 shadow-sm  rounded-md">
-                    Completed Table
-                  </h2>
-                )}
-
-                <div className="  box_shadow_tabel bg-white rounded-lg">
-                  <div
-                    className={`overflow-auto ${
-                      isAdminDashboard ? "pb-[120px]" : ""
-                    }`}
-                  >
-                    <CommonTable />
-                  </div>
-                  {/* Pagination Controls */}
-                  <div className="d-flex flex-col sm:flex-row justify-end items-end sm:items-center gap-3 py-3 px-3">
-                    <Dropdown>
-                      <span
-                        style={{
-                          textAlign: "start",
-                          color: "#6e3b37",
-                          fontSize: "14px",
-                        }}
-                        className="me-4 "
-                      >
-                        Items per page:
-                      </span>{" "}
-                      <Dropdown.Toggle  variant="secondary" id="dropdown-basic">
-                        {itemsPerPage}
-                      </Dropdown.Toggle>
-                      <Dropdown.Menu>
-                        {[1, 5, 10, 15, 20].map((num) => (
-                          <Dropdown.Item
-                            key={num}
-                           
-                            onClick={() => handleItemsPerPageChange(num)}
-                          >
-                            {num}
-                          </Dropdown.Item>
-                        ))}
-                      </Dropdown.Menu>
-                    </Dropdown>
-
+            </div>
+            <div className="mt-3">
+              <h2 className="text-red-500 tracking-wide text-base md:text-lg font-medium  bg-white inline-block p-2 shadow-sm  rounded-md">
+                Progress Table
+              </h2>
+              <div className="  box_shadow_tabel bg-white rounded-lg">
+                <div
+                  className={`overflow-auto ${
+                    isAdminDashboard ? "pb-[120px]" : ""
+                  }`}
+                >
+                  <CommonTable tabledata={currentProgressData} />
+                </div>
+                {/* Pagination Controls */}
+                <div className="d-flex flex-col sm:flex-row justify-end items-end sm:items-center gap-3 py-3 px-3">
+                  <Dropdown>
                     <span
                       style={{
                         textAlign: "start",
                         color: "#6e3b37",
                         fontSize: "14px",
                       }}
+                      className="me-4 "
                     >
-                      {`${(currentPage - 1) * itemsPerPage + 1}-${Math.min(
-                        currentPage * itemsPerPage,
-                        data.length
-                      )} of ${data.length}`}
-                    </span>
+                      Items per page:
+                    </span>{" "}
+                    <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+                      {itemsPerPage}
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                      {[1, 5, 10, 15, 20].map((num) => (
+                        <Dropdown.Item
+                          key={num}
+                          onClick={() => handleItemsPerPageChange(num)}
+                        >
+                          {num}
+                        </Dropdown.Item>
+                      ))}
+                    </Dropdown.Menu>
+                  </Dropdown>
 
-                    <ul className="d-flex mb-0 gap-3 align-items-center">
-                      <li>
-                        <button
-                          type="button"
-                          onClick={() => handlePageChange(1)}
-                          disabled={currentPage === 1}
-                        >
-                          <PrevPageIcon />
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          type="button"
-                          onClick={() => handlePageChange(currentPage - 1)}
-                          disabled={currentPage === 1}
-                        >
-                          <PrevArrowIcon />
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          type="button"
-                          className=" rotate-180"
-                          onClick={() => handlePageChange(currentPage + 1)}
-                          disabled={currentPage === totalPages}
-                        >
-                          <PrevArrowIcon />
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          type="button"
-                          onClick={() => handlePageChange(totalPages)}
-                          disabled={currentPage === totalPages}
-                        >
-                          <NextPageIcon />
-                        </button>
-                      </li>
-                    </ul>
-                  </div>
+                  <span
+                    style={{
+                      textAlign: "start",
+                      color: "#6e3b37",
+                      fontSize: "14px",
+                    }}
+                  >
+                    {`${(currentPage - 1) * itemsPerPage + 1}-${Math.min(
+                      currentPage * itemsPerPage,
+                      data.length
+                    )} of ${data.length}`}
+                  </span>
+
+                  <ul className="d-flex mb-0 gap-3 align-items-center">
+                    <li>
+                      <button
+                        type="button"
+                        onClick={() => handlePageChange(1)}
+                        disabled={currentPage === 1}
+                      >
+                        <PrevPageIcon />
+                      </button>
+                    </li>
+                    <li>
+                      <button
+                        type="button"
+                        onClick={() => handlePageChange(currentPage - 1)}
+                        disabled={currentPage === 1}
+                      >
+                        <PrevArrowIcon />
+                      </button>
+                    </li>
+                    <li>
+                      <button
+                        type="button"
+                        className=" rotate-180"
+                        onClick={() => handlePageChange(currentPage + 1)}
+                        disabled={currentPage === totalPages}
+                      >
+                        <PrevArrowIcon />
+                      </button>
+                    </li>
+                    <li>
+                      <button
+                        type="button"
+                        onClick={() => handlePageChange(totalPages)}
+                        disabled={currentPage === totalPages}
+                      >
+                        <NextPageIcon />
+                      </button>
+                    </li>
+                  </ul>
                 </div>
               </div>
-            ))}
+            </div>
+            </div>}
+            {/* Completed Table */}
+            <div className="mt-3">
+              <h2 className="text-red-500 tracking-wide text-base md:text-lg font-medium  bg-white inline-block p-2 shadow-sm  rounded-md">
+                Completed Table
+              </h2>
+              <div className="  box_shadow_tabel bg-white rounded-lg">
+                <div
+                  className={`overflow-auto ${
+                    isAdminDashboard ? "pb-[120px]" : ""
+                  }`}
+                >
+                  <CommonTable tabledata={currentCompleteData} />
+                </div>
+                {/* Pagination Controls */}
+                <div className="d-flex flex-col sm:flex-row justify-end items-end sm:items-center gap-3 py-3 px-3">
+                  <Dropdown>
+                    <span
+                      style={{
+                        textAlign: "start",
+                        color: "#6e3b37",
+                        fontSize: "14px",
+                      }}
+                      className="me-4 "
+                    >
+                      Items per page:
+                    </span>{" "}
+                    <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+                      {itemsPerCompletePage}
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                      {[1, 5, 10, 15, 20].map((num) => (
+                        <Dropdown.Item
+                          key={num}
+                          onClick={() => handleItemsPerCompletePageChange(num)}
+                        >
+                          {num}
+                        </Dropdown.Item>
+                      ))}
+                    </Dropdown.Menu>
+                  </Dropdown>
+
+                  <span
+                    style={{
+                      textAlign: "start",
+                      color: "#6e3b37",
+                      fontSize: "14px",
+                    }}
+                  >
+                    {`${
+                      (currentCompletePage - 1) * itemsPerCompletePage + 1
+                    }-${Math.min(
+                      currentCompletePage * itemsPerCompletePage,
+                      completedata.length
+                    )} of ${completedata.length}`}
+                  </span>
+
+                  <ul className="d-flex mb-0 gap-3 align-items-center">
+                    <li>
+                      <button
+                        type="button"
+                        onClick={() => handleCompletePageChange(1)}
+                        disabled={currentCompletePage === 1}
+                      >
+                        <PrevPageIcon />
+                      </button>
+                    </li>
+                    <li>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          handleCompletePageChange(currentCompletePage - 1)
+                        }
+                        disabled={currentCompletePage === 1}
+                      >
+                        <PrevArrowIcon />
+                      </button>
+                    </li>
+                    <li>
+                      <button
+                        type="button"
+                        className=" rotate-180"
+                        onClick={() =>
+                          handleCompletePageChange(currentCompletePage + 1)
+                        }
+                        disabled={currentCompletePage === totalCompletePages}
+                      >
+                        <PrevArrowIcon />
+                      </button>
+                    </li>
+                    <li>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          handleCompletePageChange(totalCompletePages)
+                        }
+                        disabled={currentCompletePage === totalCompletePages}
+                      >
+                        <NextPageIcon />
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

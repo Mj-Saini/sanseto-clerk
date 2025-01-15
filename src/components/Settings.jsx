@@ -1,5 +1,9 @@
 /* eslint-disable react/no-unescaped-entities */
+import { useState } from "react";
+
 const Settings = () => {
+  const [stoploss, setStoploss] = useState(true);
+  const [target, setTarget] = useState(true);
   return (
     <>
       <div className="w-full mx-auto ">
@@ -165,6 +169,7 @@ const Settings = () => {
 
               <div className="custom-select">
                 <select className="p-2 border border-gray-300 text-[13px] text-[#97514b]  rounded-md w-full">
+                  <option>Line Chart View</option>
                   <option>Range bar</option>
                 </select>
               </div>
@@ -178,7 +183,7 @@ const Settings = () => {
           <div className="flex justify-between gap-3 mt">
             <div className=" d-flex gap-y-4 gap-lg-2 flex-wrap flex-lg-nowrap">
               <div className=" col-12 col-md-6 col-lg-3">
-                <div className=" flex justify-between gap-3 flex-col flex-xxl-row items-end">
+                <div className=" flex justify-between gap-3 flex-col flex-xxl-row items_xxl_end">
                   <div className="w_180px">
                     <label className="flex items-center space-x-2">
                       <span className=" text-[13px] font-normal mb-1">
@@ -189,10 +194,12 @@ const Settings = () => {
                       <div className="flex gap-2 items-center">
                         <input
                           type="checkbox"
-                          className="input_checkbox form-checkbox c w-6"
+                          onClick={() => setStoploss(!stoploss)}
+                          className="input_checkbox form-checkbox w-6"
                         />
                         <input
                           type="number"
+                          readOnly={stoploss ? true : false}
                           className="p-2 border border-gray-300 text-[13px] text-[#97514b] rounded-md "
                           placeholder=""
                         />
@@ -201,8 +208,12 @@ const Settings = () => {
                   </div>
                   <div className="w_109px">
                     <div className="custom-select">
-                      <select className="p-2 border border-gray-300 text-[13px] text-[#97514b] rounded-md w-full">
+                      <select
+                        className="p-2 border border-gray-300 text-[13px] text-[#97514b] rounded-md w-full"
+                        disabled={stoploss ? true : false}
+                      >
                         <option>Points</option>
+                        <option>Percentage</option>
                       </select>
                     </div>
                   </div>
@@ -225,15 +236,19 @@ const Settings = () => {
                 </label>
                 <div className="w-full">
                   <div className="custom-select">
-                    <select className="p-2 border border-gray-300 text-[13px] text-[#97514b] rounded-md w-full">
+                    <select
+                      className="p-2 border border-gray-300 text-[13px] text-[#97514b] rounded-md w-full"
+                      disabled={stoploss ? true : false}
+                    >
                       <option>Static Stoploss</option>
+                      <option>Trailling Stoploss</option>
                     </select>
                   </div>
                 </div>
               </div>
 
               <div className="col-12 col-md-6 col-lg-3">
-                <div className=" flex justify-between gap-3 flex-col flex-xxl-row items-end">
+                <div className=" flex justify-between gap-3 flex-col flex-xxl-row items_xxl_end">
                   <div className="w_180px">
                     <label className="flex items-center space-x-2">
                       <span className=" text-[13px] font-normal mb-1">
@@ -244,10 +259,12 @@ const Settings = () => {
                       <div className="flex gap-2 items-center">
                         <input
                           type="checkbox"
-                          className="input_checkbox form-checkbox custom-ch eckbox"
+                          onClick={() => setTarget(!target)}
+                          className="input_checkbox form-checkbox w-6"
                         />
                         <input
                           type="number"
+                          readOnly={target ? true : false}
                           className="p-2 border border-gray-300 text-[13px] text-[#97514b] rounded-md "
                           placeholder=""
                         />
@@ -257,10 +274,11 @@ const Settings = () => {
                   <div className="w_109px">
                     <div className="custom-select">
                       <select
-                        disabled
+                        disabled={target ? true : false}
                         className="p-2 border border-gray-300 text-[13px] text-[#97514b] rounded-md w-full"
                       >
                         <option>Points</option>
+                        <option>Percentage</option>
                       </select>
                     </div>
                   </div>

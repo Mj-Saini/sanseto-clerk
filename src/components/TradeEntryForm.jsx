@@ -169,8 +169,12 @@ const TradeEntryForm = ({ showToast }) => {
 
     if (id) {
       await updateDataInRealtimeDB(dataToSave);
+      setAddBroker(false);
+      navigate(`/admin-dashboard`);
     } else {
       await saveDataToRealtimeDB(dataToSave);
+      setAddBroker(false);
+
     }
     setFormData({
       symbol: "XAUUSD",
@@ -193,7 +197,8 @@ const TradeEntryForm = ({ showToast }) => {
         target4: "",
       },
     });
-    setAddBroker(false);
+   
+
   };
 
   return (
@@ -225,7 +230,7 @@ const TradeEntryForm = ({ showToast }) => {
               styles={{
                 control: (provided, state) => ({
                   ...provided,
-                  display:"flex",
+                  display: "flex",
                   alignContent: "center",
                   height: "40px",
                   minHeight: "40px",
@@ -287,7 +292,6 @@ const TradeEntryForm = ({ showToast }) => {
               value={formData.position}
               onChange={handleChange}
               placeholder="Select a Position"
-
               className="w-full p-2 border border-[#C42B1E1F] text-[#97514b] rounded-md outline-none "
             />
           </div>
@@ -308,7 +312,6 @@ const TradeEntryForm = ({ showToast }) => {
                 value={formData.entryPriceFrom}
                 onChange={handleChange}
                 placeholder="Price"
-
                 className="w-full p-2 border border-[#C42B1E1F] text-[#97514b] rounded-md outline-none "
               />
             </div>
@@ -327,7 +330,6 @@ const TradeEntryForm = ({ showToast }) => {
                 value={formData.entryPriceTo}
                 onChange={handleChange}
                 placeholder="Price"
-
                 className="w-full p-2 border border-[#C42B1E1F] text-[#97514b] rounded-md outline-none "
               />
             </div>
@@ -419,7 +421,7 @@ const TradeEntryForm = ({ showToast }) => {
           </div>
 
           <div className="flex gap-3 justify-end mt-4">
-            <button className="btn_light text-[#c42b1e] py-2 px-4 rounded-md  transition duration-300">
+            <button type="button"  className="btn_light text-[#c42b1e] py-2 px-4 rounded-md  transition duration-300">
               cencel
             </button>
             <button

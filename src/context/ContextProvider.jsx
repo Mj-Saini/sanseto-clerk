@@ -12,11 +12,14 @@ export const useContextProvider = () => {
 // Create the provider component
 export const ContextProvider = ({ children }) => {
   const [data, setData] = useState([]);
+  const [completedata, setCompleteData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [currentCompletePage, setCurrentCompletePage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [itemsPerCompletePage, setItemsPerCompletePage] = useState(10);
   const totalPages = Math.ceil(data.length / itemsPerPage);
+  const totalCompletePages = Math.ceil(completedata.length / itemsPerCompletePage);
   const [isToastVisible, setIsToastVisible] = useState(false);
-
   const [addBroker, setAddBroker] = useState(false);
 
   const showToast = () => {
@@ -43,10 +46,18 @@ export const ContextProvider = ({ children }) => {
               })
             );
             showToast();
-            setData(tradeData);
+            const filterprogressdata = tradeData.filter(
+              (v) => v.completed !== true
+            );
+            const filtercompletedata = tradeData.filter(
+              (v) => v.completed === true
+            );
+            setData(filterprogressdata);
+            setCompleteData(filtercompletedata);
           } else {
             console.log("No data available");
             setData([]);
+            setCompleteData([]);
           }
         },
         (error) => {
@@ -63,16 +74,40 @@ export const ContextProvider = ({ children }) => {
     return isNaN(date.getTime()) ? "Invalid Date" : date.toLocaleDateString();
   };
 
-  const handlePageChange = (page) => {
-    if (page >= 1 && page <= totalPages) {
-      setCurrentPage(page);
-    }
-  };
-
+ 
+  // progress table
   const handleItemsPerPageChange = (num) => {
     setItemsPerPage(num);
     setCurrentPage(1);
   };
+
+  const currentProgressData = data.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+   const handlePageChange = (page) => {
+     if (page >= 1 && page <= totalPages) {
+       setCurrentPage(page);
+     }
+   };
+
+  // Complete table
+  const handleItemsPerCompletePageChange = (num) => {
+    setItemsPerCompletePage(num);
+    setCurrentCompletePage(1);
+  };
+
+     const handleCompletePageChange = (page) => {
+       if (page >= 1 && page <= totalCompletePages) {
+         setCurrentCompletePage(page);
+       }
+     };
+
+    const currentCompleteData = completedata.slice(
+      (currentCompletePage - 1) * itemsPerCompletePage,
+      currentCompletePage * itemsPerCompletePage
+    );
 
   const deleteData = async (id) => {
     const entryRef = ref(realtimeDb, `trades/${id}`);
@@ -85,27 +120,30 @@ export const ContextProvider = ({ children }) => {
     }
   };
 
-  const currentData = data.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
 
   const value = {
     data,
+    completedata,
     setData,
     itemsPerPage,
+    itemsPerCompletePage,
+    currentCompleteData,
+    currentCompletePage,
+    totalCompletePages,
     setItemsPerPage,
+    setItemsPerCompletePage,
+    handleCompletePageChange,
     currentPage,
     setCurrentPage,
     isToastVisible,
     formatDate,
     handlePageChange,
     handleItemsPerPageChange,
-    currentData,
+    handleItemsPerCompletePageChange,
+    currentProgressData,
     totalPages,
     deleteData,
-    addBroker,
-    setAddBroker,
+    addBroker, setAddBroker
   };
 
   return <MyContext.Provider value={value}>{children}</MyContext.Provider>;
