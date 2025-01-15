@@ -145,7 +145,7 @@ const DashBoard = () => {
                       <>
                         <button
                           onClick={toggleDropdown}
-                          className="block w-full text-center whitespace-nowrap ps-2 sm:ps-4 py-3 text-base text-gray-700 "
+                          className="block w-full text-center whitespace-nowrap ps-2 sm:ps-4 py-1.5 text-base text-gray-700 "
                         >
                           {isLoaded && user ? (
                             <img
