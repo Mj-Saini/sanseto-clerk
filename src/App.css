@@ -230,4 +230,8 @@
   .d_xl_flex {
     display: flex;
   }
+
+  .items_xxl_end{
+    align-items: end;
+  }
 }

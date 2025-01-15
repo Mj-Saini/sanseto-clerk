@@ -5,7 +5,7 @@ import { useContextProvider } from "../../context/ContextProvider";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const CommonTable = () => {
+const CommonTable = ({ tabledata }) => {
   const { formatDate, currentData, deleteData } = useContextProvider();
 
   const [activePopupIndex, setActivePopupIndex] = useState(null);
@@ -158,8 +158,8 @@ const CommonTable = () => {
             </tr>
           </thead>
           <tbody>
-            {Array.isArray(currentData) && currentData.length > 0 ? (
-              currentData?.map((item, index) => (
+            {Array.isArray(tabledata) && tabledata.length > 0 ? (
+              tabledata?.map((item, index) => (
                 <tr key={index} className="relative">
                   <td
                     className={` ${
@@ -170,7 +170,7 @@ const CommonTable = () => {
                       color: "#6e3b37",
                       fontSize: "14px",
                       fontWeight: "400",
-                      padding:"10px"
+                      padding: "10px",
                     }}
                   >
                     {index + 1}
@@ -184,7 +184,7 @@ const CommonTable = () => {
                       color: "#6e3b37",
                       fontSize: "14px",
                       fontWeight: "400",
-                      padding:"10px"
+                      padding: "10px",
                     }}
                   >
                     {formatDate(item.dateTime)}
@@ -203,7 +203,7 @@ const CommonTable = () => {
                       color: "#6e3b37",
                       fontSize: "14px",
                       fontWeight: "400",
-                      padding:"10px"
+                      padding: "10px",
                     }}
                   >
                     {item.symbol}
@@ -217,7 +217,7 @@ const CommonTable = () => {
                       color: "#6e3b37",
                       fontSize: "14px",
                       fontWeight: "400",
-                      padding:"10px"
+                      padding: "10px",
                     }}
                   >
                     {item.position}
@@ -231,7 +231,7 @@ const CommonTable = () => {
                       color: "#6e3b37",
                       fontSize: "14px",
                       fontWeight: "400",
-                      padding:"10px"
+                      padding: "10px",
                     }}
                   >
                     {item.entryPriceFrom}
@@ -245,7 +245,7 @@ const CommonTable = () => {
                       color: "#6e3b37",
                       fontSize: "14px",
                       fontWeight: "400",
-                      padding:"10px"
+                      padding: "10px",
                     }}
                   >
                     {item.entryPriceTo}
@@ -259,7 +259,7 @@ const CommonTable = () => {
                       color: "#6e3b37",
                       fontSize: "14px",
                       fontWeight: "400",
-                      padding:"10px"
+                      padding: "10px",
                     }}
                   >
                     {item.stopLoss}
@@ -273,7 +273,7 @@ const CommonTable = () => {
                       color: "#6e3b37",
                       fontSize: "14px",
                       fontWeight: "400",
-                      padding:"10px"
+                      padding: "10px",
                     }}
                   >
                     {item.target1}
@@ -287,7 +287,7 @@ const CommonTable = () => {
                       color: "#6e3b37",
                       fontSize: "14px",
                       fontWeight: "400",
-                      padding:"10px"
+                      padding: "10px",
                     }}
                   >
                     {item.target2}
@@ -301,7 +301,7 @@ const CommonTable = () => {
                       color: "#6e3b37",
                       fontSize: "14px",
                       fontWeight: "400",
-                      padding:"10px"
+                      padding: "10px",
                     }}
                   >
                     {item.target3}
@@ -315,7 +315,7 @@ const CommonTable = () => {
                       color: "#6e3b37",
                       fontSize: "14px",
                       fontWeight: "400",
-                      padding:"10px"
+                      padding: "10px",
                     }}
                   >
                     {item.target4}
@@ -329,7 +329,7 @@ const CommonTable = () => {
                       color: "#6e3b37",
                       fontSize: "14px",
                       fontWeight: "400",
-                      padding:"10px"
+                      padding: "10px",
                     }}
                   >
                     {item.comment}
