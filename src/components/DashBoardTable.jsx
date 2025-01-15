@@ -109,7 +109,7 @@ const DashboardTable = () => {
 
             <div className="mt-3">
               <h2 className="text-red-500 tracking-wide text-base md:text-lg font-medium  bg-white inline-block p-2 shadow-sm  rounded-md">
-                Progress Table
+                Progress calls
               </h2>
               <div className="  box_shadow_tabel bg-white rounded-lg">
                 <div
@@ -206,7 +206,7 @@ const DashboardTable = () => {
             {/* Completed Table */}
             <div className="mt-3">
               <h2 className="text-red-500 tracking-wide text-base md:text-lg font-medium  bg-white inline-block p-2 shadow-sm  rounded-md">
-                Completed Table
+                Completed calls
               </h2>
               <div className="  box_shadow_tabel bg-white rounded-lg">
                 <div
