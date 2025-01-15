@@ -421,7 +421,7 @@ const TradeEntryForm = ({ showToast }) => {
           </div>
 
           <div className="flex gap-3 justify-end mt-4">
-            <button type="button"  className="btn_light text-[#c42b1e] py-2 px-4 rounded-md  transition duration-300">
+            <button onClick={()=>setAddBroker(false)} type="button"  className="btn_light text-[#c42b1e] py-2 px-4 rounded-md  transition duration-300">
               cencel
             </button>
             <button

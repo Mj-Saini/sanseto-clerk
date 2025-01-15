@@ -74,7 +74,7 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                 </Link>
               </div>
 
-              <div
+              {/* <div
                 className={` px-3 ${
                   location.pathname === "/admin-dashboard/add-symbol"
                     ? "relative after:absolute after:bg-[#c42b1e] after:rounded-md after:-right-3 after:top-0 after:h-full after:w-4 z-10"
@@ -101,7 +101,7 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                     add symbol
                   </span>
                 </Link>
-              </div>
+              </div> */}
             </>
           ) : (
             <>
