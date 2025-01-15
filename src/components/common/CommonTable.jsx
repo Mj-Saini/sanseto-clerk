@@ -21,7 +21,7 @@ const CommonTable = ({ tabledata }) => {
       <div className="w-[1100px] h-[325px] xl:w-full px-3">
         <Table responsive="sm" className="mb-0">
           <thead>
-            <tr className="sticky top-0 z-10">
+            <tr>
               <th
                 style={{
                   textAlign: "start",
@@ -160,7 +160,7 @@ const CommonTable = ({ tabledata }) => {
           <tbody>
             {Array.isArray(tabledata) && tabledata.length > 0 ? (
               tabledata?.map((item, index) => (
-                <tr key={index} className="relative">
+                <tr key={index} className="relative z-0">
                   <td
                     className={` ${
                       index === item.length - 1 ? "!border-0" : ""

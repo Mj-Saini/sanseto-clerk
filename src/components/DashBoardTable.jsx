@@ -77,8 +77,8 @@ const DashboardTable = () => {
           <div className=" py-3 w-full">
             {/* Table */}
             {/* Action Buttons */}
-          {isAdminDashboard && 
           <div>
+          {isAdminDashboard && 
              <div
               style={{ display: "flex", justifyContent: "space-between" }}
               className="my-3 bg-white shadow-sm p-3 rounded-lg flex flex-col sm:!flex-row gap-3"
@@ -102,7 +102,11 @@ const DashboardTable = () => {
                   Open 1Cliq Window
                 </button>
               </div>
-            </div>
+            </div>}
+
+
+
+
             <div className="mt-3">
               <h2 className="text-red-500 tracking-wide text-base md:text-lg font-medium  bg-white inline-block p-2 shadow-sm  rounded-md">
                 Progress Table
@@ -198,7 +202,7 @@ const DashboardTable = () => {
                 </div>
               </div>
             </div>
-            </div>}
+            </div>
             {/* Completed Table */}
             <div className="mt-3">
               <h2 className="text-red-500 tracking-wide text-base md:text-lg font-medium  bg-white inline-block p-2 shadow-sm  rounded-md">
