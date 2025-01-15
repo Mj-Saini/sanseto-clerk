@@ -160,7 +160,7 @@ const CommonTable = ({ tabledata }) => {
           <tbody>
             {Array.isArray(tabledata) && tabledata.length > 0 ? (
               tabledata?.map((item, index) => (
-                <tr key={index} className="relative z-0">
+                <tr key={index} className="position-relative">
                   <td
                     className={` ${
                       index === item.length - 1 ? "!border-0" : ""

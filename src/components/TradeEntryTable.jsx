@@ -95,7 +95,7 @@ const TradeEntryTable = () => {
   const isAdminDashboard = location.pathname.startsWith("/admin-dashboard");
 
   return (
-    <div className="mt-5 bg-white shadow-lg rounded-lg p-2" style={{ paddingBottom: "150px" }}>
+    <div className="mt-5 bg-white shadow-lg rounded-lg p-2 !z-0 relative" style={{ paddingBottom: "150px" }}>
       <CustomToast
         message={"Table is Updated."}
         show={isToastVisible}
@@ -228,9 +228,9 @@ const TradeEntryTable = () => {
               {isAdminDashboard && <th scope="col">Action</th>}
             </tr>
           </thead>
-          <tbody>
+          <tbody className="relative !z-0 ">
             {currentData.map((row, index) => (
-              <tr key={index} className="position-relative">
+              <tr key={index} className="relative !z-0 ">
                 <td
                   style={{
                     textAlign: "start",
@@ -365,7 +365,7 @@ const TradeEntryTable = () => {
                   >
                     <div
                       onClick={() => togglePopup(index)}
-                      className="d-flex flex-col gap-1 cursor-pointer mx-auto justify-items-center"
+                      className="d-flex flex-col gap-1 cursor-pointer mx-auto justify-items-center z-30"
                       style={{ width: "10px" }}
                     >
                       <span
