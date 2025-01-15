@@ -210,7 +210,7 @@ const TradeEntryForm = ({ showToast }) => {
 
       <div
         id="TradeForm"
-        className="w-full md:w-1/2 mx-auto p-[20px] bg-white shadow-lg rounded-lg z-[20] relative"
+        className="w-full md:w-1/2 mx-auto p-[20px] bg-white shadow-lg rounded-lg z-[20] relative overflow-auto h-[600px]"
       >
         <h2 className="font-bold text-lg lg:text-xl text-black mb-6">
           Add Broker
