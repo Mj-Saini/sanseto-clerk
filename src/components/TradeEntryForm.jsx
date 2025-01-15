@@ -8,7 +8,7 @@ import { collection, getDocs } from "firebase/firestore";
 import Select from "react-select";
 import { useContextProvider } from "../context/ContextProvider";
 
-const TradeEntryForm = ({ showToast, }) => {
+const TradeEntryForm = ({ showToast }) => {
   const { setAddBroker } = useContextProvider();
   const { id } = useParams();
   const navigate = useNavigate();
@@ -26,6 +26,7 @@ const TradeEntryForm = ({ showToast, }) => {
     target4: "",
     comment: "",
     position: "",
+    stopLossEnabled: false,
     targetsChecked: {
       target1: false,
       target2: false,
@@ -117,10 +118,11 @@ const TradeEntryForm = ({ showToast, }) => {
   };
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value, type, checked } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: type === "checkbox" ? checked : value, // Handle checkbox and text input
+    }));
   };
 
   const updateDataInRealtimeDB = async (data) => {
@@ -181,6 +183,7 @@ const TradeEntryForm = ({ showToast, }) => {
       target4: "",
       comment: "",
       position: "",
+      stopLossEnabled: false,
       targetsChecked: {
         target1: "",
         target2: "",
@@ -322,15 +325,24 @@ const TradeEntryForm = ({ showToast, }) => {
             <label className="block text-[#6b3e37] mb-1" htmlFor="stopLoss">
               Stop Loss
             </label>
-            <input
-              required
-              type="text"
-              id="stopLoss"
-              name="stopLoss"
-              value={formData.stopLoss}
-              onChange={handleChange}
-              className="w-full p-2 border border-gray-300 text-[#97514b] rounded-md outline-none "
-            />
+            <div className=" d-flex align-items-center gap-2">
+              <input
+                className="w-[24px] h-[24px]"
+                type="checkbox"
+                name="stopLossEnabled"
+                checked={formData.stopLossEnabled}
+                onChange={handleChange}
+              />
+              <input
+                required
+                type="text"
+                id="stopLoss"
+                name="stopLoss"
+                value={formData.stopLoss}
+                onChange={handleChange}
+                className="w-full p-2 border border-gray-300 text-[#97514b] rounded-md outline-none "
+              />
+            </div>
           </div>
 
           <div className="mb-2 grid grid-cols-2 gap-x-4 gap-y-2">

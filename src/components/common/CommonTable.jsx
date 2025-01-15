@@ -170,7 +170,7 @@ const CommonTable = () => {
                       color: "#6e3b37",
                       fontSize: "14px",
                       fontWeight: "400",
-                      padding:"10px"
+                      padding: "10px",
                     }}
                   >
                     {index + 1}
@@ -184,7 +184,7 @@ const CommonTable = () => {
                       color: "#6e3b37",
                       fontSize: "14px",
                       fontWeight: "400",
-                      padding:"10px"
+                      padding: "10px",
                     }}
                   >
                     {formatDate(item.dateTime)}
@@ -203,7 +203,7 @@ const CommonTable = () => {
                       color: "#6e3b37",
                       fontSize: "14px",
                       fontWeight: "400",
-                      padding:"10px"
+                      padding: "10px",
                     }}
                   >
                     {item.symbol}
@@ -217,7 +217,7 @@ const CommonTable = () => {
                       color: "#6e3b37",
                       fontSize: "14px",
                       fontWeight: "400",
-                      padding:"10px"
+                      padding: "10px",
                     }}
                   >
                     {item.position}
@@ -231,7 +231,7 @@ const CommonTable = () => {
                       color: "#6e3b37",
                       fontSize: "14px",
                       fontWeight: "400",
-                      padding:"10px"
+                      padding: "10px",
                     }}
                   >
                     {item.entryPriceFrom}
@@ -245,21 +245,21 @@ const CommonTable = () => {
                       color: "#6e3b37",
                       fontSize: "14px",
                       fontWeight: "400",
-                      padding:"10px"
+                      padding: "10px",
                     }}
                   >
                     {item.entryPriceTo}
                   </td>
                   <td
                     className={` ${
-                      index === item.length - 1 ? "!border-0" : ""
+                      item?.stopLossEnabled ? "!bg-[#c42b1e29]" : ""
                     }`}
                     style={{
                       textAlign: "start",
                       color: "#6e3b37",
                       fontSize: "14px",
                       fontWeight: "400",
-                      padding:"10px"
+                      padding: "10px",
                     }}
                   >
                     {item.stopLoss}
@@ -273,7 +273,7 @@ const CommonTable = () => {
                       color: "#6e3b37",
                       fontSize: "14px",
                       fontWeight: "400",
-                      padding:"10px"
+                      padding: "10px",
                     }}
                   >
                     {item.target1}
@@ -287,7 +287,7 @@ const CommonTable = () => {
                       color: "#6e3b37",
                       fontSize: "14px",
                       fontWeight: "400",
-                      padding:"10px"
+                      padding: "10px",
                     }}
                   >
                     {item.target2}
@@ -301,7 +301,7 @@ const CommonTable = () => {
                       color: "#6e3b37",
                       fontSize: "14px",
                       fontWeight: "400",
-                      padding:"10px"
+                      padding: "10px",
                     }}
                   >
                     {item.target3}
@@ -315,7 +315,7 @@ const CommonTable = () => {
                       color: "#6e3b37",
                       fontSize: "14px",
                       fontWeight: "400",
-                      padding:"10px"
+                      padding: "10px",
                     }}
                   >
                     {item.target4}
@@ -329,7 +329,7 @@ const CommonTable = () => {
                       color: "#6e3b37",
                       fontSize: "14px",
                       fontWeight: "400",
-                      padding:"10px"
+                      padding: "10px",
                     }}
                   >
                     {item.comment}
@@ -378,25 +378,22 @@ const CommonTable = () => {
                       </div>
                       {activePopupIndex === index && (
                         <div className="absolute top-10 right-5 bg-[#fff] shadow-lg rounded w-28 z-40 overflow-hidden">
-                          
-                        
-                              <Link
-                                to={`/admin-dashboard/trade-call-form/${item.id}`}
-                               className="w-full px-3 py-2 text-left text-sm text-[#6e3b37] hover:text-[#c42b1e] hover:bg-[#c42b1e29] flex"
-                              >
-                                Edit
-                              </Link>
-                         
-                              <button
-                                onClick={() => {
-                                  deleteData(item.id);
-                                  togglePopup(index);
-                                }}
-                                className="w-full px-3 py-2 text-left text-sm text-[#6e3b37] hover:text-[#c42b1e] hover:bg-[#c42b1e29]"
-                              >
-                                Delete
-                              </button>
-                         
+                          <Link
+                            to={`/admin-dashboard/trade-call-form/${item.id}`}
+                            className="w-full px-3 py-2 text-left text-sm text-[#6e3b37] hover:text-[#c42b1e] hover:bg-[#c42b1e29] flex"
+                          >
+                            Edit
+                          </Link>
+
+                          <button
+                            onClick={() => {
+                              deleteData(item.id);
+                              togglePopup(index);
+                            }}
+                            className="w-full px-3 py-2 text-left text-sm text-[#6e3b37] hover:text-[#c42b1e] hover:bg-[#c42b1e29]"
+                          >
+                            Delete
+                          </button>
                         </div>
                       )}
                     </td>
