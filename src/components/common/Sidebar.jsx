@@ -73,10 +73,9 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                   </span>
                 </Link>
               </div>
-
-              {/* <div
+              <div
                 className={` px-3 ${
-                  location.pathname === "/admin-dashboard/add-symbol"
+                  location.pathname === "/admin-dashboard/pricing"
                     ? "relative after:absolute after:bg-[#c42b1e] after:rounded-md after:-right-3 after:top-0 after:h-full after:w-4 z-10"
                     : ""
                 }`}
@@ -84,24 +83,83 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                 {" "}
                 <Link
                   onClick={sideMenu}
-                  to={"add-symbol"}
+                  to={"pricing"}
                   className={`flex items-center py-2.5 text-[#6e3b37] font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] hover:text-[#C42B1E] ${
-                    location.pathname === "/admin-dashboard/add-symbol"
+                    location.pathname === "/admin-dashboard/pricing"
                       ? "bg-[#C42B1E29] hover:!bg-[#C42B1E30] text-[#C42B1E]"
                       : ""
                   }`}
                 >
-                  <span className="ms-1.5 mr-6">👤</span>
+                  <span className="ms-1.5 mr-6">
+                    <ShareIcon />
+                  </span>
                   <span
                     className={` duration-200 group-hover:lg:-translate-x-3 ${
                       sidebarFixed ? "-translate-x-3" : "lg:translate-x-3"
                     }`}
                   >
-                    {" "}
-                    add symbol
+                    1Cliq Plan
                   </span>
                 </Link>
-              </div> */}
+              </div>
+              <div
+                className={` px-3 ${
+                  location.pathname === "/admin-dashboard/detto-settings"
+                    ? "relative after:absolute after:bg-[#c42b1e] after:rounded-md after:-right-3 after:top-0 after:h-full after:w-4 z-10"
+                    : ""
+                }`}
+              >
+                {" "}
+                <Link
+                  onClick={sideMenu}
+                  to={"detto-settings"}
+                  className={`flex items-center py-2.5 text-[#6e3b37] font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] hover:text-[#C42B1E] ${
+                    location.pathname === "/dashboard/detto-settings"
+                      ? "bg-[#C42B1E29] hover:!bg-[#C42B1E30] text-[#C42B1E]"
+                      : ""
+                  }`}
+                >
+                  <span className="ms-1.5 mr-6">
+                    <DittoSettings />
+                  </span>{" "}
+                  <span
+                    className={` duration-200 group-hover:lg:-translate-x-3 ${
+                      sidebarFixed ? "-translate-x-3" : "lg:translate-x-3"
+                    }`}
+                  >
+                    ditto setting
+                  </span>
+                </Link>
+              </div>
+
+              <div
+                className={` px-3 ${
+                  location.pathname === "/dashboard/settings"
+                    ? "relative after:absolute after:bg-[#c42b1e] after:rounded-md after:-right-3 after:top-0 after:h-full after:w-4 z-10"
+                    : ""
+                }`}
+              >
+                <Link
+                  onClick={sideMenu}
+                  to={"settings"}
+                  className={`flex items-center py-2.5 text-[#6e3b37] font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] hover:text-[#C42B1E] ${
+                    location.pathname === "/dashboard/settings"
+                      ? "bg-[#C42B1E29] hover:!bg-[#C42B1E30] text-[#C42B1E]"
+                      : ""
+                  }`}
+                >
+                  <span className="ms-1.5 mr-6">
+                    <Settings />
+                  </span>{" "}
+                  <span
+                    className={` duration-200 group-hover:lg:-translate-x-3 ${
+                      sidebarFixed ? "-translate-x-3" : "lg:translate-x-3"
+                    }`}
+                  >
+                    favourite setting
+                  </span>
+                </Link>
+              </div>
             </>
           ) : (
             <>

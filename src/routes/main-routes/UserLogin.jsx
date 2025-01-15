@@ -89,6 +89,11 @@ const UserLogin = () => {
             path="trade-call-form"
             element={<TradeEntryForm showToast={showToast} />}
           />
+          <Route path="detto-settings" element={<DittoSettings />} />
+          <Route path="settings" element={<Settings />} />
+          <Route path="pricing" element={<PricePlan />}>
+            <Route path="price" element={<PriceSettings />} />
+          </Route>
           <Route
             path="trade-call-form/:id"
             element={<TradeEntryForm showToast={showToast} />}
