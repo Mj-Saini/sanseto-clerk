@@ -27,6 +27,7 @@ const TradeEntryForm = ({ showToast }) => {
     comment: "",
     position: "",
     stopLossEnabled: false,
+    completed: false,
     targetsChecked: {
       target1: false,
       target2: false,
@@ -184,6 +185,7 @@ const TradeEntryForm = ({ showToast }) => {
       comment: "",
       position: "",
       stopLossEnabled: false,
+      completed: false,
       targetsChecked: {
         target1: "",
         target2: "",
@@ -200,13 +202,18 @@ const TradeEntryForm = ({ showToast }) => {
         onClick={() => setAddBroker(false)}
         className="fixed top-0 left-0 h-screen w-full flex justify-center items-center bg-black/50"
       ></div> */}
+
       <div
         id="TradeForm"
-        className="w-full md:w-1/2 mx-auto p-3 bg-white shadow-lg rounded-lg z-10"
+        className="w-full md:w-1/2 mx-auto p-[20px] bg-white shadow-lg rounded-lg z-[20] relative"
       >
+        <h2 className="font-bold text-lg lg:text-xl text-black mb-6">
+          Add Broker
+        </h2>
+
         <form onSubmit={handleSubmit}>
           <div className="mb-2">
-            <label className="block text-[#6b3e37] mb-1" htmlFor="symbol">
+            <label className="block mb-1 text-black/60" htmlFor="symbol">
               Choose Symbol
             </label>
             <Select
@@ -218,8 +225,10 @@ const TradeEntryForm = ({ showToast }) => {
               styles={{
                 control: (provided, state) => ({
                   ...provided,
-                  height: "30px",
-                  minHeight: "30px",
+                  display:"flex",
+                  alignContent: "center",
+                  height: "40px",
+                  minHeight: "40px",
                   borderRadius: "0.375rem",
                   outline: "none",
                   boxShadow: "none",
@@ -239,21 +248,18 @@ const TradeEntryForm = ({ showToast }) => {
                 }),
                 valueContainer: (provided) => ({
                   ...provided,
-                  height: "30px",
-                  padding: "0",
                   boxShadow: "none",
                 }),
 
                 indicatorsContainer: (provided) => ({
                   ...provided,
-                  height: "30px",
                   boxShadow: "none",
                 }),
               }}
             />
           </div>
           <div className="mb-2">
-            <label className="block text-[#6b3e37] mb-1" htmlFor="dateTime">
+            <label className="block mb-1 text-black/60" htmlFor="dateTime">
               Date & Time
             </label>
             <input
@@ -263,12 +269,12 @@ const TradeEntryForm = ({ showToast }) => {
               name="dateTime"
               value={formData.dateTime}
               onChange={handleChange}
-              className="w-full p-2 border border-gray-300 text-[#97514b] rounded-md outline-none "
+              className="w-full p-2 py-3 border border-[#C42B1E1F] text-[#97514b] rounded-md outline-none "
             />
           </div>
           <div className="mb-2">
             <label
-              className="block text-[#6b3e37] mb-1"
+              className="block mb-1 text-black/60"
               htmlFor="entryPriceFrom"
             >
               Position
@@ -280,14 +286,16 @@ const TradeEntryForm = ({ showToast }) => {
               name="position"
               value={formData.position}
               onChange={handleChange}
-              className="w-full p-2 border border-gray-300 text-[#97514b] rounded-md outline-none "
+              placeholder="Select a Position"
+
+              className="w-full p-2 border border-[#C42B1E1F] text-[#97514b] rounded-md outline-none "
             />
           </div>
 
           <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-2">
             <div>
               <label
-                className="block text-[#6b3e37] mb-1"
+                className="block mb-1 text-black/60"
                 htmlFor="entryPriceFrom"
               >
                 Entry Price From
@@ -299,12 +307,14 @@ const TradeEntryForm = ({ showToast }) => {
                 name="entryPriceFrom"
                 value={formData.entryPriceFrom}
                 onChange={handleChange}
-                className="w-full p-2 border border-gray-300 text-[#97514b] rounded-md outline-none "
+                placeholder="Price"
+
+                className="w-full p-2 border border-[#C42B1E1F] text-[#97514b] rounded-md outline-none "
               />
             </div>
             <div>
               <label
-                className="block text-[#6b3e37] mb-1"
+                className="block mb-1 text-black/60"
                 htmlFor="entryPriceTo"
               >
                 Entry Price To
@@ -316,32 +326,48 @@ const TradeEntryForm = ({ showToast }) => {
                 name="entryPriceTo"
                 value={formData.entryPriceTo}
                 onChange={handleChange}
-                className="w-full p-2 border border-gray-300 text-[#97514b] rounded-md outline-none "
+                placeholder="Price"
+
+                className="w-full p-2 border border-[#C42B1E1F] text-[#97514b] rounded-md outline-none "
               />
             </div>
           </div>
-
-          <div className="mb-2">
-            <label className="block text-[#6b3e37] mb-1" htmlFor="stopLoss">
-              Stop Loss
-            </label>
-            <div className=" d-flex align-items-center gap-2">
-              <input
-                className="w-[24px] h-[24px]"
-                type="checkbox"
-                name="stopLossEnabled"
-                checked={formData.stopLossEnabled}
-                onChange={handleChange}
-              />
-              <input
-                required
-                type="text"
-                id="stopLoss"
-                name="stopLoss"
-                value={formData.stopLoss}
-                onChange={handleChange}
-                className="w-full p-2 border border-gray-300 text-[#97514b] rounded-md outline-none "
-              />
+          <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-2">
+            <div className="">
+              <label className="block mb-1 text-black/60" htmlFor="stopLoss">
+                Stop Loss
+              </label>
+              <div className="d-flex align-items-center gap-2  !border !border-[#C42B1E1F] text-[#97514b] rounded-md pe-2">
+                <input
+                  required
+                  type="text"
+                  id="stopLoss"
+                  name="stopLoss"
+                  value={formData.stopLoss}
+                  onChange={handleChange}
+                  placeholder="Price"
+                  className="w-full p-2 border-0 text-[#97514b] rounded-md outline-none "
+                />{" "}
+                <input
+                  className="w-[14px] h-[14px]"
+                  type="checkbox"
+                  name="stopLossEnabled"
+                  checked={formData.stopLossEnabled}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+            <div className="flex items-end ">
+              <button className="w-full flex items-center text-black/50 bg-[#C42B1E0A] px-3 rounded-md gap-2">
+                <input
+                  className="w-[14px] h-[14px]"
+                  type="checkbox"
+                  name="completed"
+                  checked={formData.completed}
+                  onChange={handleChange}
+                />
+                Completed
+              </button>
             </div>
           </div>
 
@@ -349,20 +375,12 @@ const TradeEntryForm = ({ showToast }) => {
             {[1, 2, 3, 4].map((target) => (
               <div key={target}>
                 <label
-                  className="block text-[#6b3e37] mb-1"
+                  className="block mb-1 text-black/60"
                   htmlFor={`target${target}`}
                 >
                   Target {target}
                 </label>
-                <div className=" d-flex align-items-center gap-2">
-                  <input
-                    className="w-[24px] h-[24px]"
-                    type="checkbox"
-                    // checked={!!formData.targetsChecked[`target${target}`]}
-                    onChange={(e) =>
-                      handleCheckboxChange(`target${target}`, e.target.checked)
-                    }
-                  />
+                <div className="d-flex align-items-center gap-2  !border !border-[#C42B1E1F] text-[#97514b] rounded-md pe-2">
                   <input
                     required={target === 1}
                     type="text"
@@ -370,14 +388,23 @@ const TradeEntryForm = ({ showToast }) => {
                     name={`target${target}`}
                     value={formData[`target${target}`]}
                     onChange={handleChange}
-                    className="w-full p-2 border border-gray-300 text-[#97514b] rounded-md outline-none"
+                    placeholder="Type here"
+                    className="w-full p-2 border border-[#C42B1E1F] text-[#97514b] rounded-md outline-none"
+                  />
+                  <input
+                    className="w-[14px] h-[14px]"
+                    type="checkbox"
+                    // checked={!!formData.targetsChecked[`target${target}`]}
+                    onChange={(e) =>
+                      handleCheckboxChange(`target${target}`, e.target.checked)
+                    }
                   />
                 </div>
               </div>
             ))}
           </div>
           <div className="mb-2">
-            <label className="block text-[#6b3e37] mb-1" htmlFor="comment">
+            <label className="block mb-1 text-black/60" htmlFor="comment">
               Comment
             </label>
             <textarea
@@ -385,17 +412,23 @@ const TradeEntryForm = ({ showToast }) => {
               name="comment"
               value={formData.comment}
               onChange={handleChange}
+              placeholder="Write a Comment"
               rows="4"
-              className="w-full h-[50px] p-2 border border-gray-300 text-[#97514b] rounded-md outline-none resize-none"
+              className="w-full h-[80px] p-2 !border !border-[#C42B1E1F] text-[#97514b] rounded-md outline-none resize-none"
             />
           </div>
 
-          <button
-            type="submit"
-            className="w-full btn_dark text-white py-0 h-[30px] rounded-md  transition duration-300"
-          >
-            Submit
-          </button>
+          <div className="flex gap-3 justify-end mt-4">
+            <button className="btn_light text-[#c42b1e] py-2 px-4 rounded-md  transition duration-300">
+              cencel
+            </button>
+            <button
+              type="submit"
+              className="btn_dark text-white py-2 px-4 rounded-md  transition duration-300"
+            >
+              Submit
+            </button>
+          </div>
         </form>
       </div>
     </>

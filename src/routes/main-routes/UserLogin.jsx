@@ -46,7 +46,6 @@ const UserLogin = () => {
 
   return (
     <div className="overflow">
-    
       <CustomToast
         message={"trades call has a new entry"}
         show={isToastVisible}
@@ -90,10 +89,10 @@ const UserLogin = () => {
             path="trade-call-form"
             element={<TradeEntryForm showToast={showToast} />}
           />
-          <Route
+          {/* <Route
             path="trade-call-form/:id"
             element={<TradeEntryForm showToast={showToast} />}
-          />
+          /> */}
           <Route path="add-symbol" element={<AddSymbol />} />
         </Route>
         <Route path="/broker" element={<NewForm />} />
