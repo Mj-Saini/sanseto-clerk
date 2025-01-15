@@ -9,8 +9,8 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
   const isAdminDashboard = location.pathname.startsWith("/admin-dashboard");
   return (
     <div className="top-0 sticky overflow-hidden bg-[#fff] h-full">
-      <div className="pt-6 flex justify-between relative z-0">
-        <div className="px-3">
+      <div className="pt-6 flex justify-between relative z-30">
+        <div className="px-3 relative z-50">
           {/* {sidebarFixed ? */}
           <img
             className={` hidden group-hover:lg:hidden lg:flex ${

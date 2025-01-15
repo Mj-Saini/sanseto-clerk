@@ -121,8 +121,8 @@ const DashBoard = () => {
           }`}
         >
           <div>
-            <div className="sticky top-3 bg-white/90 z-0 rounded-lg backdrop_blur">
-              <div className="flex justify-between lg:justify-end items-center p-2 z-10">
+            
+              <div className="flex justify-between rounded-lg backdrop_blur sticky top-3 bg-white/90 lg:justify-end items-center p-2 !z-10">
                 <div
                   onClick={toggleSideBar}
                   className="cursor-pointer lg:hidden"
@@ -222,7 +222,7 @@ const DashBoard = () => {
                   {/* )} */}
                 </div>
               </div>
-            </div>
+            
             <div className="flex flex-col justify-between">
               <Outlet />
             </div>
