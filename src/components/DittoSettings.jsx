@@ -21,6 +21,7 @@ const DittoSettings = () => {
     handleItemsPerPageChange,
     } =useContextProvider()
   const [show, setShow] = useState(false);
+  const [addParents, setAddParents] = useState(false);
 
   const handleRefresh = () => {
     window.location.reload();
@@ -32,10 +33,10 @@ const DittoSettings = () => {
   return (
     <div className="py-2">
       {show && (
-        <div className="fixed top-0 left-0 h-screen w-full flex justify-center items-center ">
+        <div className="fixed top-0 left-0 h-screen w-full flex justify-center items-center z-50">
           <div
             onClick={() => setShow(false)}
-            className="fixed top-0 left-0 h-screen w-full flex justify-center items-center bg-black/50"
+            className="fixed top-0 left-0 h-screen w-full flex justify-center items-center bg-black/50 "
           ></div>
 
           <ChangeParentPopup setShow={setShow} show={show} />
@@ -71,7 +72,7 @@ const DittoSettings = () => {
             </div>
             {/* Functional Buttons */}
             <div className=" p-[6px]">
-              <button className="bg-[#F6E7E5] hover:bg-[#F1DAD6] uppercase text-[#c42b1e]  font-bold whitespace-nowrap border-red-400 px-4 py-[10px] rounded  w-full text-sm">
+              <button onClick={()=>setShow(true)} className="bg-[#F6E7E5] hover:bg-[#F1DAD6] uppercase text-[#c42b1e]  font-bold whitespace-nowrap border-red-400 px-4 py-[10px] rounded  w-full text-sm">
                 Change Parent
               </button>
             </div>

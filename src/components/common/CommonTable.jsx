@@ -179,6 +179,7 @@ const CommonTable = ({ tabledata }) => {
                       fontSize: "14px",
                       fontWeight: "400",
                       padding: "10px",
+                      borderRight:"1px solid #ccc"
                     }}
                   >
                     {index + 1}
@@ -193,6 +194,7 @@ const CommonTable = ({ tabledata }) => {
                       fontSize: "14px",
                       fontWeight: "400",
                       padding: "10px",
+                      borderRight:"1px solid #ccc"
                     }}
                   >
                     {formatDate(item.dateTime)}
@@ -212,6 +214,7 @@ const CommonTable = ({ tabledata }) => {
                       fontSize: "14px",
                       fontWeight: "400",
                       padding: "10px",
+                      borderRight:"1px solid #ccc"
                     }}
                   >
                     {item.symbol}
@@ -226,6 +229,7 @@ const CommonTable = ({ tabledata }) => {
                       fontSize: "14px",
                       fontWeight: "400",
                       padding: "10px",
+                      borderRight:"1px solid #ccc"
                     }}
                   >
                     {item.position}
@@ -240,6 +244,7 @@ const CommonTable = ({ tabledata }) => {
                       fontSize: "14px",
                       fontWeight: "400",
                       padding: "10px",
+                      borderRight:"1px solid #ccc"
                     }}
                   >
                     {item.entryPriceFrom}
@@ -254,6 +259,7 @@ const CommonTable = ({ tabledata }) => {
                       fontSize: "14px",
                       fontWeight: "400",
                       padding: "10px",
+                      borderRight:"1px solid #ccc"
                     }}
                   >
                     {item.entryPriceTo}
@@ -268,6 +274,7 @@ const CommonTable = ({ tabledata }) => {
                       fontSize: "14px",
                       fontWeight: "400",
                       padding: "10px",
+                      borderRight:"1px solid #ccc"
                     }}
                   >
                     {item.stopLoss}
@@ -282,6 +289,7 @@ const CommonTable = ({ tabledata }) => {
                       fontSize: "14px",
                       fontWeight: "400",
                       padding: "10px",
+                      borderRight:"1px solid #ccc"
                     }}
                   >
                     {item.target1}
@@ -296,6 +304,7 @@ const CommonTable = ({ tabledata }) => {
                       fontSize: "14px",
                       fontWeight: "400",
                       padding: "10px",
+                      borderRight:"1px solid #ccc"
                     }}
                   >
                     {item.target2}
@@ -310,6 +319,7 @@ const CommonTable = ({ tabledata }) => {
                       fontSize: "14px",
                       fontWeight: "400",
                       padding: "10px",
+                      borderRight:"1px solid #ccc"
                     }}
                   >
                     {item.target3}
@@ -324,6 +334,7 @@ const CommonTable = ({ tabledata }) => {
                       fontSize: "14px",
                       fontWeight: "400",
                       padding: "10px",
+                      borderRight:"1px solid #ccc"
                     }}
                   >
                     {item.target4}
@@ -338,6 +349,7 @@ const CommonTable = ({ tabledata }) => {
                       fontSize: "14px",
                       fontWeight: "400",
                       padding: "10px",
+                      borderRight:"1px solid #ccc"
                     }}
                   >
                  <div className="flex items-center">
@@ -361,6 +373,7 @@ const CommonTable = ({ tabledata }) => {
                       fontSize: "14px",
                       fontWeight: "400",
                       padding: "10px",
+                      borderRight:"1px solid #ccc"
                     }}
                   >
                     {item.comment}

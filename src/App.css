@@ -156,12 +156,6 @@
 }
 
 
-/* #TradeForm input:first-child{
-  border: 1px solid #a50b0000 !important;
-  height: 40px;
-  margin-top: 0;
-  font-size: 14px;
-}  */
 #TradeForm select,#TradeForm input{
   border: 1px solid #C42B1E1F !important;
   color: #000;
@@ -177,14 +171,13 @@
   border: 2px solid #C42B1E !important;
 } 
 
-.selectIn {
-background: #000;
+.form-select:focus {
+  border:2px solid #C42B1E !important;
+  outline: 0;
+  box-shadow: none !important 
 }
-
-option:hover {
-  background-color: #000000 !important;
-  color: #333 !important;
-  padding: 5px !important;
+select option{
+  color: #6c757d !important;
 }
 
 input::placeholder{
