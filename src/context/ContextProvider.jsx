@@ -22,6 +22,7 @@ export const ContextProvider = ({ children }) => {
   const totalCompletePages = Math.ceil(completedata.length / itemsPerCompletePage);
   const [isToastVisible, setIsToastVisible] = useState(false);
   const [addBroker, setAddBroker] = useState(false);
+  const [updateBroker, setUpdateBroker] = useState(null);
 
   const showToast = () => {
     setIsToastVisible(true);
@@ -70,11 +71,28 @@ export const ContextProvider = ({ children }) => {
     fetchData();
   }, []);
 
+  // const formatDate = (dateTime) => {
+  //   const date = new Date(dateTime);
+  //   return isNaN(date.getTime()) ? "Invalid Date" : date.toLocaleDateString();
+  // };
+
   const formatDate = (dateTime) => {
     const date = new Date(dateTime);
-    return isNaN(date.getTime()) ? "Invalid Date" : date.toLocaleDateString();
+    if (isNaN(date.getTime())) return "Invalid Date";
+  
+    // Format date as DD-MM-YY
+    const formattedDate = date
+      .toLocaleDateString("en-GB", { day: "2-digit", month: "2-digit", year: "2-digit" })
+      .replace(/\//g, "-");
+  
+    // Custom time formatting (24-hour format)
+    const hours = date.getHours().toString().padStart(2, "0");
+    const minutes = date.getMinutes().toString().padStart(2, "0");
+    const formattedTime = `${hours}:${minutes}`;
+  
+    return `${formattedDate}, ${formattedTime}`;
   };
-
+  
  
   // // progress table
   // const handleItemsPerPageChange = (num) => {
@@ -123,7 +141,6 @@ export const ContextProvider = ({ children }) => {
     }
   };
 
-
   const value = {
     data,
     completedata,
@@ -135,7 +152,7 @@ export const ContextProvider = ({ children }) => {
     totalCompletePages,
     setItemsPerPage,
     setItemsPerCompletePage,
-    
+    updateBroker, setUpdateBroker,
     currentPage,
     setCurrentPage,
     isToastVisible,

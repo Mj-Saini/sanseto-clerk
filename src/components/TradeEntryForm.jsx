@@ -3,22 +3,14 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import { db, realtimeDb } from "./firebase";
-import {
-  push,
-  set,
-  ref,
-  onValue,
-  update,
-  get,
-  remove,
-} from "firebase/database";
-import { useNavigate, useParams } from "react-router-dom";
+import { push, set, ref, onValue, update, remove } from "firebase/database";
+import { useNavigate } from "react-router-dom";
 import { useContextProvider } from "../context/ContextProvider";
 import "../index.css";
 import { DeleteIcon } from "./common/Icons";
 
 const TradeEntryForm = ({ showToast }) => {
-  const { setAddBroker } = useContextProvider();
+  const { setAddBroker, updateBroker, setUpdateBroker } = useContextProvider();
   const [isFocused, setIsFocused] = useState({
     symbol: false,
     dataTime: false,
@@ -34,12 +26,13 @@ const TradeEntryForm = ({ showToast }) => {
       target4: false,
     },
   });
-  const { id } = useParams();
+  const id = updateBroker;
   const navigate = useNavigate();
   const [symbols, setSymbols] = useState([]);
   const [showTable, setShowTable] = useState(false);
   const [filterSymbol, setFilterSymbol] = useState([]);
   const [finalSymbol, setFinalSymbol] = useState("");
+  const [addPosition, setAddPosition] = useState(false);
 
   const [data, setData] = useState([]);
   const [formData, setFormData] = useState({
@@ -213,6 +206,7 @@ const TradeEntryForm = ({ showToast }) => {
       await updateDataInRealtimeDB(dataToSave);
       setAddBroker(false);
       navigate(`/admin-dashboard`);
+      setUpdateBroker(null);
     } else {
       await saveDataToRealtimeDB(dataToSave);
       setAddBroker(false);
@@ -238,6 +232,21 @@ const TradeEntryForm = ({ showToast }) => {
         target4: "",
       },
     });
+
+    // ========
+
+    // const sendMessage = async () => {
+    //   const botToken1 = "7775810841:AAHC-3a43B3jK_lskNdSWiASWXTE9CKi2SM";
+    //   const apiUrl = "https://api.telegram.org/bot${botToken1}/sendMessage";
+
+    //   try {
+    //     const res = await axios.post(apiUrl, {
+    //       chat_id: "-1002437061530",
+    //       text: message,
+    //     });
+    //     console.log(res);
+    //   }
+    // };
   };
 
   const handleFocus = (field) => {
@@ -288,6 +297,7 @@ const TradeEntryForm = ({ showToast }) => {
         const newSymbolRef = push(symbolsRef);
         await set(newSymbolRef, { name: newSymbol });
         setFormData({ symbol: "" });
+        setShowTable(false);
         setFilterSymbol([]);
       } catch (e) {
         console.error("Error adding symbol: ", e);
@@ -298,18 +308,13 @@ const TradeEntryForm = ({ showToast }) => {
   return (
     <>
       <div
-        onClick={() => {
-
-          window.history.back();
-        }}
-        className="fixed top-0 left-0 h-screen w-full flex justify-center bg-black/60 items-center z-40"
-      ></div>
-      <div
         id="TradeForm"
-        className="w-full md:w-1/2 mx-auto p-[20px] bg-white shadow-lg rounded-lg z-[50] relative overflow-auto h-[600px] "
+        className="w-full md:w-2/5 mx-auto p-[20px] bg-white shadow-lg rounded-lg z-[50] relative overflow-auto h-[600px] "
       >
         <div
-          onClick={() =>{ handleFocus(false); }}
+          onClick={() => {
+            handleFocus(false);
+          }}
           className="fixed top-0 left-0 h-screen w-full flex justify-center items-center z-0"
         ></div>
         <h2 className="font-bold text-lg lg:text-xl text-black mb-6 z-10 relative">
@@ -319,6 +324,7 @@ const TradeEntryForm = ({ showToast }) => {
         <form onSubmit={handleSubmit}>
           <div className="mb-4 relative">
             <label
+              onClick={() => handleFocus("symbol")}
               className={`mb-1 text-[#6e3b37]  absolute left-2 z-10 duration-300 ${
                 isFocused.symbol
                   ? "text-xs top-0 -translate-y-1/2 bg-white text-[#6e3b37] opacity-100 px-1.5"
@@ -333,15 +339,21 @@ const TradeEntryForm = ({ showToast }) => {
                 <div className="absolute top-full left-0 w-full h-[200px] bg-white z-20 mt-1 rounded-lg !border-2 !border-[#C42B1E] overflow-auto p-2">
                   {filterSymbol.length === 0 && (
                     <div className="w-full mt-3">
-                      <div className="flex items-center justify-between bg-secondry_clr gap-4 rounded px-3 py-1 text-[#C42B1E] relative group h-10 uppercase w-full">
-                        <span>{formData.symbol}</span>
+                      <div className="flex items-center justify-between  gap-4 rounded px-3 py-1 !border border-[#C42B1E45] text-[#C42B1E] hover:bg-[#C42B1E29] relative group h-10 uppercase w-full">
+                        <div
+                          onClick={() =>
+                            alert("Please Add This Entry In Database First")
+                          }
+                          className="w-full"
+                        >
+                          {formData.symbol}
+                        </div>
                         <div className="hidden justify-start p-0 group-hover:flex">
                           <span
                             onClick={() => handleAddSymbol()}
-                            className="ml-2 text-[#6b3e37] flex items-center"
+                            className="text-[10px] cursor-pointer whitespace-nowrap"
                           >
-                            <span className="text-3xl cursor-pointer"> +</span>
-                            
+                            Click Here To Add
                           </span>
                         </div>
                       </div>
@@ -356,7 +368,7 @@ const TradeEntryForm = ({ showToast }) => {
                           setFormData({ ...formData, symbol: symbol.value });
                           console.log(formData, "formdata");
                         }}
-                        className="flex items-center justify-between bg-secondry_clr gap-4 rounded px-3 py-1 text-[#C42B1E] relative group h-10 uppercase w-full"
+                        className="flex items-center justify-between !border border-[#C42B1E45] hover:bg-[#C42B1E29] gap-4 rounded px-3 py-1 text-[#C42B1E] relative group h-10 uppercase w-full"
                       >
                         <span>{symbol.value}</span>
                         <div className="hidden justify-start p-0 group-hover:flex">
@@ -364,8 +376,7 @@ const TradeEntryForm = ({ showToast }) => {
                             onClick={() => removeSymbol(symbol.id)}
                             className="ml-2 text-[#6b3e37] flex items-center cursor-pointer"
                           >
-                            
-                            <DeleteIcon/>
+                            <DeleteIcon />
                           </span>
                         </div>
                       </div>
@@ -387,6 +398,7 @@ const TradeEntryForm = ({ showToast }) => {
           </div>
           <div className="mb-4 relative z-1">
             <label
+              onClick={() => handleFocus("entryPriceFrom")}
               className={`mb-1 text-[#6e3b37]  absolute left-2 z-10 duration-300 ${
                 isFocused.dateTime
                   ? "text-xs top-0 -translate-y-1/2 bg-white text-[#6e3b37] opacity-100 px-1.5"
@@ -406,9 +418,13 @@ const TradeEntryForm = ({ showToast }) => {
               className="w-full p-2 py-3 border-2 border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none  focus:border-[#C42B1E]"
             />
           </div>
-          <div className="mb-4 relative z-1">
+          <div
+            onClick={() => setAddPosition(true)}
+            className="mb-4 relative z-10"
+          >
             <label
-              className={`mb-1 text-[#6e3b37]  absolute left-2 z-10 duration-300 ${
+              onClick={() => handleFocus("position")}
+              className={`mb-1 text-[#6e3b37]  absolute left-2 z-20 duration-300 ${
                 isFocused.position
                   ? "text-xs top-0 -translate-y-1/2 bg-white text-[#6e3b37] opacity-100 px-1.5"
                   : " top-1/2 -translate-y-1/2 opacity-0"
@@ -425,15 +441,40 @@ const TradeEntryForm = ({ showToast }) => {
               value={formData.position}
               onChange={handleChange}
               onFocus={() => handleFocus("position")}
-              placeholder="position"
+              placeholder="Position"
               className="w-full p-2 border border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none "
             />
+            {addPosition && (
+              <div className="border border-[#6e3b37] absolute top-full mt-1 w-full bg-white rounded-md overflow-hidden">
+                <p
+                  onClick={(e) => {
+                    e.stopPropagation(); // Prevents event from reaching parent
+                    setAddPosition(false);
+                    setFormData({ ...formData, position: "sell" });
+                  }}
+                  className="text-[#6e3b37] text-sm hover:bg-[#C42B1E1F] mb-0 p-2 capitalize"
+                >
+                  sell
+                </p>
+                <p
+                  onClick={(e) => {
+                    e.stopPropagation(); // Prevents event from reaching parent
+                    setAddPosition(false);
+                    setFormData({ ...formData, position: "buy" });
+                  }}
+                  className="text-[#6e3b37] text-sm hover:bg-[#C42B1E1F] mb-0 p-2 capitalize "
+                >
+                  buy
+                </p>
+              </div>
+            )}
           </div>
 
-          <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-4">
+          <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-4 ">
             <div className="relative">
               <label
-                className={`mb-1 text-[#6e3b37]  absolute left-2 z-10 duration-300 ${
+                onClick={() => handleFocus("entryPriceFrom")}
+                className={`mb-1 text-[#6e3b37]  absolute left-2  duration-300 ${
                   isFocused.entryPriceFrom
                     ? "text-xs top-0 -translate-y-1/2 bg-white text-[#6e3b37] opacity-100 px-1.5"
                     : " top-1/2 -translate-y-1/2 opacity-0"
@@ -456,6 +497,7 @@ const TradeEntryForm = ({ showToast }) => {
             </div>
             <div className="relative">
               <label
+                onClick={() => handleFocus("entryPriceTo")}
                 className={`mb-1 text-[#6e3b37]  absolute left-2 z-10 duration-300 ${
                   isFocused.entryPriceTo
                     ? "text-xs top-0 -translate-y-1/2 bg-white text-[#6e3b37] opacity-100 px-1.5"
@@ -481,6 +523,7 @@ const TradeEntryForm = ({ showToast }) => {
           <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-4">
             <div className="relative">
               <label
+                onClick={() => handleFocus("stopLoss")}
                 className={`mb-1 text-[#6e3b37] absolute left-2 z-10 duration-300 ${
                   isFocused.stopLoss
                     ? "text-xs top-0 -translate-y-1/2 bg-white text-[#6e3b37] opacity-100 px-1.5"
@@ -490,7 +533,7 @@ const TradeEntryForm = ({ showToast }) => {
               >
                 Stop Loss
               </label>
-              <div className="d-flex align-items-center gap-2 relative !border !border-[#C42B1E1F] text-[#97514b] formInput rounded-md">
+              <div className="d-flex align-items-center gap-2 relative text-[#97514b] formInput rounded-md">
                 <input
                   required
                   type="text"
@@ -514,7 +557,7 @@ const TradeEntryForm = ({ showToast }) => {
             <div className="flex items-end relative z-10">
               <label
                 for="completed"
-                className="w-full flex items-center text-black/50 bg-[#C42B1E0A] px-3 rounded-md gap-2 cursor-default"
+                className="w-full flex items-center !border border-[#6e3b37] text-black/50 bg-[#C42B1E0A] px-3 rounded-md gap-2 cursor-default"
               >
                 <input
                   className="w-[14px] h-[14px]"
@@ -533,6 +576,7 @@ const TradeEntryForm = ({ showToast }) => {
             {[1, 2, 3, 4].map((target) => (
               <div key={target} className="relative">
                 <label
+                  onClick={() => handleFocus(`target${target}`)}
                   className={`mb-1 text-[#6e3b37] absolute left-2 z-10 duration-300 ${
                     isFocused.targetsChecked[`target${target}`]
                       ? "text-xs top-0 -translate-y-1/2 bg-white text-[#6e3b37] opacity-100 px-1.5 "
@@ -542,7 +586,7 @@ const TradeEntryForm = ({ showToast }) => {
                 >
                   Target {target}
                 </label>
-                <div className="d-flex align-items-center gap-2 !border !border-[#C42B1E1F] text-[#97514b] formInput rounded-md target_box1 relative">
+                <div className="d-flex align-items-center gap-2 text-[#97514b] formInput rounded-md target_box1 relative">
                   <input
                     required={target === 1}
                     type="text"
@@ -568,6 +612,7 @@ const TradeEntryForm = ({ showToast }) => {
           </div>
           <div className="mb-4 relative">
             <label
+              onClick={() => handleFocus("comment")}
               className={`mb-1 text-[#6e3b37]  absolute left-2 z-10 duration-300 ${
                 isFocused.comment
                   ? "text-xs top-0 -translate-y-1/2 bg-white text-[#6e3b37] opacity-100 px-1.5"
@@ -591,7 +636,10 @@ const TradeEntryForm = ({ showToast }) => {
 
           <div className="flex gap-3 justify-end mt-4 relative z-10">
             <button
-              onClick={() => window.history.back()}
+              onClick={() => {
+                setAddBroker(false);
+                setUpdateBroker(null);
+              }}
               type="button"
               className="btn_light text-[#c42b1e] py-2 px-4 rounded-md  transition duration-300"
             >

@@ -2,18 +2,81 @@
 
 import { Table } from "react-bootstrap";
 import { useContextProvider } from "../../context/ContextProvider";
-import { Link } from "react-router-dom";
 import { DeleteIcon, EditIcon } from "./Icons";
+import TradeEntryForm from "../TradeEntryForm";
+import { useState } from "react";
+import ConfirmationPopup from "../ConfirmationPopup";
 
 const CommonTable = ({ tabledata }) => {
-  console.log(tabledata, "datadatatable");
-  const { formatDate, deleteData } = useContextProvider();
+  const { formatDate,addBroker,setAddBroker, deleteData, setUpdateBroker } = useContextProvider();
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
+  const [actionType, setActionType] = useState(null); // 'update' or 'delete'
+  const [currentId, setCurrentId] = useState(null); 
+
+
+  const UpdateUserData = (id) => {
+    setUpdateBroker(id);
+    setAddBroker(true);
+  };
+  const handleUpdateClick = (id) => {
+    setCurrentId(id);
+    setActionType('update');
+    setIsPopupVisible(true);
+  };
+
+  const handleDeleteClick = (id) => {
+    setCurrentId(id);
+    setActionType('delete');
+    setIsPopupVisible(true);
+  };
+  
+
+  const handleConfirm = () => {
+    if (actionType === 'update') {
+      UpdateUserData(currentId);
+    } else if (actionType === 'delete') {
+      deleteData(currentId);
+    }
+    setIsPopupVisible(false); 
+  };
+
+  const handleCancel = () => {
+    setIsPopupVisible(false); 
+  };
 
   const isAdminDashboard = location.pathname.startsWith("/admin-dashboard");
+
+ 
+
 
   return (
     <div className="py-3 ">
       {/* Table Section */}
+      {isPopupVisible && (
+       <div className="fixed top-0 left-0 w-full h-screen z-20 bg-black/50 flex justify-center items-center">
+         <div
+          onClick={() => {
+            setIsPopupVisible(false);
+          }}
+          className="fixed top-0 left-0 h-screen w-full flex justify-center items-center z-0"
+        ></div>
+         <ConfirmationPopup
+          actionType={actionType}
+          onConfirm={handleConfirm}
+          onCancel={handleCancel}
+        />
+       </div>
+      )}
+      {addBroker && (
+        <div className="fixed top-0 left-0 h-screen w-full flex justify-center items-center z-[20] ">
+          <div
+            onClick={() => setAddBroker(false)}
+            className="fixed top-0 left-0 h-screen w-full flex justify-center items-center bg-black/50"
+          ></div>
+
+          <TradeEntryForm setAddBroker={setAddBroker} />
+        </div>
+      )}
 
       <div className="w-[1100px] xl:w-full px-3">
         <Table responsive="sm" className="mb-0">
@@ -195,14 +258,11 @@ const CommonTable = ({ tabledata }) => {
                       fontWeight: "400",
                       padding: "10px",
                       borderRight:"1px solid #ccc"
+                      
                     }}
                   >
                     {formatDate(item.dateTime)}
-                    &nbsp;
-                    {new Date(item.dateTime).toLocaleTimeString([], {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })}
+
                   </td>
                   <td
                     className={` ${
@@ -214,7 +274,9 @@ const CommonTable = ({ tabledata }) => {
                       fontSize: "14px",
                       fontWeight: "400",
                       padding: "10px",
-                      borderRight:"1px solid #ccc"
+                      borderRight:"1px solid #ccc",
+                      textTransform:"uppercase",
+
                     }}
                   >
                     {item.symbol}
@@ -229,7 +291,8 @@ const CommonTable = ({ tabledata }) => {
                       fontSize: "14px",
                       fontWeight: "400",
                       padding: "10px",
-                      borderRight:"1px solid #ccc"
+                      borderRight:"1px solid #ccc ",
+                      textTransform:"uppercase",
                     }}
                   >
                     {item.position}
@@ -388,17 +451,15 @@ const CommonTable = ({ tabledata }) => {
                       className="ps-3 sticky right-0"
                     >
                       <div className="d-flex gap-1 cursor-pointer mx-auto justify-items-center">
-                        <Link
-                          to={`/admin-dashboard/trade-call-form/${item.id}`}
+                        <button
+                           onClick={() => handleUpdateClick(item.id)}
                           className="w-full px-2 py-2 text-left text-sm text-[#6e3b37] flex"
                         >
                           <EditIcon />
-                        </Link>
+                        </button>
 
                         <button
-                          onClick={() => {
-                            deleteData(item.id);
-                          }}
+                          onClick={() => handleDeleteClick(item.id)}
                           className="w-full px-2 py-2 text-left text-sm text-[#6e3b37]"
                         >
                           <DeleteIcon />

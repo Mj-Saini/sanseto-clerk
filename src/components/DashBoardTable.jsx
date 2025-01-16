@@ -18,19 +18,11 @@ const DashboardTable = () => {
 
   const {
     data,
-    completedata,
-    currentCompletePage,
-    currentProgressData,
     itemsPerPage,
-    itemsPerCompletePage,
-    currentCompleteData,
     currentPage,
     totalPages,
-    totalCompletePages,
     handlePageChange,
-    handleCompletePageChange,
     handleItemsPerPageChange,
-    handleItemsPerCompletePageChange,
     isToastVisible,
     addBroker, setAddBroker
   } = useContextProvider();
@@ -84,8 +76,9 @@ const DashboardTable = () => {
               className="my-3 bg-white shadow-sm p-3 rounded-lg flex flex-col sm:!flex-row gap-3"
             >
               <div className="d-flex gap-2">
-                <Link to="trade-call-form"
-                  // onClick={() => setAddBroker(true)}
+                <Link
+                //  to="trade-call-form"
+                  onClick={() => setAddBroker(true)}
                   className="btn_dark shadow-sm max-sm:w-full text-xs px-[14px] uppercase"
                 >
                   Add broker
