@@ -176,9 +176,15 @@ input[type="checkbox"]{
   height: 40px;
 } 
 
+input::placeholder{
+  color: #97514b; 
+}
+textarea::placeholder{
+  color: #97514b; 
 
+}
 input[type="datetime-local"]::-webkit-datetime-edit {
-  color: transparent; /* Hides the date input text (if empty) */
+  color: #97514b; /* Hides the date input text (if empty) */
 }
 
 input[type="datetime-local"]:focus::-webkit-datetime-edit {

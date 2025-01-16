@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { onValue, ref, remove } from "firebase/database";
 import { createContext, useContext, useEffect, useState } from "react";
@@ -46,18 +47,18 @@ export const ContextProvider = ({ children }) => {
               })
             );
             showToast();
-            const filterprogressdata = tradeData.filter(
-              (v) => v.completed !== true
-            );
-            const filtercompletedata = tradeData.filter(
-              (v) => v.completed === true
-            );
-            setData(filterprogressdata);
-            setCompleteData(filtercompletedata);
+            // const filterprogressdata = tradeData.filter(
+            //   (v) => v.completed !== true
+            // );
+            // const filtercompletedata = tradeData.filter(
+            //   (v) => v.completed === true
+            // );
+            setData(tradeData);
+            // setCompleteData(filtercompletedata);
           } else {
             console.log("No data available");
             setData([]);
-            setCompleteData([]);
+            // setCompleteData([]);
           }
         },
         (error) => {
@@ -75,39 +76,41 @@ export const ContextProvider = ({ children }) => {
   };
 
  
-  // progress table
-  const handleItemsPerPageChange = (num) => {
-    setItemsPerPage(num);
-    setCurrentPage(1);
-  };
+  // // progress table
+  // const handleItemsPerPageChange = (num) => {
+  //   setItemsPerPage(num);
+  //   setCurrentPage(1);
+  // };
 
-  const currentProgressData = data.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
+  // const currentProgressData = data.slice(
+  //   (currentPage - 1) * itemsPerPage,
+  //   currentPage * itemsPerPage
+  // );
 
-   const handlePageChange = (page) => {
-     if (page >= 1 && page <= totalPages) {
-       setCurrentPage(page);
-     }
-   };
+  //  const handlePageChange = (page) => {
+  //    if (page >= 1 && page <= totalPages) {
+  //      setCurrentPage(page);
+  //    }
+  //  };
 
-  // Complete table
-  const handleItemsPerCompletePageChange = (num) => {
-    setItemsPerCompletePage(num);
-    setCurrentCompletePage(1);
-  };
+  // // Complete table
+  // const handleItemsPerCompletePageChange = (num) => {
+  //   setItemsPerCompletePage(num);
+  //   setCurrentCompletePage(1);
+  // };
 
-     const handleCompletePageChange = (page) => {
-       if (page >= 1 && page <= totalCompletePages) {
-         setCurrentCompletePage(page);
-       }
-     };
+  //    const handleCompletePageChange = (page) => {
+  //      if (page >= 1 && page <= totalCompletePages) {
+  //        setCurrentCompletePage(page);
+  //      }
+  //    };
 
-    const currentCompleteData = completedata.slice(
-      (currentCompletePage - 1) * itemsPerCompletePage,
-      currentCompletePage * itemsPerCompletePage
-    );
+  //   const currentCompleteData = completedata.slice(
+  //     (currentCompletePage - 1) * itemsPerCompletePage,
+  //     currentCompletePage * itemsPerCompletePage
+  //   );
+
+
 
   const deleteData = async (id) => {
     const entryRef = ref(realtimeDb, `trades/${id}`);
@@ -127,20 +130,16 @@ export const ContextProvider = ({ children }) => {
     setData,
     itemsPerPage,
     itemsPerCompletePage,
-    currentCompleteData,
+    
     currentCompletePage,
     totalCompletePages,
     setItemsPerPage,
     setItemsPerCompletePage,
-    handleCompletePageChange,
+    
     currentPage,
     setCurrentPage,
     isToastVisible,
     formatDate,
-    handlePageChange,
-    handleItemsPerPageChange,
-    handleItemsPerCompletePageChange,
-    currentProgressData,
     totalPages,
     deleteData,
     addBroker, setAddBroker

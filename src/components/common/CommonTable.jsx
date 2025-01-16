@@ -6,7 +6,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const CommonTable = ({ tabledata }) => {
-  const { formatDate, deleteData } = useContextProvider();
+  console.log(tabledata,"datadatatable")
+  const { formatDate, deleteData, } = useContextProvider();
 
   const [activePopupIndex, setActivePopupIndex] = useState(null);
   const togglePopup = (index) => {
@@ -18,7 +19,7 @@ const CommonTable = ({ tabledata }) => {
     <div className="py-3 ">
       {/* Table Section */}
 
-      <div className="w-[1100px] h-[325px] xl:w-full px-3">
+      <div className="w-[1100px] xl:w-full px-3">
         <Table responsive="sm" className="mb-0">
           <thead>
             <tr>
@@ -131,6 +132,16 @@ const CommonTable = ({ tabledata }) => {
                 }}
               >
                 Target4
+              </th>
+              <th
+                style={{
+                  textAlign: "start",
+                  color: "#6e3b37",
+                  fontSize: "12px",
+                  fontWeight: "normal",
+                }}
+              >
+                Status
               </th>
               <th
                 style={{
@@ -332,6 +343,20 @@ const CommonTable = ({ tabledata }) => {
                       padding: "10px",
                     }}
                   >
+                    {item.completed ? "COMPLETED" : "PROGRESS"}
+                  </td>
+                  <td
+                    className={` ${
+                      index === item.length - 1 ? "!border-0" : ""
+                    }`}
+                    style={{
+                      textAlign: "start",
+                      color: "#6e3b37",
+                      fontSize: "14px",
+                      fontWeight: "400",
+                      padding: "10px",
+                    }}
+                  >
                     {item.comment}
                   </td>
                   {isAdminDashboard && (
@@ -377,7 +402,7 @@ const CommonTable = ({ tabledata }) => {
                         ></span>
                       </div>
                       {activePopupIndex === index && (
-                        <div className="absolute top-10 right-5 bg-[#fff] shadow-lg rounded w-28 z-40 overflow-hidden">
+                        <div className="absolute top-4 right-10 bg-[#fff] shadow-lg rounded w-28 z-40 overflow-hidden">
                           <Link
                             to={`/admin-dashboard/trade-call-form/${item.id}`}
                             className="w-full px-3 py-2 text-left text-sm text-[#6e3b37] hover:text-[#c42b1e] hover:bg-secondry_clr flex"

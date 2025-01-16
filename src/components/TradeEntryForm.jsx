@@ -8,6 +8,7 @@ import { collection, getDocs } from "firebase/firestore";
 import Select from "react-select";
 import { useContextProvider } from "../context/ContextProvider";
 import "../index.css";
+import { Placeholder } from 'react-bootstrap';
 
 const TradeEntryForm = ({ showToast }) => {
   const { setAddBroker } = useContextProvider();
@@ -257,10 +258,10 @@ const TradeEntryForm = ({ showToast }) => {
         <form onSubmit={handleSubmit}>
           <div className="mb-4 relative">
             <label
-              className={`mb-1 text-[#f44336]  absolute left-2 z-10 duration-300 ${
+              className={`mb-1 text-[#6e3b37]  absolute left-2 z-10 duration-300 ${
                 isFocused.symbol
-                  ? "text-xs top-0 -translate-y-1/2 bg-white text-[#F44336]"
-                  : " top-1/2 -translate-y-1/2"
+                  ? "text-xs top-0 -translate-y-1/2 bg-white text-[#6e3b37] opacity-100"
+                  : " top-1/2 -translate-y-1/2 opacity-0"
               }`}
               htmlFor="symbol"
             >
@@ -311,10 +312,10 @@ const TradeEntryForm = ({ showToast }) => {
           </div>
           <div className="mb-4 relative z-1">
             <label
-              className={`mb-1 text-[#f44336]  absolute left-2 z-10 duration-300 ${
+              className={`mb-1 text-[#6e3b37]  absolute left-2 z-10 duration-300 ${
                 isFocused.dateTime
-                  ? "text-xs top-0 -translate-y-1/2 bg-white text-[#F44336]"
-                  : " top-1/2 -translate-y-1/2"
+                  ? "text-xs top-0 -translate-y-1/2 bg-white text-[#6e3b37] opacity-100"
+                  : " top-1/2 -translate-y-1/2 opacity-0"
               }`}
             >
               Date & Time
@@ -332,10 +333,10 @@ const TradeEntryForm = ({ showToast }) => {
           </div>
           <div className="mb-4 relative z-1">
             <label
-              className={`mb-1 text-[#f44336]  absolute left-2 z-10 duration-300 ${
+              className={`mb-1 text-[#6e3b37]  absolute left-2 z-10 duration-300 ${
                 isFocused.position
-                  ? "text-xs top-0 -translate-y-1/2 bg-white text-[#F44336]"
-                  : " top-1/2 -translate-y-1/2"
+                  ? "text-xs top-0 -translate-y-1/2 bg-white text-[#6e3b37] opacity-100"
+                  : " top-1/2 -translate-y-1/2 opacity-0"
               }`}
               htmlFor="positon"
             >
@@ -349,7 +350,7 @@ const TradeEntryForm = ({ showToast }) => {
               value={formData.position}
               onChange={handleChange}
               onFocus={() => handleFocus("position")}
-              placeholder=""
+              placeholder="position"
               className="w-full p-2 border border-[#C42B1E1F] text-[#97514b] rounded-md outline-none "
             />
           </div>
@@ -357,10 +358,10 @@ const TradeEntryForm = ({ showToast }) => {
           <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-4">
             <div className="relative">
               <label
-                className={`mb-1 text-[#f44336]  absolute left-2 z-10 duration-300 ${
+                className={`mb-1 text-[#6e3b37]  absolute left-2 z-10 duration-300 ${
                   isFocused.entryPriceFrom
-                    ? "text-xs top-0 -translate-y-1/2 bg-white text-[#F44336]"
-                    : " top-1/2 -translate-y-1/2"
+                    ? "text-xs top-0 -translate-y-1/2 bg-white text-[#6e3b37] opacity-100"
+                    : " top-1/2 -translate-y-1/2 opacity-0"
                 }`}
                 htmlFor="entryPriceFrom"
               >
@@ -374,16 +375,16 @@ const TradeEntryForm = ({ showToast }) => {
                 value={formData.entryPriceFrom}
                 onChange={handleChange}
                 onFocus={() => handleFocus("entryPriceFrom")}
-                placeholder=""
+                           placeholder="price"
                 className="w-full p-2 border border-[#C42B1E1F] text-[#97514b] rounded-md outline-none "
               />
             </div>
             <div className="relative">
               <label
-                className={`mb-1 text-[#f44336]  absolute left-2 z-10 duration-300 ${
+                className={`mb-1 text-[#6e3b37]  absolute left-2 z-10 duration-300 ${
                   isFocused.entryPriceTo
-                    ? "text-xs top-0 -translate-y-1/2 bg-white text-[#F44336]"
-                    : " top-1/2 -translate-y-1/2"
+                    ? "text-xs top-0 -translate-y-1/2 bg-white text-[#6e3b37] opacity-100"
+                    : " top-1/2 -translate-y-1/2 opacity-0"
                 }`}
                 htmlFor="entryPriceTo"
               >
@@ -397,7 +398,7 @@ const TradeEntryForm = ({ showToast }) => {
                 value={formData.entryPriceTo}
                 onFocus={() => handleFocus("entryPriceTo")}
                 onChange={handleChange}
-                placeholder=""
+              placeholder="price"
                 className="w-full p-2 border border-[#C42B1E1F] text-[#97514b] rounded-md outline-none "
               />
             </div>
@@ -405,10 +406,10 @@ const TradeEntryForm = ({ showToast }) => {
           <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-4">
             <div className="relative">
               <label
-                className={`mb-1 text-[#f44336]  absolute left-2 z-10 duration-300 ${
+                className={`mb-1 text-[#6e3b37]  absolute left-2 z-10 duration-300 ${
                   isFocused.stopLoss
-                    ? "text-xs top-0 -translate-y-1/2 bg-white text-[#F44336]"
-                    : " top-1/2 -translate-y-1/2"
+                    ? "text-xs top-0 -translate-y-1/2 bg-white text-[#6e3b37] opacity-100"
+                    : " top-1/2 -translate-y-1/2 opacity-0"
                 }`}
                 htmlFor="stopLoss"
               >
@@ -423,7 +424,7 @@ const TradeEntryForm = ({ showToast }) => {
                   value={formData.stopLoss}
                   onChange={handleChange}
                   onFocus={() => handleFocus("stopLoss")}
-                  placeholder=""
+                  placeholder="stop loss"
                   className="w-full p-2 border-0 text-[#97514b] rounded-md outline-none "
                 />{" "}
                 <input
@@ -453,10 +454,10 @@ const TradeEntryForm = ({ showToast }) => {
             {[1, 2, 3, 4].map((target) => (
               <div key={target} className="relative">
                 <label
-                  className={`mb-1 text-[#f44336] absolute left-2 z-10 duration-300 ${
+                  className={`mb-1 text-[#6e3b37] absolute left-2 z-10 duration-300 ${
                     isFocused.targetsChecked[`target${target}`]
-                      ? "text-xs top-0 -translate-y-1/2 bg-white text-[#F44336]"
-                      : " top-1/2 -translate-y-1/2"
+                      ? "text-xs top-0 -translate-y-1/2 bg-white text-[#6e3b37] opacity-100"
+                      : " top-1/2 -translate-y-1/2 opacity-0"
                   }`}
                   htmlFor={`target${target}`}
                 >
@@ -471,16 +472,16 @@ const TradeEntryForm = ({ showToast }) => {
                     value={formData[`target${target}`]}
                     onChange={handleChange}
                     onFocus={() => handleFocus(`target${target}`)}
-                    placeholder=""
+                    placeholder="type here"
                     className="w-full p-2 border border-[#C42B1E1F] text-[#97514b] rounded-md outline-none"
                   />
                   <input
                     className="w-[14px] h-[14px]"
                     type="checkbox"
                     // checked={!!formData.targetsChecked[target${target}]}
-                    // onChange={(e) =>
-                    //   handleCheckboxChange(target${target}, e.target.checked)
-                    // }
+                    onChange={(e) =>
+                      handleCheckboxChange(`target${target}`, e.target.checked)
+                    }
                   />
                 </div>
               </div>
@@ -488,10 +489,10 @@ const TradeEntryForm = ({ showToast }) => {
           </div>
           <div className="mb-4 relative">
             <label
-              className={`mb-1 text-[#f44336]  absolute left-2 z-10 duration-300 ${
+              className={`mb-1 text-[#6e3b37]  absolute left-2 z-10 duration-300 ${
                 isFocused.comment
-                  ? "text-xs top-0 -translate-y-1/2 bg-white text-[#F44336]"
-                  : " top-0 translate-y-1/2"
+                  ? "text-xs top-0 -translate-y-1/2 bg-white text-[#6e3b37] opacity-100"
+                  : " top-0 translate-y-1/2 opacity-0"
               }`}
               htmlFor="comment"
             >
@@ -503,13 +504,13 @@ const TradeEntryForm = ({ showToast }) => {
               value={formData.comment}
               onFocus={() => handleFocus("comment")}
               onChange={handleChange}
-              placeholder=""
+              placeholder="comments"
               rows="4"
               className="w-full h-[80px] p-2 !border !border-[#C42B1E1F] text-[#97514b] rounded-md outline-none resize-none"
             />
           </div>
 
-          <div className="flex gap-3 justify-end mt-4">
+          <div className="flex gap-3 justify-end mt-4 relative z-10">
             <button
               onClick={() => setAddBroker(false)}
               type="button"

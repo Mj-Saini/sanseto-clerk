@@ -108,16 +108,14 @@ const DashboardTable = () => {
 
 
             <div className="mt-3">
-              <h2 className="text-red-500 tracking-wide text-base md:text-lg font-medium  bg-white inline-block p-2 shadow-sm  rounded-md">
-                Progress calls
-              </h2>
+         
               <div className="  box_shadow_tabel bg-white rounded-lg">
                 <div
                   className={`overflow-auto ${
-                    isAdminDashboard ? "pb-[120px]" : ""
+                    isAdminDashboard ? "pb-8" : ""
                   }`}
                 >
-                  <CommonTable tabledata={currentProgressData} />
+                  <CommonTable tabledata={data} />
                 </div>
                 {/* Pagination Controls */}
                 <div className="d-flex flex-col sm:flex-row justify-end items-end sm:items-center gap-3 py-3 px-3">
@@ -204,109 +202,7 @@ const DashboardTable = () => {
             </div>
             </div>
             {/* Completed Table */}
-            <div className="mt-3">
-              <h2 className="text-red-500 tracking-wide text-base md:text-lg font-medium  bg-white inline-block p-2 shadow-sm  rounded-md">
-                Completed calls
-              </h2>
-              <div className="  box_shadow_tabel bg-white rounded-lg">
-                <div
-                  className={`overflow-auto ${
-                    isAdminDashboard ? "pb-[120px]" : ""
-                  }`}
-                >
-                  <CommonTable tabledata={currentCompleteData} />
-                </div>
-                {/* Pagination Controls */}
-                <div className="d-flex flex-col sm:flex-row justify-end items-end sm:items-center gap-3 py-3 px-3">
-                  <Dropdown>
-                    <span
-                      style={{
-                        textAlign: "start",
-                        color: "#6e3b37",
-                        fontSize: "14px",
-                      }}
-                      className="me-4 "
-                    >
-                      Items per page:
-                    </span>{" "}
-                    <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-                      {itemsPerCompletePage}
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                      {[1, 5, 10, 15, 20].map((num) => (
-                        <Dropdown.Item
-                          key={num}
-                          onClick={() => handleItemsPerCompletePageChange(num)}
-                        >
-                          {num}
-                        </Dropdown.Item>
-                      ))}
-                    </Dropdown.Menu>
-                  </Dropdown>
-
-                  <span
-                    style={{
-                      textAlign: "start",
-                      color: "#6e3b37",
-                      fontSize: "14px",
-                    }}
-                  >
-                    {`${
-                      (currentCompletePage - 1) * itemsPerCompletePage + 1
-                    }-${Math.min(
-                      currentCompletePage * itemsPerCompletePage,
-                      completedata.length
-                    )} of ${completedata.length}`}
-                  </span>
-
-                  <ul className="d-flex mb-0 gap-3 align-items-center">
-                    <li>
-                      <button
-                        type="button"
-                        onClick={() => handleCompletePageChange(1)}
-                        disabled={currentCompletePage === 1}
-                      >
-                        <PrevPageIcon />
-                      </button>
-                    </li>
-                    <li>
-                      <button
-                        type="button"
-                        onClick={() =>
-                          handleCompletePageChange(currentCompletePage - 1)
-                        }
-                        disabled={currentCompletePage === 1}
-                      >
-                        <PrevArrowIcon />
-                      </button>
-                    </li>
-                    <li>
-                      <button
-                        type="button"
-                        className=" rotate-180"
-                        onClick={() =>
-                          handleCompletePageChange(currentCompletePage + 1)
-                        }
-                        disabled={currentCompletePage === totalCompletePages}
-                      >
-                        <PrevArrowIcon />
-                      </button>
-                    </li>
-                    <li>
-                      <button
-                        type="button"
-                        onClick={() =>
-                          handleCompletePageChange(totalCompletePages)
-                        }
-                        disabled={currentCompletePage === totalCompletePages}
-                      >
-                        <NextPageIcon />
-                      </button>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+         
           </div>
         </div>
       </div>
