@@ -35,9 +35,9 @@ const ChangeParentPopup = ({ show, setShow }) => {
             {/* Form Group for Parent Broker */}
             <Form.Group controlId="parentBrokerSelect" className="mb-3 relative">
               <Form.Label
-                className={`mb-1 text-[#6e3b37] absolute left-2 z-10 duration-300 ${
+                className={`mb-1 text-primary_clr absolute left-2 z-10 duration-300 ${
                   isFocused.parentBroker
-                    ? "text-xs top-0 -translate-y-1/2 bg-white text-[#6e3b37] opacity-100 px-1.5"
+                    ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5"
                     : "top-1/2 -translate-y-1/2 opacity-0"
                 }`}
               >

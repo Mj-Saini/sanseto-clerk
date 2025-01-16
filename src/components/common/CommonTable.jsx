@@ -453,14 +453,14 @@ const CommonTable = ({ tabledata }) => {
                       <div className="d-flex gap-1 cursor-pointer mx-auto justify-items-center">
                         <button
                            onClick={() => handleUpdateClick(item.id)}
-                          className="w-full px-2 py-2 text-left text-sm text-[#6e3b37] flex"
+                          className="w-full px-2 py-2 text-left text-sm text-primary_clr flex"
                         >
                           <EditIcon />
                         </button>
 
                         <button
                           onClick={() => handleDeleteClick(item.id)}
-                          className="w-full px-2 py-2 text-left text-sm text-[#6e3b37]"
+                          className="w-full px-2 py-2 text-left text-sm text-primary_clr"
                         >
                           <DeleteIcon />
                         </button>

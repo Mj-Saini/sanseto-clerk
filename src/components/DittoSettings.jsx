@@ -47,7 +47,7 @@ const DittoSettings = () => {
       <div className="flex flex-col sm:flex-row items-center justify-between bg-white shadow-xs rounded-lg p-3 mb-2 mt-3">
         {/* Parent Broker Section */}
         <div className="flex flex-col lg:items-center lg:flex-row gap-2 w-full lg:w-4/5 ">
-          <div className="flex flex-col mb-1 sm:mb-0 text-base text-[#6e3b37]">
+          <div className="flex flex-col mb-1 sm:mb-0 text-base text-primary_clr">
             <span className="mr-2 whitespace-nowrap font-extrabold">
               Parent Broker:
             </span>

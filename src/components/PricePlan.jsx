@@ -12,7 +12,7 @@ const PricePlan = () => {
       ) : (
         <div>
           <div className="text-center mb-3 bg-white shadow-sm p-3 rounded-lg">
-            <h5 className="text-[#6e3b37] mb-3 text-base font-bold">
+            <h5 className="text-primary_clr mb-3 text-base font-bold">
               Brokers Available in 1Cliq
             </h5>
             <div className="d-flex flex-wrap justify-content-center mt-2">
@@ -50,7 +50,7 @@ const PricePlan = () => {
               ))}
             </div>
             <p className="mb-0 pt-3">
-              <small className="text-[#6e3b37] text-[13px] font-light">
+              <small className="text-primary_clr text-[13px] font-light">
                 (Broker having * in name charges separate fee from user for api
                 access which they have to pay directly to the broker only)
               </small>
@@ -63,7 +63,7 @@ const PricePlan = () => {
                 <div className="">
                   <div className="card-header flex flex-col items-center">
                     <PlanHandIcon />
-                    <h5 className="mb-2 mt-3 text-[#6e3b37] font-medium text-lg sm:text-xl lg:text-2xl">
+                    <h5 className="mb-2 mt-3 text-primary_clr font-medium text-lg sm:text-xl lg:text-2xl">
                       Go Cliq
                     </h5>
                     <p className="text-[13px] text-[#C42B1E] rounded-2xl  !bg-secondry_clr px-2 py-1">
@@ -71,62 +71,62 @@ const PricePlan = () => {
                     </p>
                   </div>
                   <div className="card-body">
-                    <div className=" flex justify-center gap-1 text-[#6e3b37]">
+                    <div className=" flex justify-center gap-1 text-primary_clr">
                       ₹
                       <h3 className="text-3xl sm:text-4xl lg:text-5xl mb-0 text-[#C42B1E] ">
                         1599{" "}
-                        <span className="text-sm text-[#6e3b37]">/ month</span>
+                        <span className="text-sm text-primary_clr">/ month</span>
                       </h3>
                     </div>
-                    <p className="text-muted ms-2 text-[#6e3b37]">
+                    <p className="text-muted ms-2 text-primary_clr">
                       {" "}
                       ( Excluding GST)
                     </p>
                     <ul className="list-unstyled">
-                      <li className="text-sm pb-3 text-[#6e3b37]">
+                      <li className="text-sm pb-3 text-primary_clr">
                         7 Broker(s) Allowed
                       </li>
-                      <li className="text-sm pb-3 text-[#6e3b37]">
+                      <li className="text-sm pb-3 text-primary_clr">
                         Basket Order
                       </li>
-                      <li className="text-sm pb-3 text-[#6e3b37]">
+                      <li className="text-sm pb-3 text-primary_clr">
                         Place Unlimited Qty
                       </li>
 
-                      <li className="text-sm pb-3 text-[#6e3b37]">
+                      <li className="text-sm pb-3 text-primary_clr">
                         All Market Order
                       </li>
-                      <li className="text-sm pb-3 text-[#6e3b37]">
+                      <li className="text-sm pb-3 text-primary_clr">
                         MTM Target And SL
                       </li>
-                      <li className="text-sm pb-3 text-[#6e3b37]">
+                      <li className="text-sm pb-3 text-primary_clr">
                         Take trade on single click
                       </li>
-                      <li className="text-sm pb-3 text-[#6e3b37]">
+                      <li className="text-sm pb-3 text-primary_clr">
                         Multiple Broker at single place (1 Broker at a time)
                       </li>
-                      <li className="text-sm pb-3 text-[#6e3b37]">
+                      <li className="text-sm pb-3 text-primary_clr">
                         Close All Positions
                       </li>
-                      <li className="text-sm pb-3 text-[#6e3b37]">
+                      <li className="text-sm pb-3 text-primary_clr">
                         Trailing SL & Manual SL
                       </li>
-                      <li className="text-sm pb-3 text-[#6e3b37]">
+                      <li className="text-sm pb-3 text-primary_clr">
                         Live MTM update
                       </li>
-                      <li className="text-sm pb-3 text-[#6e3b37]">
+                      <li className="text-sm pb-3 text-primary_clr">
                         Predefined Auto SL & Target
                       </li>
-                      <li className="text-sm pb-3 text-[#6e3b37]">
+                      <li className="text-sm pb-3 text-primary_clr">
                         Limit order
                       </li>
-                      <li className="text-sm pb-3 text-[#6e3b37]">
+                      <li className="text-sm pb-3 text-primary_clr">
                         LTP Limit order
                       </li>
-                      <li className="text-sm pb-3 text-[#6e3b37]">
+                      <li className="text-sm pb-3 text-primary_clr">
                         Keyboard Shortcuts
                       </li>
-                      <li className="text-sm pb-3 text-[#6e3b37]">
+                      <li className="text-sm pb-3 text-primary_clr">
                         Email Support Only
                       </li>
                     </ul>
@@ -143,7 +143,7 @@ const PricePlan = () => {
               <div className="text-center h-100 flex flex-col justify-between bg-white  rounded-md !border !border-[#C42B1E] p-3">
                 <div className="flex flex-col items-center">
                   <PlanHandIcon />
-                  <h5 className="mb-2 mt-3 text-[#6e3b37] font-medium text-lg sm:text-xl lg:text-2xl">
+                  <h5 className="mb-2 mt-3 text-primary_clr font-medium text-lg sm:text-xl lg:text-2xl">
                     Go Cliq Annual
                   </h5>
                   <p className="text-[13px] text-[#C42B1E] rounded-2xl  !bg-secondry_clr px-2 py-1">
@@ -152,61 +152,61 @@ const PricePlan = () => {
                 </div>
                 <div className="card-body flex flex-col justify-between">
                   <div>
-                    <div className=" flex justify-center gap-1 text-[#6e3b37]">
+                    <div className=" flex justify-center gap-1 text-primary_clr">
                       ₹
                       <h3 className="text-3xl sm:text-4xl lg:text-5xl mb-0 text-[#C42B1E] ">
                         1167{" "}
-                        <span className="text-sm text-[#6e3b37]">/ month</span>
+                        <span className="text-sm text-primary_clr">/ month</span>
                       </h3>
                     </div>
-                    <p className="text-muted ms-2 text-[#6e3b37]">
+                    <p className="text-muted ms-2 text-primary_clr">
                       (Excluding GST)
                     </p>
                     <ul className="list-unstyled">
-                      <li className="text-sm pb-3 text-[#6e3b37]">
+                      <li className="text-sm pb-3 text-primary_clr">
                         7 Broker(s) Allowed
                       </li>
-                      <li className="text-sm pb-3 text-[#6e3b37]">
+                      <li className="text-sm pb-3 text-primary_clr">
                         LTP Limit order
                       </li>
-                      <li className="text-sm pb-3 text-[#6e3b37]">
+                      <li className="text-sm pb-3 text-primary_clr">
                         Keyboard Shortcuts
                       </li>
-                      <li className="text-sm pb-3 text-[#6e3b37]">
+                      <li className="text-sm pb-3 text-primary_clr">
                         Basket Order
                       </li>
 
-                      <li className="text-sm pb-3 text-[#6e3b37]">
+                      <li className="text-sm pb-3 text-primary_clr">
                         Place Unlimited Qty
                       </li>
-                      <li className="text-sm pb-3 text-[#6e3b37]">
+                      <li className="text-sm pb-3 text-primary_clr">
                         All Market Order
                       </li>
-                      <li className="text-sm pb-3 text-[#6e3b37]">
+                      <li className="text-sm pb-3 text-primary_clr">
                         MTM Target And SL
                       </li>
-                      <li className="text-sm pb-3 text-[#6e3b37]">
+                      <li className="text-sm pb-3 text-primary_clr">
                         Take trade on single click
                       </li>
-                      <li className="text-sm pb-3 text-[#6e3b37]">
+                      <li className="text-sm pb-3 text-primary_clr">
                         Multiple Broker at single place (1 Broker at a time)
                       </li>
-                      <li className="text-sm pb-3 text-[#6e3b37]">
+                      <li className="text-sm pb-3 text-primary_clr">
                         Close All Positions
                       </li>
-                      <li className="text-sm pb-3 text-[#6e3b37]">
+                      <li className="text-sm pb-3 text-primary_clr">
                         Trailing SL & Manual SL
                       </li>
-                      <li className="text-sm pb-3 text-[#6e3b37]">
+                      <li className="text-sm pb-3 text-primary_clr">
                         Live MTM update
                       </li>
-                      <li className="text-sm pb-3 text-[#6e3b37]">
+                      <li className="text-sm pb-3 text-primary_clr">
                         Predefined Auto SL & Target
                       </li>
-                      <li className="text-sm pb-3 text-[#6e3b37]">
+                      <li className="text-sm pb-3 text-primary_clr">
                         Limit order
                       </li>
-                      <li className="text-sm pb-3 text-[#6e3b37]">
+                      <li className="text-sm pb-3 text-primary_clr">
                         Email Support Only
                       </li>
                     </ul>
@@ -221,8 +221,8 @@ const PricePlan = () => {
 
           {/* Disclaimer Section */}
           <div className="text-center pt-3 bg-white shadow-sm rounded-lg px-2">
-            <h5 className="text-lg md:text-xl text-[#6e3b37]">Disclaimer</h5>
-            <p className="text-base text-[#6e3b37]">
+            <h5 className="text-lg md:text-xl text-primary_clr">Disclaimer</h5>
+            <p className="text-base text-primary_clr">
               Although information has been obtained from and is based upon
               sources we believe to be reliable, we do not guarantee its
               accuracy and the information may be incomplete or condensed. All
@@ -237,7 +237,7 @@ const PricePlan = () => {
               it present a personalized recommendation to you. Individual stocks
               presented may not be suitable for you.
             </p>
-            <p className="text-base text-[#6e3b37] border-b pb-3">
+            <p className="text-base text-primary_clr border-b pb-3">
               Any opinions, chats, messages, news, research, analyses, prices,
               or other information contained on this Website are provided as
               general market information for educational and entertainment
@@ -255,19 +255,19 @@ const PricePlan = () => {
               investment/trading decisions.
             </p>
             <div className="text-center mt-3 pb-3">
-              <h5 className="text-lg md:text-xl text-[#6e3b37]">Note</h5>
-              <p className="text-base text-[#6e3b37] font-semibold w-[82%] mx-auto">
+              <h5 className="text-lg md:text-xl text-primary_clr">Note</h5>
+              <p className="text-base text-primary_clr font-semibold w-[82%] mx-auto">
                 We are not SEBI Registered Advisor and We are NOT responsible
                 for your trading profits/losses if you use our charts and data
                 for trading. Please consult your investment advisor.
               </p>
 
-              <small className="text-base text-[#6e3b37]">
+              <small className="text-base text-primary_clr">
                 Monthly subscription means 30 days of subscription period.
               </small>
 
               <br />
-              <p className="text-base text-[#6e3b37] mt-3">
+              <p className="text-base text-primary_clr mt-3">
                 All Plans are under 18% GST.
               </p>
             </div>

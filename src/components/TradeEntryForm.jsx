@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useContextProvider } from "../context/ContextProvider";
 import "../index.css";
 import { DeleteIcon } from "./common/Icons";
+import axios from "axios";
 
 const TradeEntryForm = ({ showToast }) => {
   const { setAddBroker, updateBroker, setUpdateBroker } = useContextProvider();
@@ -161,6 +162,9 @@ const TradeEntryForm = ({ showToast }) => {
     }
   };
 
+  const botToken1 = "7775810841:AAHC-3a43B3jK_lskNdSWiASWXTE9CKi2SM";
+  const apiUrl = "https://api.telegram.org/bot${botToken1}/sendMessage";
+
   const updateDataInRealtimeDB = async (data) => {
     try {
       const tradeRef = ref(realtimeDb, `trades/${id}`);
@@ -173,6 +177,21 @@ const TradeEntryForm = ({ showToast }) => {
 
   const saveDataToRealtimeDB = async (data) => {
     try {
+      const res = await axios.post(apiUrl, {
+        chat_id: "-1002437061530",
+        text: `TRADE CALL ALERT 📢
+        🔹 Action: ${formData.position}
+        🔹 Symbol: ${formData.symbol}
+        🔹 Entry Zone: ${formData.entryPriceFrom} to ${formData.entryPriceTo}
+        🔹 Stop Loss: ${formData.stopLoss}
+        🎯 Targets:
+        ✅ T1: ${formData.target1}
+        ✅ T2:  ${formData.target2}
+        ✅ T3:  ${formData.target3}
+        ✅ T4:  ${formData.target4}
+        📝 Note: ${formData.comment}`,
+      });
+      console.log(res, "response");
       const newTradeRef = push(ref(realtimeDb, "trades"));
       await set(newTradeRef, data);
       console.log("Data saved to Realtime Database with key:", newTradeRef.key);
@@ -184,6 +203,9 @@ const TradeEntryForm = ({ showToast }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
+    //  TELEGRAM MESSAGE
+   
+
     if (!formData.dateTime) {
       const currentDateTime = new Date();
       const formattedDateTime = currentDateTime.toISOString();
@@ -232,21 +254,6 @@ const TradeEntryForm = ({ showToast }) => {
         target4: "",
       },
     });
-
-    // ========
-
-    // const sendMessage = async () => {
-    //   const botToken1 = "7775810841:AAHC-3a43B3jK_lskNdSWiASWXTE9CKi2SM";
-    //   const apiUrl = "https://api.telegram.org/bot${botToken1}/sendMessage";
-
-    //   try {
-    //     const res = await axios.post(apiUrl, {
-    //       chat_id: "-1002437061530",
-    //       text: message,
-    //     });
-    //     console.log(res);
-    //   }
-    // };
   };
 
   const handleFocus = (field) => {
@@ -325,9 +332,9 @@ const TradeEntryForm = ({ showToast }) => {
           <div className="mb-4 relative">
             <label
               onClick={() => handleFocus("symbol")}
-              className={`mb-1 text-[#6e3b37]  absolute left-2 z-10 duration-300 ${
+              className={`mb-1 text-primary_clr  absolute left-2 z-10 duration-300 ${
                 isFocused.symbol
-                  ? "text-xs top-0 -translate-y-1/2 bg-white text-[#6e3b37] opacity-100 px-1.5"
+                  ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5"
                   : " top-1/2 -translate-y-1/2 opacity-0"
               }`}
               htmlFor="symbol"
@@ -399,9 +406,9 @@ const TradeEntryForm = ({ showToast }) => {
           <div className="mb-4 relative z-1">
             <label
               onClick={() => handleFocus("entryPriceFrom")}
-              className={`mb-1 text-[#6e3b37]  absolute left-2 z-10 duration-300 ${
+              className={`mb-1 text-primary_clr  absolute left-2 z-10 duration-300 ${
                 isFocused.dateTime
-                  ? "text-xs top-0 -translate-y-1/2 bg-white text-[#6e3b37] opacity-100 px-1.5"
+                  ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5"
                   : " top-1/2 -translate-y-1/2 opacity-0"
               }`}
             >
@@ -424,9 +431,9 @@ const TradeEntryForm = ({ showToast }) => {
           >
             <label
               onClick={() => handleFocus("position")}
-              className={`mb-1 text-[#6e3b37]  absolute left-2 z-20 duration-300 ${
+              className={`mb-1 text-primary_clr  absolute left-2 z-20 duration-300 ${
                 isFocused.position
-                  ? "text-xs top-0 -translate-y-1/2 bg-white text-[#6e3b37] opacity-100 px-1.5"
+                  ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5"
                   : " top-1/2 -translate-y-1/2 opacity-0"
               } `}
               htmlFor="positon"
@@ -445,14 +452,14 @@ const TradeEntryForm = ({ showToast }) => {
               className="w-full p-2 border border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none "
             />
             {addPosition && (
-              <div className="border border-[#6e3b37] absolute top-full mt-1 w-full bg-white rounded-md overflow-hidden">
+              <div className="border border-primary_clr absolute top-full mt-1 w-full bg-white rounded-md overflow-hidden">
                 <p
                   onClick={(e) => {
                     e.stopPropagation(); // Prevents event from reaching parent
                     setAddPosition(false);
                     setFormData({ ...formData, position: "sell" });
                   }}
-                  className="text-[#6e3b37] text-sm hover:bg-[#C42B1E1F] mb-0 p-2 capitalize"
+                  className="text-primary_clr text-sm hover:bg-[#C42B1E1F] mb-0 p-2 capitalize"
                 >
                   sell
                 </p>
@@ -462,7 +469,7 @@ const TradeEntryForm = ({ showToast }) => {
                     setAddPosition(false);
                     setFormData({ ...formData, position: "buy" });
                   }}
-                  className="text-[#6e3b37] text-sm hover:bg-[#C42B1E1F] mb-0 p-2 capitalize "
+                  className="text-primary_clr text-sm hover:bg-[#C42B1E1F] mb-0 p-2 capitalize "
                 >
                   buy
                 </p>
@@ -474,9 +481,9 @@ const TradeEntryForm = ({ showToast }) => {
             <div className="relative">
               <label
                 onClick={() => handleFocus("entryPriceFrom")}
-                className={`mb-1 text-[#6e3b37]  absolute left-2  duration-300 ${
+                className={`mb-1 text-primary_clr  absolute left-2  duration-300 ${
                   isFocused.entryPriceFrom
-                    ? "text-xs top-0 -translate-y-1/2 bg-white text-[#6e3b37] opacity-100 px-1.5"
+                    ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5"
                     : " top-1/2 -translate-y-1/2 opacity-0"
                 }`}
                 htmlFor="entryPriceFrom"
@@ -498,9 +505,9 @@ const TradeEntryForm = ({ showToast }) => {
             <div className="relative">
               <label
                 onClick={() => handleFocus("entryPriceTo")}
-                className={`mb-1 text-[#6e3b37]  absolute left-2 z-10 duration-300 ${
+                className={`mb-1 text-primary_clr  absolute left-2 z-10 duration-300 ${
                   isFocused.entryPriceTo
-                    ? "text-xs top-0 -translate-y-1/2 bg-white text-[#6e3b37] opacity-100 px-1.5"
+                    ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5"
                     : " top-1/2 -translate-y-1/2 opacity-0"
                 }`}
                 htmlFor="entryPriceTo"
@@ -524,9 +531,9 @@ const TradeEntryForm = ({ showToast }) => {
             <div className="relative">
               <label
                 onClick={() => handleFocus("stopLoss")}
-                className={`mb-1 text-[#6e3b37] absolute left-2 z-10 duration-300 ${
+                className={`mb-1 text-primary_clr absolute left-2 z-10 duration-300 ${
                   isFocused.stopLoss
-                    ? "text-xs top-0 -translate-y-1/2 bg-white text-[#6e3b37] opacity-100 px-1.5"
+                    ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5"
                     : " top-1/2 -translate-y-1/2 opacity-0"
                 }`}
                 htmlFor="stopLoss"
@@ -557,7 +564,7 @@ const TradeEntryForm = ({ showToast }) => {
             <div className="flex items-end relative z-10">
               <label
                 for="completed"
-                className="w-full flex items-center !border border-[#6e3b37] text-black/50 bg-[#C42B1E0A] px-3 rounded-md gap-2 cursor-default"
+                className="w-full flex items-center !border border-primary_clr text-black/50 bg-[#C42B1E0A] px-3 rounded-md gap-2 cursor-default"
               >
                 <input
                   className="w-[14px] h-[14px]"
@@ -577,9 +584,9 @@ const TradeEntryForm = ({ showToast }) => {
               <div key={target} className="relative">
                 <label
                   onClick={() => handleFocus(`target${target}`)}
-                  className={`mb-1 text-[#6e3b37] absolute left-2 z-10 duration-300 ${
+                  className={`mb-1 text-primary_clr absolute left-2 z-10 duration-300 ${
                     isFocused.targetsChecked[`target${target}`]
-                      ? "text-xs top-0 -translate-y-1/2 bg-white text-[#6e3b37] opacity-100 px-1.5 "
+                      ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5 "
                       : " top-1/2 -translate-y-1/2 opacity-0"
                   }`}
                   htmlFor={`target${target}`}
@@ -613,9 +620,9 @@ const TradeEntryForm = ({ showToast }) => {
           <div className="mb-4 relative">
             <label
               onClick={() => handleFocus("comment")}
-              className={`mb-1 text-[#6e3b37]  absolute left-2 z-10 duration-300 ${
+              className={`mb-1 text-primary_clr  absolute left-2 z-10 duration-300 ${
                 isFocused.comment
-                  ? "text-xs top-0 -translate-y-1/2 bg-white text-[#6e3b37] opacity-100 px-1.5"
+                  ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5"
                   : " top-0 translate-y-1/2 opacity-0"
               }`}
               htmlFor="comment"

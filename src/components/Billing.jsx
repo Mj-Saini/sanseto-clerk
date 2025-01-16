@@ -16,7 +16,7 @@ const [currentData, setCurrentData] = useState([])
   return (
     <div className="py-4">
       <div className="mb-5 bg-white rounded-lg shadow-lg p-3">
-        <h2 className="h4 mb-3 d-flex align-items-center gap-2 text-lg md:text-xl !text-[#6e3b37]">
+        <h2 className="h4 mb-3 d-flex align-items-center gap-2 text-lg md:text-xl !text-primary_clr">
           1Cliq Subscription
         </h2>
         <div className="table-responsive ">
@@ -267,7 +267,7 @@ const [currentData, setCurrentData] = useState([])
 
       {/* Ditto Subscription Section */}
       <div className="mb-5 bg-white rounded-lg shadow-lg p-3">
-        <h2 className="h4 mb-3 text-lg md:text-xl !text-[#6e3b37]">
+        <h2 className="h4 mb-3 text-lg md:text-xl !text-primary_clr">
           Ditto Subscription
         </h2>
         <div className="table-responsive">

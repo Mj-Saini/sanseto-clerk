@@ -229,7 +229,7 @@ const DashBoard = () => {
           </div>
           <footer>
             <div className="d-flex align-center justify-space-between">
-              <span className="d-flex gap-1 align-center text-[#6e3b37] pt-3">
+              <span className="d-flex gap-1 align-center text-primary_clr pt-3">
                 {" "}
                 © {currentYear} Made With
                 <span>

@@ -55,7 +55,7 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                 <Link
                   onClick={sideMenu}
                   to={""}
-                  className={`flex items-center py-2.5 text-[#6e3b37] font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] hover:text-[#C42B1E] ${
+                  className={`flex items-center py-2.5 text-primary_clr font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] hover:text-[#C42B1E] ${
                     location.pathname === "/admin-dashboard"
                       ? "bg-secondry_clr hover:!bg-[#C42B1E30] text-[#C42B1E]"
                       : ""
@@ -84,7 +84,7 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                 <Link
                   onClick={sideMenu}
                   to={"pricing"}
-                  className={`flex items-center py-2.5 text-[#6e3b37] font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] hover:text-[#C42B1E] ${
+                  className={`flex items-center py-2.5 text-primary_clr font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] hover:text-[#C42B1E] ${
                     location.pathname === "/admin-dashboard/pricing"
                       ? "bg-secondry_clr hover:!bg-[#C42B1E30] text-[#C42B1E]"
                       : ""
@@ -113,7 +113,7 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                 <Link
                   onClick={sideMenu}
                   to={"detto-settings"}
-                  className={`flex items-center py-2.5 text-[#6e3b37] font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] hover:text-[#C42B1E] ${
+                  className={`flex items-center py-2.5 text-primary_clr font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] hover:text-[#C42B1E] ${
                     location.pathname === "/dashboard/detto-settings"
                       ? "bg-secondry_clr hover:!bg-[#C42B1E30] text-[#C42B1E]"
                       : ""
@@ -142,7 +142,7 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                 <Link
                   onClick={sideMenu}
                   to={"settings"}
-                  className={`flex items-center py-2.5 text-[#6e3b37] font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] hover:text-[#C42B1E] ${
+                  className={`flex items-center py-2.5 text-primary_clr font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] hover:text-[#C42B1E] ${
                     location.pathname === "/dashboard/settings"
                       ? "bg-secondry_clr hover:!bg-[#C42B1E30] text-[#C42B1E]"
                       : ""
@@ -174,7 +174,7 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                 <Link
                   onClick={sideMenu}
                   to={""}
-                  className={`flex items-center py-2.5 text-[#6e3b37] font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] group-hover: hover:text-[#C42B1E] ${
+                  className={`flex items-center py-2.5 text-primary_clr font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] group-hover: hover:text-[#C42B1E] ${
                     sidebarFixed ? "" : ""
                   }  ${
                     location.pathname === "/dashboard"
@@ -206,7 +206,7 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                 <Link
                   onClick={sideMenu}
                   to={"pricing"}
-                  className={`flex items-center py-2.5 text-[#6e3b37] font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] hover:text-[#C42B1E] ${
+                  className={`flex items-center py-2.5 text-primary_clr font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] hover:text-[#C42B1E] ${
                     location.pathname === "/dashboard/pricing"
                       ? "bg-secondry_clr hover:!bg-[#C42B1E30] text-[#C42B1E]"
                       : ""
@@ -235,7 +235,7 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                 <Link
                   onClick={sideMenu}
                   to={"detto-settings"}
-                  className={`flex items-center py-2.5 text-[#6e3b37] font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] hover:text-[#C42B1E] ${
+                  className={`flex items-center py-2.5 text-primary_clr font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] hover:text-[#C42B1E] ${
                     location.pathname === "/dashboard/detto-settings"
                       ? "bg-secondry_clr hover:!bg-[#C42B1E30] text-[#C42B1E]"
                       : ""
@@ -264,7 +264,7 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                 <Link
                   onClick={sideMenu}
                   to={"settings"}
-                  className={`flex items-center py-2.5 text-[#6e3b37] font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] hover:text-[#C42B1E] ${
+                  className={`flex items-center py-2.5 text-primary_clr font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] hover:text-[#C42B1E] ${
                     location.pathname === "/dashboard/settings"
                       ? "bg-secondry_clr hover:!bg-[#C42B1E30] text-[#C42B1E]"
                       : ""
