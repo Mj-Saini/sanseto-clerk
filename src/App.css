@@ -105,13 +105,6 @@
 }
 
 
-input[type="checkbox"]{
-  accent-color: #c43b1e;
-}
-::-webkit-scrollbar{
-  display: none;
-}
-
 .custom-select {
   position: relative;
   display: inline-block;
@@ -163,18 +156,36 @@ input[type="checkbox"]{
 }
 
 
-#TradeForm input:first-child{
+/* #TradeForm input:first-child{
   border: 1px solid #a50b0000 !important;
   height: 40px;
   margin-top: 0;
   font-size: 14px;
-} 
+}  */
 #TradeForm select,#TradeForm input{
   border: 1px solid #C42B1E1F !important;
   color: #000;
   font-size: 14px;
   height: 40px;
+}
+
+ 
+#TradeForm .formInput:focus {
+  border: 2px solid #C42B1E !important;
 } 
+#TradeForm textarea:focus {
+  border: 2px solid #C42B1E !important;
+} 
+
+.selectIn {
+background: #000;
+}
+
+option:hover {
+  background-color: #000000 !important;
+  color: #333 !important;
+  padding: 5px !important;
+}
 
 input::placeholder{
   color: #97514b; 
@@ -190,6 +201,14 @@ input[type="datetime-local"]::-webkit-datetime-edit {
 input[type="datetime-local"]:focus::-webkit-datetime-edit {
   color: #97514b; /* Text color when focused */
 }
+
+input[type="checkbox"]{
+  accent-color: #c43b1e;
+}
+::-webkit-scrollbar{
+  display: none;
+}
+
 
 @media (min-width: 320px) {
   .custom-grid {

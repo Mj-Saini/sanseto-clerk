@@ -2,17 +2,13 @@
 
 import { Table } from "react-bootstrap";
 import { useContextProvider } from "../../context/ContextProvider";
-import { useState } from "react";
 import { Link } from "react-router-dom";
+import { DeleteIcon, EditIcon } from "./Icons";
 
 const CommonTable = ({ tabledata }) => {
-  console.log(tabledata,"datadatatable")
-  const { formatDate, deleteData, } = useContextProvider();
+  console.log(tabledata, "datadatatable");
+  const { formatDate, deleteData } = useContextProvider();
 
-  const [activePopupIndex, setActivePopupIndex] = useState(null);
-  const togglePopup = (index) => {
-    setActivePopupIndex((prevIndex) => (prevIndex === index ? null : index));
-  };
   const isAdminDashboard = location.pathname.startsWith("/admin-dashboard");
 
   return (
@@ -161,6 +157,7 @@ const CommonTable = ({ tabledata }) => {
                     fontSize: "12px",
                     fontWeight: "normal",
                   }}
+                  className="sticky right-0"
                   scope="col"
                 >
                   Action
@@ -332,7 +329,7 @@ const CommonTable = ({ tabledata }) => {
                     {item.target4}
                   </td>
                   <td
-                    className={` ${
+                    className={ `  ${
                       index === item.length - 1 ? "!border-0" : ""
                     }`}
                     style={{
@@ -343,7 +340,16 @@ const CommonTable = ({ tabledata }) => {
                       padding: "10px",
                     }}
                   >
-                    {item.completed ? "COMPLETED" : "PROGRESS"}
+                 <div className="flex items-center">
+                 <span
+                      className={` px-2 py-1.5 rounded-md w-24 text-xs text-center ${
+                        item.completed ? "bg-[#f4433729] text-[#f44337]" : "bg-[#8592a3] text-white"
+                      } `}
+                    >
+                      {" "}
+                      {item.completed ? "COMPLETED" : "PROGRESS"}
+                    </span>
+                 </div>
                   </td>
                   <td
                     className={` ${
@@ -366,61 +372,25 @@ const CommonTable = ({ tabledata }) => {
                         color: "#6e3b37",
                         fontSize: "14px",
                       }}
-                      className="ps-3"
+                      className="ps-3 sticky right-0"
                     >
-                      <div
-                        onClick={() => togglePopup(index)}
-                        className="d-flex flex-col gap-1 cursor-pointer mx-auto justify-items-center"
-                        style={{ width: "10px" }}
-                      >
-                        <span
-                          style={{
-                            display: "block",
-                            width: "4px",
-                            height: "4px",
-                            borderRadius: "20px",
-                            background: "black",
-                          }}
-                        ></span>
-                        <span
-                          style={{
-                            display: "block",
-                            width: "4px",
-                            height: "4px",
-                            borderRadius: "20px",
-                            background: "black",
-                          }}
-                        ></span>
-                        <span
-                          style={{
-                            display: "block",
-                            width: "4px",
-                            height: "4px",
-                            borderRadius: "20px",
-                            background: "black",
-                          }}
-                        ></span>
-                      </div>
-                      {activePopupIndex === index && (
-                        <div className="absolute top-4 right-10 bg-[#fff] shadow-lg rounded w-28 z-40 overflow-hidden">
-                          <Link
-                            to={`/admin-dashboard/trade-call-form/${item.id}`}
-                            className="w-full px-3 py-2 text-left text-sm text-[#6e3b37] hover:text-[#c42b1e] hover:bg-secondry_clr flex"
-                          >
-                            Edit
-                          </Link>
+                      <div className="d-flex gap-1 cursor-pointer mx-auto justify-items-center">
+                        <Link
+                          to={`/admin-dashboard/trade-call-form/${item.id}`}
+                          className="w-full px-2 py-2 text-left text-sm text-[#6e3b37] flex"
+                        >
+                          <EditIcon />
+                        </Link>
 
-                          <button
-                            onClick={() => {
-                              deleteData(item.id);
-                              togglePopup(index);
-                            }}
-                            className="w-full px-3 py-2 text-left text-sm text-[#6e3b37] hover:text-[#c42b1e] hover:bg-secondry_clr"
-                          >
-                            Delete
-                          </button>
-                        </div>
-                      )}
+                        <button
+                          onClick={() => {
+                            deleteData(item.id);
+                          }}
+                          className="w-full px-2 py-2 text-left text-sm text-[#6e3b37]"
+                        >
+                          <DeleteIcon />
+                        </button>
+                      </div>
                     </td>
                   )}
                 </tr>

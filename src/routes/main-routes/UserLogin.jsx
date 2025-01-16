@@ -95,6 +95,10 @@ const UserLogin = () => {
             <Route path="price" element={<PriceSettings />} />
           </Route>
           <Route
+            path="trade-call-form"
+            element={<TradeEntryForm showToast={showToast} />}
+          />
+          <Route
             path="trade-call-form/:id"
             element={<TradeEntryForm showToast={showToast} />}
           />

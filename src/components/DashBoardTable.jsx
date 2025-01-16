@@ -84,12 +84,12 @@ const DashboardTable = () => {
               className="my-3 bg-white shadow-sm p-3 rounded-lg flex flex-col sm:!flex-row gap-3"
             >
               <div className="d-flex gap-2">
-                <button
-                  onClick={() => setAddBroker(true)}
+                <Link to="trade-call-form"
+                  // onClick={() => setAddBroker(true)}
                   className="btn_dark shadow-sm max-sm:w-full text-xs px-[14px] uppercase"
                 >
                   Add broker
-                </button>
+                </Link>
                 <button
                   onClick={handleRefresh}
                   className="btn_light max-sm:w-full text-xs px-[14px]"
