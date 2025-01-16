@@ -176,25 +176,25 @@ const TradeEntryForm = ({ showToast }) => {
   };
 
   const saveDataToRealtimeDB = async (data) => {
+    const res = await axios.post(apiUrl, {
+      chat_id: "-1002437061530",
+      text: `TRADE CALL ALERT 📢
+      🔹 Action: ${formData.position}
+      🔹 Symbol: ${formData.symbol}
+      🔹 Entry Zone: ${formData.entryPriceFrom} to ${formData.entryPriceTo}
+      🔹 Stop Loss: ${formData.stopLoss}
+      🎯 Targets:
+      ✅ T1: ${formData.target1}
+      ✅ T2:  ${formData.target2}
+      ✅ T3:  ${formData.target3}
+      ✅ T4:  ${formData.target4}
+      📝 Note: ${formData.comment}`,
+    });
+    console.log(res, "response");
     try {
-      const res = await axios.post(apiUrl, {
-        chat_id: "-1002437061530",
-        text: `TRADE CALL ALERT 📢
-        🔹 Action: ${formData.position}
-        🔹 Symbol: ${formData.symbol}
-        🔹 Entry Zone: ${formData.entryPriceFrom} to ${formData.entryPriceTo}
-        🔹 Stop Loss: ${formData.stopLoss}
-        🎯 Targets:
-        ✅ T1: ${formData.target1}
-        ✅ T2:  ${formData.target2}
-        ✅ T3:  ${formData.target3}
-        ✅ T4:  ${formData.target4}
-        📝 Note: ${formData.comment}`,
-      });
-      console.log(res, "response");
-      const newTradeRef = push(ref(realtimeDb, "trades"));
-      await set(newTradeRef, data);
-      console.log("Data saved to Realtime Database with key:", newTradeRef.key);
+      // const newTradeRef = push(ref(realtimeDb, "trades"));
+      // await set(newTradeRef, data);
+      // console.log("Data saved to Realtime Database with key:", newTradeRef.key);
     } catch (e) {
       console.error("Error saving data to Realtime Database: ", e);
     }
@@ -204,7 +204,6 @@ const TradeEntryForm = ({ showToast }) => {
     e.preventDefault();
     console.log(formData);
     //  TELEGRAM MESSAGE
-   
 
     if (!formData.dateTime) {
       const currentDateTime = new Date();
@@ -329,7 +328,7 @@ const TradeEntryForm = ({ showToast }) => {
         </h2>
 
         <form onSubmit={handleSubmit}>
-          <div className="mb-4 relative">
+          <div className="mb-3 relative">
             <label
               onClick={() => handleFocus("symbol")}
               className={`mb-1 text-primary_clr  absolute left-2 z-10 duration-300 ${
@@ -403,7 +402,7 @@ const TradeEntryForm = ({ showToast }) => {
               />
             </div>
           </div>
-          <div className="mb-4 relative z-1">
+          <div className="mb-3 relative z-1">
             <label
               onClick={() => handleFocus("entryPriceFrom")}
               className={`mb-1 text-primary_clr  absolute left-2 z-10 duration-300 ${
@@ -427,7 +426,7 @@ const TradeEntryForm = ({ showToast }) => {
           </div>
           <div
             onClick={() => setAddPosition(true)}
-            className="mb-4 relative z-10"
+            className="mb-3 relative z-10"
           >
             <label
               onClick={() => handleFocus("position")}
@@ -477,7 +476,7 @@ const TradeEntryForm = ({ showToast }) => {
             )}
           </div>
 
-          <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-4 ">
+          <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-3 ">
             <div className="relative">
               <label
                 onClick={() => handleFocus("entryPriceFrom")}
@@ -527,7 +526,7 @@ const TradeEntryForm = ({ showToast }) => {
               />
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-4">
+          <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-3">
             <div className="relative">
               <label
                 onClick={() => handleFocus("stopLoss")}
@@ -579,7 +578,7 @@ const TradeEntryForm = ({ showToast }) => {
             </div>
           </div>
 
-          <div className="mb-4 grid grid-cols-2 gap-x-4 gap-y-4">
+          <div className="mb-3 grid grid-cols-2 gap-x-4 gap-y-4">
             {[1, 2, 3, 4].map((target) => (
               <div key={target} className="relative">
                 <label
@@ -617,7 +616,7 @@ const TradeEntryForm = ({ showToast }) => {
               </div>
             ))}
           </div>
-          <div className="mb-4 relative">
+          <div className="mb-3 relative">
             <label
               onClick={() => handleFocus("comment")}
               className={`mb-1 text-primary_clr  absolute left-2 z-10 duration-300 ${
