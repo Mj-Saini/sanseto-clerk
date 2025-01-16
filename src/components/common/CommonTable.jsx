@@ -252,7 +252,7 @@ const CommonTable = ({ tabledata }) => {
                   </td>
                   <td
                     className={` ${
-                      item?.stopLossEnabled ? "!bg-[#c42b1e29]" : ""
+                      item?.stopLossEnabled ? "!bg-secondry_clr" : ""
                     }`}
                     style={{
                       textAlign: "start",
@@ -380,7 +380,7 @@ const CommonTable = ({ tabledata }) => {
                         <div className="absolute top-10 right-5 bg-[#fff] shadow-lg rounded w-28 z-40 overflow-hidden">
                           <Link
                             to={`/admin-dashboard/trade-call-form/${item.id}`}
-                            className="w-full px-3 py-2 text-left text-sm text-[#6e3b37] hover:text-[#c42b1e] hover:bg-[#c42b1e29] flex"
+                            className="w-full px-3 py-2 text-left text-sm text-[#6e3b37] hover:text-[#c42b1e] hover:bg-secondry_clr flex"
                           >
                             Edit
                           </Link>
@@ -390,7 +390,7 @@ const CommonTable = ({ tabledata }) => {
                               deleteData(item.id);
                               togglePopup(index);
                             }}
-                            className="w-full px-3 py-2 text-left text-sm text-[#6e3b37] hover:text-[#c42b1e] hover:bg-[#c42b1e29]"
+                            className="w-full px-3 py-2 text-left text-sm text-[#6e3b37] hover:text-[#c42b1e] hover:bg-secondry_clr"
                           >
                             Delete
                           </button>

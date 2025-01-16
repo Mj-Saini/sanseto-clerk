@@ -177,7 +177,13 @@ input[type="checkbox"]{
 } 
 
 
+input[type="datetime-local"]::-webkit-datetime-edit {
+  color: transparent; /* Hides the date input text (if empty) */
+}
 
+input[type="datetime-local"]:focus::-webkit-datetime-edit {
+  color: #97514b; /* Text color when focused */
+}
 
 @media (min-width: 320px) {
   .custom-grid {

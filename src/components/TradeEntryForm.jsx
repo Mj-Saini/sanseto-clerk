@@ -7,9 +7,25 @@ import { useNavigate, useParams } from "react-router-dom";
 import { collection, getDocs } from "firebase/firestore";
 import Select from "react-select";
 import { useContextProvider } from "../context/ContextProvider";
+import "../index.css";
 
 const TradeEntryForm = ({ showToast }) => {
   const { setAddBroker } = useContextProvider();
+  const [isFocused, setIsFocused] = useState({
+    symbol: false,
+    dataTime: false,
+    position: false,
+    entryPriceFrom: false,
+    entryPriceTo: false,
+    stopLoss: false,
+    comment: false,
+    targetsChecked: {
+      target1: false,
+      target2: false,
+      target3: false,
+      target4: false,
+    },
+  });
   const { id } = useParams();
   const navigate = useNavigate();
   const [symbols, setSymbols] = useState([]);
@@ -174,7 +190,6 @@ const TradeEntryForm = ({ showToast }) => {
     } else {
       await saveDataToRealtimeDB(dataToSave);
       setAddBroker(false);
-
     }
     setFormData({
       symbol: "XAUUSD",
@@ -197,36 +212,67 @@ const TradeEntryForm = ({ showToast }) => {
         target4: "",
       },
     });
-   
+  };
 
+  const handleFocus = (field) => {
+    setIsFocused((prevState) => {
+      const resetFields = Object.keys(prevState).reduce((acc, key) => {
+        if (key !== "targetsChecked") {
+          acc[key] = false;
+        } else {
+          acc[key] = prevState[key];
+        }
+        return acc;
+      }, {});
+
+      const updatedTargetsChecked = Object.keys(
+        prevState.targetsChecked
+      ).reduce((acc, key) => {
+        acc[key] = key === field ? true : false;
+        return acc;
+      }, {});
+
+      return {
+        ...resetFields,
+        [field]: true,
+        targetsChecked: updatedTargetsChecked,
+      };
+    });
   };
 
   return (
     <>
-      {/* <div
-        onClick={() => setAddBroker(false)}
-        className="fixed top-0 left-0 h-screen w-full flex justify-center items-center bg-black/50"
-      ></div> */}
-
       <div
         id="TradeForm"
         className="w-full md:w-1/2 mx-auto p-[20px] bg-white shadow-lg rounded-lg z-[20] relative overflow-auto h-[600px]"
       >
-        <h2 className="font-bold text-lg lg:text-xl text-black mb-6">
+        <div
+          onClick={() => handleFocus(false)}
+          className="fixed top-0 left-0 h-screen w-full flex justify-center items-center z-0"
+        ></div>
+        <h2 className="font-bold text-lg lg:text-xl text-black mb-6 z-10 relative">
           Add Broker
         </h2>
 
         <form onSubmit={handleSubmit}>
-          <div className="mb-2">
-            <label className="block mb-1 text-black/60" htmlFor="symbol">
+          <div className="mb-4 relative">
+            <label
+              className={`mb-1 text-[#f44336]  absolute left-2 z-10 duration-300 ${
+                isFocused.symbol
+                  ? "text-xs top-0 -translate-y-1/2 bg-white text-[#F44336]"
+                  : " top-1/2 -translate-y-1/2"
+              }`}
+              htmlFor="symbol"
+            >
               Choose Symbol
             </label>
             <Select
               options={symbols}
+              onFocus={() => handleFocus("symbol")}
               value={symbols.find((symbol) => symbol.value === formData.symbol)}
-              placeholder="Search or select a symbol"
+              placeholder=""
               onChange={handleSymbolChange}
-              className="w-full outline-none"
+              className="w-full outline-none z-[9] relative"
               styles={{
                 control: (provided, state) => ({
                   ...provided,
@@ -263,8 +309,14 @@ const TradeEntryForm = ({ showToast }) => {
               }}
             />
           </div>
-          <div className="mb-2">
-            <label className="block mb-1 text-black/60" htmlFor="dateTime">
+          <div className="mb-4 relative z-1">
+            <label
+              className={`mb-1 text-[#f44336]  absolute left-2 z-10 duration-300 ${
+                isFocused.dateTime
+                  ? "text-xs top-0 -translate-y-1/2 bg-white text-[#F44336]"
+                  : " top-1/2 -translate-y-1/2"
+              }`}
+            >
               Date & Time
             </label>
             <input
@@ -272,15 +324,20 @@ const TradeEntryForm = ({ showToast }) => {
               type="datetime-local"
               id="dateTime"
               name="dateTime"
+              onFocus={() => handleFocus("dateTime")}
               value={formData.dateTime}
               onChange={handleChange}
               className="w-full p-2 py-3 border border-[#C42B1E1F] text-[#97514b] rounded-md outline-none "
             />
           </div>
-          <div className="mb-2">
+          <div className="mb-4 relative z-1">
             <label
-              className="block mb-1 text-black/60"
-              htmlFor="entryPriceFrom"
+              className={`mb-1 text-[#f44336]  absolute left-2 z-10 duration-300 ${
+                isFocused.position
+                  ? "text-xs top-0 -translate-y-1/2 bg-white text-[#F44336]"
+                  : " top-1/2 -translate-y-1/2"
+              }`}
+              htmlFor="positon"
             >
               Position
             </label>
@@ -291,15 +348,20 @@ const TradeEntryForm = ({ showToast }) => {
               name="position"
               value={formData.position}
               onChange={handleChange}
-              placeholder="Select a Position"
+              onFocus={() => handleFocus("position")}
+              placeholder=""
               className="w-full p-2 border border-[#C42B1E1F] text-[#97514b] rounded-md outline-none "
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-2">
-            <div>
+          <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-4">
+            <div className="relative">
               <label
-                className="block mb-1 text-black/60"
+                className={`mb-1 text-[#f44336]  absolute left-2 z-10 duration-300 ${
+                  isFocused.entryPriceFrom
+                    ? "text-xs top-0 -translate-y-1/2 bg-white text-[#F44336]"
+                    : " top-1/2 -translate-y-1/2"
+                }`}
                 htmlFor="entryPriceFrom"
               >
                 Entry Price From
@@ -311,13 +373,18 @@ const TradeEntryForm = ({ showToast }) => {
                 name="entryPriceFrom"
                 value={formData.entryPriceFrom}
                 onChange={handleChange}
-                placeholder="Price"
+                onFocus={() => handleFocus("entryPriceFrom")}
+                placeholder=""
                 className="w-full p-2 border border-[#C42B1E1F] text-[#97514b] rounded-md outline-none "
               />
             </div>
-            <div>
+            <div className="relative">
               <label
-                className="block mb-1 text-black/60"
+                className={`mb-1 text-[#f44336]  absolute left-2 z-10 duration-300 ${
+                  isFocused.entryPriceTo
+                    ? "text-xs top-0 -translate-y-1/2 bg-white text-[#F44336]"
+                    : " top-1/2 -translate-y-1/2"
+                }`}
                 htmlFor="entryPriceTo"
               >
                 Entry Price To
@@ -328,15 +395,23 @@ const TradeEntryForm = ({ showToast }) => {
                 id="entryPriceTo"
                 name="entryPriceTo"
                 value={formData.entryPriceTo}
+                onFocus={() => handleFocus("entryPriceTo")}
                 onChange={handleChange}
-                placeholder="Price"
+                placeholder=""
                 className="w-full p-2 border border-[#C42B1E1F] text-[#97514b] rounded-md outline-none "
               />
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-2">
-            <div className="">
-              <label className="block mb-1 text-black/60" htmlFor="stopLoss">
+          <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-4">
+            <div className="relative">
+              <label
+                className={`mb-1 text-[#f44336]  absolute left-2 z-10 duration-300 ${
+                  isFocused.stopLoss
+                    ? "text-xs top-0 -translate-y-1/2 bg-white text-[#F44336]"
+                    : " top-1/2 -translate-y-1/2"
+                }`}
+                htmlFor="stopLoss"
+              >
                 Stop Loss
               </label>
               <div className="d-flex align-items-center gap-2  !border !border-[#C42B1E1F] text-[#97514b] rounded-md pe-2">
@@ -347,7 +422,8 @@ const TradeEntryForm = ({ showToast }) => {
                   name="stopLoss"
                   value={formData.stopLoss}
                   onChange={handleChange}
-                  placeholder="Price"
+                  onFocus={() => handleFocus("stopLoss")}
+                  placeholder=""
                   className="w-full p-2 border-0 text-[#97514b] rounded-md outline-none "
                 />{" "}
                 <input
@@ -359,7 +435,7 @@ const TradeEntryForm = ({ showToast }) => {
                 />
               </div>
             </div>
-            <div className="flex items-end ">
+            <div className="flex items-end relative z-10">
               <button className="w-full flex items-center text-black/50 bg-[#C42B1E0A] px-3 rounded-md gap-2">
                 <input
                   className="w-[14px] h-[14px]"
@@ -373,16 +449,20 @@ const TradeEntryForm = ({ showToast }) => {
             </div>
           </div>
 
-          <div className="mb-2 grid grid-cols-2 gap-x-4 gap-y-2">
+          <div className="mb-4 grid grid-cols-2 gap-x-4 gap-y-4">
             {[1, 2, 3, 4].map((target) => (
-              <div key={target}>
+              <div key={target} className="relative">
                 <label
-                  className="block mb-1 text-black/60"
+                  className={`mb-1 text-[#f44336] absolute left-2 z-10 duration-300 ${
+                    isFocused.targetsChecked[`target${target}`]
+                      ? "text-xs top-0 -translate-y-1/2 bg-white text-[#F44336]"
+                      : " top-1/2 -translate-y-1/2"
+                  }`}
                   htmlFor={`target${target}`}
                 >
                   Target {target}
                 </label>
-                <div className="d-flex align-items-center gap-2  !border !border-[#C42B1E1F] text-[#97514b] rounded-md pe-2">
+                <div className="d-flex align-items-center gap-2 !border !border-[#C42B1E1F] text-[#97514b] rounded-md pe-2">
                   <input
                     required={target === 1}
                     type="text"
@@ -390,38 +470,51 @@ const TradeEntryForm = ({ showToast }) => {
                     name={`target${target}`}
                     value={formData[`target${target}`]}
                     onChange={handleChange}
-                    placeholder="Type here"
+                    onFocus={() => handleFocus(`target${target}`)}
+                    placeholder=""
                     className="w-full p-2 border border-[#C42B1E1F] text-[#97514b] rounded-md outline-none"
                   />
                   <input
                     className="w-[14px] h-[14px]"
                     type="checkbox"
-                    // checked={!!formData.targetsChecked[`target${target}`]}
-                    onChange={(e) =>
-                      handleCheckboxChange(`target${target}`, e.target.checked)
-                    }
+                    // checked={!!formData.targetsChecked[target${target}]}
+                    // onChange={(e) =>
+                    //   handleCheckboxChange(target${target}, e.target.checked)
+                    // }
                   />
                 </div>
               </div>
             ))}
           </div>
-          <div className="mb-2">
-            <label className="block mb-1 text-black/60" htmlFor="comment">
+          <div className="mb-4 relative">
+            <label
+              className={`mb-1 text-[#f44336]  absolute left-2 z-10 duration-300 ${
+                isFocused.comment
+                  ? "text-xs top-0 -translate-y-1/2 bg-white text-[#F44336]"
+                  : " top-0 translate-y-1/2"
+              }`}
+              htmlFor="comment"
+            >
               Comment
             </label>
             <textarea
               id="comment"
               name="comment"
               value={formData.comment}
+              onFocus={() => handleFocus("comment")}
               onChange={handleChange}
-              placeholder="Write a Comment"
+              placeholder=""
               rows="4"
               className="w-full h-[80px] p-2 !border !border-[#C42B1E1F] text-[#97514b] rounded-md outline-none resize-none"
             />
           </div>
 
           <div className="flex gap-3 justify-end mt-4">
-            <button onClick={()=>setAddBroker(false)} type="button"  className="btn_light text-[#c42b1e] py-2 px-4 rounded-md  transition duration-300">
+            <button
+              onClick={() => setAddBroker(false)}
+              type="button"
+              className="btn_light text-[#c42b1e] py-2 px-4 rounded-md  transition duration-300"
+            >
               cencel
             </button>
             <button

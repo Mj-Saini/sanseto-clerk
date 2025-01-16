@@ -66,7 +66,7 @@ const PricePlan = () => {
                     <h5 className="mb-2 mt-3 text-[#6e3b37] font-medium text-lg sm:text-xl lg:text-2xl">
                       Go Cliq
                     </h5>
-                    <p className="text-[13px] text-[#C42B1E] rounded-2xl  !bg-[#C42B1E29] px-2 py-1">
+                    <p className="text-[13px] text-[#C42B1E] rounded-2xl  !bg-secondry_clr px-2 py-1">
                       FOR 1 MONTH
                     </p>
                   </div>
@@ -146,7 +146,7 @@ const PricePlan = () => {
                   <h5 className="mb-2 mt-3 text-[#6e3b37] font-medium text-lg sm:text-xl lg:text-2xl">
                     Go Cliq Annual
                   </h5>
-                  <p className="text-[13px] text-[#C42B1E] rounded-2xl  !bg-[#C42B1E29] px-2 py-1">
+                  <p className="text-[13px] text-[#C42B1E] rounded-2xl  !bg-secondry_clr px-2 py-1">
                     FOR 12 MONTHS
                   </p>
                 </div>

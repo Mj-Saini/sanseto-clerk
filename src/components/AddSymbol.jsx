@@ -117,7 +117,7 @@ const AddSymbol = () => {
             key={symbol.id}
             className="w-full sm:w-1/2 md:w-1/3 sm:px-2 mt-3 h-10"
           >
-            <div className="flex items-center justify-between bg-[#C42B1E29] gap-4 rounded px-3 py-1 text-[#C42B1E] relative group h-10 uppercase">
+            <div className="flex items-center justify-between bg-secondry_clr gap-4 rounded px-3 py-1 text-[#C42B1E] relative group h-10 uppercase">
               <span>{symbol.name}</span>
               <div className="hidden group-hover:flex justify-start p-0">
                 <button

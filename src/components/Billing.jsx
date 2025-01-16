@@ -216,7 +216,7 @@ const [currentData, setCurrentData] = useState([])
                       <span
                         className={`badge !rounded-2xl !text-[13px]  ${
                           subscription.planValidity === "EXPIRED"
-                            ? "bg-[#C42B1E29] !text-[#C42B1E]"
+                            ? "bg-secondry_clr !text-[#C42B1E]"
                             : "bg-success"
                         }`}
                       >

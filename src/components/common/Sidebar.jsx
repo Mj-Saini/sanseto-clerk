@@ -57,7 +57,7 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                   to={""}
                   className={`flex items-center py-2.5 text-[#6e3b37] font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] hover:text-[#C42B1E] ${
                     location.pathname === "/admin-dashboard"
-                      ? "bg-[#C42B1E29] hover:!bg-[#C42B1E30] text-[#C42B1E]"
+                      ? "bg-secondry_clr hover:!bg-[#C42B1E30] text-[#C42B1E]"
                       : ""
                   }`}
                 >
@@ -86,7 +86,7 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                   to={"pricing"}
                   className={`flex items-center py-2.5 text-[#6e3b37] font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] hover:text-[#C42B1E] ${
                     location.pathname === "/admin-dashboard/pricing"
-                      ? "bg-[#C42B1E29] hover:!bg-[#C42B1E30] text-[#C42B1E]"
+                      ? "bg-secondry_clr hover:!bg-[#C42B1E30] text-[#C42B1E]"
                       : ""
                   }`}
                 >
@@ -115,7 +115,7 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                   to={"detto-settings"}
                   className={`flex items-center py-2.5 text-[#6e3b37] font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] hover:text-[#C42B1E] ${
                     location.pathname === "/dashboard/detto-settings"
-                      ? "bg-[#C42B1E29] hover:!bg-[#C42B1E30] text-[#C42B1E]"
+                      ? "bg-secondry_clr hover:!bg-[#C42B1E30] text-[#C42B1E]"
                       : ""
                   }`}
                 >
@@ -144,7 +144,7 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                   to={"settings"}
                   className={`flex items-center py-2.5 text-[#6e3b37] font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] hover:text-[#C42B1E] ${
                     location.pathname === "/dashboard/settings"
-                      ? "bg-[#C42B1E29] hover:!bg-[#C42B1E30] text-[#C42B1E]"
+                      ? "bg-secondry_clr hover:!bg-[#C42B1E30] text-[#C42B1E]"
                       : ""
                   }`}
                 >
@@ -208,7 +208,7 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                   to={"pricing"}
                   className={`flex items-center py-2.5 text-[#6e3b37] font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] hover:text-[#C42B1E] ${
                     location.pathname === "/dashboard/pricing"
-                      ? "bg-[#C42B1E29] hover:!bg-[#C42B1E30] text-[#C42B1E]"
+                      ? "bg-secondry_clr hover:!bg-[#C42B1E30] text-[#C42B1E]"
                       : ""
                   }`}
                 >
@@ -237,7 +237,7 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                   to={"detto-settings"}
                   className={`flex items-center py-2.5 text-[#6e3b37] font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] hover:text-[#C42B1E] ${
                     location.pathname === "/dashboard/detto-settings"
-                      ? "bg-[#C42B1E29] hover:!bg-[#C42B1E30] text-[#C42B1E]"
+                      ? "bg-secondry_clr hover:!bg-[#C42B1E30] text-[#C42B1E]"
                       : ""
                   }`}
                 >
@@ -266,7 +266,7 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                   to={"settings"}
                   className={`flex items-center py-2.5 text-[#6e3b37] font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] hover:text-[#C42B1E] ${
                     location.pathname === "/dashboard/settings"
-                      ? "bg-[#C42B1E29] hover:!bg-[#C42B1E30] text-[#C42B1E]"
+                      ? "bg-secondry_clr hover:!bg-[#C42B1E30] text-[#C42B1E]"
                       : ""
                   }`}
                 >
