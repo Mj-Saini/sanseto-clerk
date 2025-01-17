@@ -12,7 +12,7 @@ import { DeleteIcon } from "./common/Icons";
 import axios from "axios";
 import ConfirmationPopup from "./ConfirmationPopup";
 
-const TradeEntryForm = ({ showToast }) => {
+const TradeEntryForm = () => {
   const checkedInput = useRef(null);
   const { setAddBroker, updateBroker, setUpdateBroker } = useContextProvider();
   const [isFocused, setIsFocused] = useState({
@@ -387,7 +387,6 @@ const TradeEntryForm = ({ showToast }) => {
     }));
   };
 
-  console.log(formData,"formdata")
 
   return (
     <>
