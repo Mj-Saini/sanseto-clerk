@@ -531,7 +531,7 @@ const TradeEntryForm = ({ showToast }) => {
             </div>
             <div
               onClick={() => setAddPosition(true)}
-              className="mb-3 relative z-10"
+              className="mb-3 relative z-20"
             >
               <label
                 onClick={() => handleFocus("position")}
@@ -556,7 +556,7 @@ const TradeEntryForm = ({ showToast }) => {
                 className="w-full p-2 border border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none uppercase"
               />
               {addPosition && (
-                <div className="border border-primary_clr absolute top-full mt-1 w-full bg-white rounded-md overflow-hidden">
+                <div className="border border-primary_clr absolute top-full mt-1 w-full bg-white rounded-md overflow-hidden z-[8]">
                   <p
                     onClick={(e) => {
                       e.stopPropagation(); // Prevents event from reaching parent
