@@ -106,7 +106,7 @@ const AddSymbol = () => {
         />
         <button
           onClick={editingSymbol ? handleUpdateSymbol : handleAddSymbol}
-          className="btn_light text-[#C42B1E] px-4 py-2 rounded-lg "
+          className="btn_light text-tertiary_clr px-4 py-2 rounded-lg "
         >
           {editingSymbol ? "Update" : "Add"}
         </button>
@@ -117,7 +117,7 @@ const AddSymbol = () => {
             key={symbol.id}
             className="w-full sm:w-1/2 md:w-1/3 sm:px-2 mt-3 h-10"
           >
-            <div className="flex items-center justify-between bg-secondry_clr gap-4 rounded px-3 py-1 text-[#C42B1E] relative group h-10 uppercase">
+            <div className="flex items-center justify-between bg-secondry_clr gap-4 rounded px-3 py-1 text-tertiary_clr relative group h-10 uppercase">
               <span>{symbol.name}</span>
               <div className="hidden group-hover:flex justify-start p-0">
                 <button

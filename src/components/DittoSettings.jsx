@@ -72,19 +72,19 @@ const DittoSettings = () => {
             </div>
             {/* Functional Buttons */}
             <div className=" p-[6px]">
-              <button onClick={()=>setShow(true)} className="bg-[#F6E7E5] hover:bg-[#F1DAD6] uppercase text-[#c42b1e]  font-bold whitespace-nowrap border-red-400 px-4 py-[10px] rounded  w-full text-sm">
+              <button onClick={()=>setShow(true)} className="bg-[#F6E7E5] hover:bg-[#F1DAD6] uppercase text-tertiary_clr  font-bold whitespace-nowrap border-red-400 px-4 py-[10px] rounded  w-full text-sm">
                 Change Parent
               </button>
             </div>
             <div className=" p-[6px]">
-              <button className="bg-[#F6E7E5] hover:bg-[#F1DAD6] uppercase text-[#c42b1e] text-sm  font-bold whitespace-nowrap border-red-400 px-4 py-[10px] rounded  w-full">
+              <button className="bg-[#F6E7E5] hover:bg-[#F1DAD6] uppercase text-tertiary_clr text-sm  font-bold whitespace-nowrap border-red-400 px-4 py-[10px] rounded  w-full">
                 Attach Child
               </button>
             </div>
             <div className="w-full sm:w-1/2 p-[6px] block lg:hidden">
               <button
                 onClick={handleRefresh}
-                className="bg-white text-[#c42b1e] uppercase font-bold border border-[c42b1e] px-4 py-2 rounded hover:bg-[#F1DAD6] w-full"
+                className="bg-white text-tertiary_clr uppercase font-bold border border-[c42b1e] px-4 py-2 rounded hover:bg-[#F1DAD6] w-full"
               >
                 Refresh
               </button>
@@ -95,7 +95,7 @@ const DittoSettings = () => {
         <div className="space-x-2 hidden lg:flex">
           <button
             onClick={handleRefresh}
-            className="bg-white text-[#c42b1e] uppercase font-bold  font-sm border-1 !border-[#c42b1e] px-4 py-2 rounded hover:bg-[#F1DAD6]"
+            className="bg-white text-tertiary_clr uppercase font-bold  font-sm border-1 !border-tertiary_clr px-4 py-2 rounded hover:bg-[#F1DAD6]"
           >
             Refresh
           </button>

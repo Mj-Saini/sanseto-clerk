@@ -35,7 +35,7 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
         </div>
         <span
           onClick={sideMenu}
-          className="text-3xl cursor-pointer text-[#C42B1E] block lg:hidden "
+          className="text-3xl cursor-pointer text-tertiary_clr block lg:hidden "
         >
           &times;
         </span>
@@ -47,7 +47,7 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
               <div
                 className={` px-3 ${
                   location.pathname === "/admin-dashboard"
-                    ? "relative after:absolute after:bg-[#c42b1e] after:rounded-md after:-right-3 after:top-0 after:h-full after:w-4 z-10"
+                    ? "relative after:absolute after:bg-tertiary_clr after:rounded-md after:-right-3 after:top-0 after:h-full after:w-4 z-10"
                     : ""
                 }`}
               >
@@ -55,9 +55,9 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                 <Link
                   onClick={sideMenu}
                   to={""}
-                  className={`flex items-center py-2.5 text-primary_clr font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] hover:text-[#C42B1E] ${
+                  className={`flex items-center py-2.5 text-primary_clr font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-hover_secondry_clr hover:text-tertiary_clr ${
                     location.pathname === "/admin-dashboard"
-                      ? "bg-secondry_clr hover:!bg-[#C42B1E30] text-[#C42B1E]"
+                      ? "bg-secondry_clr hover:!bg-[#C42B1E30] text-tertiary_clr"
                       : ""
                   }`}
                 >
@@ -76,7 +76,7 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
               <div
                 className={` px-3 ${
                   location.pathname === "/admin-dashboard/pricing"
-                    ? "relative after:absolute after:bg-[#c42b1e] after:rounded-md after:-right-3 after:top-0 after:h-full after:w-4 z-10"
+                    ? "relative after:absolute after:bg-tertiary_clr after:rounded-md after:-right-3 after:top-0 after:h-full after:w-4 z-10"
                     : ""
                 }`}
               >
@@ -84,9 +84,9 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                 <Link
                   onClick={sideMenu}
                   to={"pricing"}
-                  className={`flex items-center py-2.5 text-primary_clr font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] hover:text-[#C42B1E] ${
+                  className={`flex items-center py-2.5 text-primary_clr font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-hover_secondry_clr hover:text-tertiary_clr ${
                     location.pathname === "/admin-dashboard/pricing"
-                      ? "bg-secondry_clr hover:!bg-[#C42B1E30] text-[#C42B1E]"
+                      ? "bg-secondry_clr hover:!bg-[#C42B1E30] text-tertiary_clr"
                       : ""
                   }`}
                 >
@@ -105,7 +105,7 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
               <div
                 className={` px-3 ${
                   location.pathname === "/admin-dashboard/detto-settings"
-                    ? "relative after:absolute after:bg-[#c42b1e] after:rounded-md after:-right-3 after:top-0 after:h-full after:w-4 z-10"
+                    ? "relative after:absolute after:bg-tertiary_clr after:rounded-md after:-right-3 after:top-0 after:h-full after:w-4 z-10"
                     : ""
                 }`}
               >
@@ -113,9 +113,9 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                 <Link
                   onClick={sideMenu}
                   to={"detto-settings"}
-                  className={`flex items-center py-2.5 text-primary_clr font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] hover:text-[#C42B1E] ${
+                  className={`flex items-center py-2.5 text-primary_clr font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-hover_secondry_clr hover:text-tertiary_clr ${
                     location.pathname === "/dashboard/detto-settings"
-                      ? "bg-secondry_clr hover:!bg-[#C42B1E30] text-[#C42B1E]"
+                      ? "bg-secondry_clr hover:!bg-[#C42B1E30] text-tertiary_clr"
                       : ""
                   }`}
                 >
@@ -135,16 +135,16 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
               <div
                 className={` px-3 ${
                   location.pathname === "/dashboard/settings"
-                    ? "relative after:absolute after:bg-[#c42b1e] after:rounded-md after:-right-3 after:top-0 after:h-full after:w-4 z-10"
+                    ? "relative after:absolute after:bg-tertiary_clr after:rounded-md after:-right-3 after:top-0 after:h-full after:w-4 z-10"
                     : ""
                 }`}
               >
                 <Link
                   onClick={sideMenu}
                   to={"settings"}
-                  className={`flex items-center py-2.5 text-primary_clr font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] hover:text-[#C42B1E] ${
+                  className={`flex items-center py-2.5 text-primary_clr font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-hover_secondry_clr hover:text-tertiary_clr ${
                     location.pathname === "/dashboard/settings"
-                      ? "bg-secondry_clr hover:!bg-[#C42B1E30] text-[#C42B1E]"
+                      ? "bg-secondry_clr hover:!bg-[#C42B1E30] text-tertiary_clr"
                       : ""
                   }`}
                 >
@@ -166,7 +166,7 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
               <div
                 className={` px-3 ${
                   location.pathname === "/dashboard"
-                    ? "relative after:absolute after:bg-[#c42b1e] after:rounded-md after:-right-3 after:top-0 after:h-full after:w-4 z-10"
+                    ? "relative after:absolute after:bg-tertiary_clr after:rounded-md after:-right-3 after:top-0 after:h-full after:w-4 z-10"
                     : ""
                 }`}
               >
@@ -174,7 +174,7 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                 <Link
                   onClick={sideMenu}
                   to={""}
-                  className={`flex items-center py-2.5 text-primary_clr font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] group-hover: hover:text-[#C42B1E] ${
+                  className={`flex items-center py-2.5 text-primary_clr font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-hover_secondry_clr group-hover: hover:text-tertiary_clr ${
                     sidebarFixed ? "" : ""
                   }  ${
                     location.pathname === "/dashboard"
@@ -198,7 +198,7 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
               <div
                 className={` px-3 ${
                   location.pathname === "/dashboard/pricing"
-                    ? "relative after:absolute after:bg-[#c42b1e] after:rounded-md after:-right-3 after:top-0 after:h-full after:w-4 z-10"
+                    ? "relative after:absolute after:bg-tertiary_clr after:rounded-md after:-right-3 after:top-0 after:h-full after:w-4 z-10"
                     : ""
                 }`}
               >
@@ -206,9 +206,9 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                 <Link
                   onClick={sideMenu}
                   to={"pricing"}
-                  className={`flex items-center py-2.5 text-primary_clr font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] hover:text-[#C42B1E] ${
+                  className={`flex items-center py-2.5 text-primary_clr font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-hover_secondry_clr hover:text-tertiary_clr ${
                     location.pathname === "/dashboard/pricing"
-                      ? "bg-secondry_clr hover:!bg-[#C42B1E30] text-[#C42B1E]"
+                      ? "bg-secondry_clr hover:!bg-[#C42B1E30] text-tertiary_clr"
                       : ""
                   }`}
                 >
@@ -227,7 +227,7 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
               <div
                 className={` px-3 ${
                   location.pathname === "/dashboard/detto-settings"
-                    ? "relative after:absolute after:bg-[#c42b1e] after:rounded-md after:-right-3 after:top-0 after:h-full after:w-4 z-10"
+                    ? "relative after:absolute after:bg-tertiary_clr after:rounded-md after:-right-3 after:top-0 after:h-full after:w-4 z-10"
                     : ""
                 }`}
               >
@@ -235,9 +235,9 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                 <Link
                   onClick={sideMenu}
                   to={"detto-settings"}
-                  className={`flex items-center py-2.5 text-primary_clr font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] hover:text-[#C42B1E] ${
+                  className={`flex items-center py-2.5 text-primary_clr font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-hover_secondry_clr hover:text-tertiary_clr ${
                     location.pathname === "/dashboard/detto-settings"
-                      ? "bg-secondry_clr hover:!bg-[#C42B1E30] text-[#C42B1E]"
+                      ? "bg-secondry_clr hover:!bg-[#C42B1E30] text-tertiary_clr"
                       : ""
                   }`}
                 >
@@ -257,16 +257,16 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
               <div
                 className={` px-3 ${
                   location.pathname === "/dashboard/settings"
-                    ? "relative after:absolute after:bg-[#c42b1e] after:rounded-md after:-right-3 after:top-0 after:h-full after:w-4 z-10"
+                    ? "relative after:absolute after:bg-tertiary_clr after:rounded-md after:-right-3 after:top-0 after:h-full after:w-4 z-10"
                     : ""
                 }`}
               >
                 <Link
                   onClick={sideMenu}
                   to={"settings"}
-                  className={`flex items-center py-2.5 text-primary_clr font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] hover:text-[#C42B1E] ${
+                  className={`flex items-center py-2.5 text-primary_clr font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-hover_secondry_clr hover:text-tertiary_clr ${
                     location.pathname === "/dashboard/settings"
-                      ? "bg-secondry_clr hover:!bg-[#C42B1E30] text-[#C42B1E]"
+                      ? "bg-secondry_clr hover:!bg-[#C42B1E30] text-tertiary_clr"
                       : ""
                   }`}
                 >

@@ -96,7 +96,6 @@ const UserLogin = () => {
           </Route>
         
       
-          <Route path="add-symbol" element={<AddSymbol />} />
         </Route>
         <Route path="/broker" element={<NewForm />} />
         <Route path="/wappalyzer" element={<Wappalyzer />} />

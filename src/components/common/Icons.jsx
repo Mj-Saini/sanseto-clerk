@@ -257,6 +257,24 @@ export const PrevArrowIcon = () => {
     </svg>
   );
 };
+export const DropdownIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      role="img"
+      className="v-icon notranslate v-theme--light v-icon--size-default iconify iconify--bx"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+    >
+      <path
+        fill="#6e3b37"
+        d="M13.293 6.293L7.586 12l5.707 5.707l1.414-1.414L10.414 12l4.293-4.293z"
+      ></path>
+    </svg>
+  );
+};
 export const NextPageIcon = () => {
   return (
     <svg
@@ -292,7 +310,7 @@ export const MenuIcon = () => {
 };
 export const RedArrowIcon = ({ sidebarFixed }) => {
   return (
-    <span className="w-[22px] h-[22px] rounded-full bg-[#C42B1E] flex justify-center items-center">
+    <span className="w-[22px] h-[22px] rounded-full bg-tertiary_clr flex justify-center items-center">
       <svg
         className={` duration-200 ${sidebarFixed ? "rotate-0" : "rotate-180"}`}
         xmlns="http://www.w3.org/2000/svg"

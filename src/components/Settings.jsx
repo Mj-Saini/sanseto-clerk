@@ -322,10 +322,10 @@ const Settings = () => {
           </p>
         </div>
         <div className="flex justify-center flex-col gap-3  flex-md-row bg-white p-6 rounded-lg shadow-sm mt-2">
-          <button className="px-4 py-2 text-sm font-bold hover:bg-[#F9F0EE] text-[#c42b1e] border-[1.5px] border-[#c42b1e] rounded-md">
+          <button className="px-4 py-2 text-sm font-bold hover:bg-[#F9F0EE] text-tertiary_clr border-[1.5px] border-tertiary_clr rounded-md">
             RESET DEFAULT SETTING
           </button>
-          <button className="px-4 py-2 text-sm font-bold bg-[#c42b1e] hover:bg-[#C1594C] text-white rounded-md">
+          <button className="px-4 py-2 text-sm font-bold bg-tertiary_clr hover:bg-[#C1594C] text-white rounded-md">
             SAVE FAVOURITE SETTING
           </button>
         </div>

@@ -59,21 +59,21 @@ const PricePlan = () => {
 
           <div className="row ">
             <div className="col-md-6 mb-3">
-              <div className="text-center h-100 flex flex-col justify-between bg-white rounded-md !border !border-[#C42B1E] p-3">
+              <div className="text-center h-100 flex flex-col justify-between bg-white rounded-md !border !border-tertiary_clr p-3">
                 <div className="">
                   <div className="card-header flex flex-col items-center">
                     <PlanHandIcon />
                     <h5 className="mb-2 mt-3 text-primary_clr font-medium text-lg sm:text-xl lg:text-2xl">
                       Go Cliq
                     </h5>
-                    <p className="text-[13px] text-[#C42B1E] rounded-2xl  !bg-secondry_clr px-2 py-1">
+                    <p className="text-[13px] text-tertiary_clr rounded-2xl  !bg-secondry_clr px-2 py-1">
                       FOR 1 MONTH
                     </p>
                   </div>
                   <div className="card-body">
                     <div className=" flex justify-center gap-1 text-primary_clr">
                       ₹
-                      <h3 className="text-3xl sm:text-4xl lg:text-5xl mb-0 text-[#C42B1E] ">
+                      <h3 className="text-3xl sm:text-4xl lg:text-5xl mb-0 text-tertiary_clr ">
                         1599{" "}
                         <span className="text-sm text-primary_clr">/ month</span>
                       </h3>
@@ -140,13 +140,13 @@ const PricePlan = () => {
 
             {/* Card 2 */}
             <div className="col-md-6 mb-3 !ps-0">
-              <div className="text-center h-100 flex flex-col justify-between bg-white  rounded-md !border !border-[#C42B1E] p-3">
+              <div className="text-center h-100 flex flex-col justify-between bg-white  rounded-md !border !border-tertiary_clr p-3">
                 <div className="flex flex-col items-center">
                   <PlanHandIcon />
                   <h5 className="mb-2 mt-3 text-primary_clr font-medium text-lg sm:text-xl lg:text-2xl">
                     Go Cliq Annual
                   </h5>
-                  <p className="text-[13px] text-[#C42B1E] rounded-2xl  !bg-secondry_clr px-2 py-1">
+                  <p className="text-[13px] text-tertiary_clr rounded-2xl  !bg-secondry_clr px-2 py-1">
                     FOR 12 MONTHS
                   </p>
                 </div>
@@ -154,7 +154,7 @@ const PricePlan = () => {
                   <div>
                     <div className=" flex justify-center gap-1 text-primary_clr">
                       ₹
-                      <h3 className="text-3xl sm:text-4xl lg:text-5xl mb-0 text-[#C42B1E] ">
+                      <h3 className="text-3xl sm:text-4xl lg:text-5xl mb-0 text-tertiary_clr ">
                         1167{" "}
                         <span className="text-sm text-primary_clr">/ month</span>
                       </h3>

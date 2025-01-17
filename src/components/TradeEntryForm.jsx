@@ -9,6 +9,7 @@ import { useContextProvider } from "../context/ContextProvider";
 import "../index.css";
 import { DeleteIcon } from "./common/Icons";
 import axios from "axios";
+import ConfirmationPopup from "./ConfirmationPopup";
 
 const TradeEntryForm = ({ showToast }) => {
   const { setAddBroker, updateBroker, setUpdateBroker } = useContextProvider();
@@ -34,6 +35,9 @@ const TradeEntryForm = ({ showToast }) => {
   const [filterSymbol, setFilterSymbol] = useState([]);
   const [finalSymbol, setFinalSymbol] = useState("");
   const [addPosition, setAddPosition] = useState(false);
+  const [comformationPopup, setComformationPopup] = useState(false);
+  const [actionType, setActionType] = useState(null); // 'update' or 'delete'
+  const [currentId, setCurrentId] = useState(null);
 
   const [data, setData] = useState([]);
   const [formData, setFormData] = useState({
@@ -114,7 +118,6 @@ const TradeEntryForm = ({ showToast }) => {
               value: data[item].name,
             }));
 
-            console.log(symbolsData, "symbolsData");
             setSymbols(symbolsData);
           } else {
             console.log("No data available");
@@ -311,12 +314,51 @@ const TradeEntryForm = ({ showToast }) => {
     }
   };
 
+  // confirmnation popup
+  const UpdateUserData = (id) => {
+    setUpdateBroker(id);
+    setAddBroker(true);
+  };
+  const handleDeleteClick = (id) => {
+    setCurrentId(id);
+    setActionType("delete");
+    setComformationPopup(true);
+  };
+
+  const handleConfirm = () => {
+    if (actionType === "update") {
+      UpdateUserData(currentId);
+    } else if (actionType === "delete") {
+      removeSymbol(currentId);
+    }
+    setComformationPopup(false);
+  };
+
+  const handleCancel = () => {
+    setComformationPopup(false);
+  };
+
   return (
     <>
       <div
         id="TradeForm"
         className="w-full md:w-2/5 mx-auto p-[20px] bg-white shadow-lg rounded-lg z-[50] relative overflow-auto h-[600px] "
       >
+        {comformationPopup && (
+          <div className="fixed top-0 left-0 w-full h-screen z-20 bg-black/50 flex justify-center items-center">
+            <div
+              onClick={() => {
+                setComformationPopup(false);
+              }}
+              className="fixed top-0 left-0 h-screen w-full flex justify-center items-center z-0"
+            ></div>
+            <ConfirmationPopup
+              actionType={actionType}
+              onConfirm={handleConfirm}
+              onCancel={handleCancel}
+            />
+          </div>
+        )}
         <div
           onClick={() => {
             handleFocus(false);
@@ -331,10 +373,10 @@ const TradeEntryForm = ({ showToast }) => {
           <div className="mb-3 relative">
             <label
               onClick={() => handleFocus("symbol")}
-              className={`mb-1 text-primary_clr  absolute left-2 z-10 duration-300 ${
+              className={`mb-1 text-primary_clr  absolute left-2 duration-300 ${
                 isFocused.symbol
-                  ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5"
-                  : " top-1/2 -translate-y-1/2 opacity-0"
+                  ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5  z-10 "
+                  : " top-1/2 -translate-y-1/2 opacity-0 z-0"
               }`}
               htmlFor="symbol"
             >
@@ -342,15 +384,15 @@ const TradeEntryForm = ({ showToast }) => {
             </label>
             <div className="relative">
               {showTable && (
-                <div className="absolute top-full left-0 w-full h-[200px] bg-white z-20 mt-1 rounded-lg !border-2 !border-[#C42B1E] overflow-auto p-2">
+                <div className="absolute top-full left-0 w-full h-[200px] bg-white z-20 mt-1 rounded-lg !border-2 !border-tertiary_clr overflow-auto p-2">
                   {filterSymbol.length === 0 && (
                     <div className="w-full mt-3">
-                      <div className="flex items-center justify-between  gap-4 rounded px-3 py-1 !border border-[#C42B1E45] text-[#C42B1E] hover:bg-[#C42B1E29] relative group h-10 uppercase w-full">
+                      <div className="flex items-center justify-between  gap-4 rounded px-3 py-1 !border border-[#C42B1E45] text-tertiary_clr hover:bg-[#C42B1E29] relative group h-10 uppercase w-full">
                         <div
                           onClick={() =>
                             alert("Please Add This Entry In Database First")
                           }
-                          className="w-full"
+                          className="w-full text-xs"
                         >
                           {formData.symbol}
                         </div>
@@ -374,12 +416,12 @@ const TradeEntryForm = ({ showToast }) => {
                           setFormData({ ...formData, symbol: symbol.value });
                           console.log(formData, "formdata");
                         }}
-                        className="flex items-center justify-between !border border-[#C42B1E45] hover:bg-[#C42B1E29] gap-4 rounded px-3 py-1 text-[#C42B1E] relative group h-10 uppercase w-full"
+                        className="flex items-center justify-between !border border-[#C42B1E45] hover:bg-[#C42B1E29] gap-4 rounded px-3 py-1 text-tertiary_clr relative group h-10 uppercase w-full text-xs"
                       >
                         <span>{symbol.value}</span>
                         <div className="hidden justify-start p-0 group-hover:flex">
                           <span
-                            onClick={() => removeSymbol(symbol.id)}
+                            onClick={() => handleDeleteClick(symbol.id)}
                             className="ml-2 text-[#6b3e37] flex items-center cursor-pointer"
                           >
                             <DeleteIcon />
@@ -393,21 +435,23 @@ const TradeEntryForm = ({ showToast }) => {
               <input
                 id="symbol"
                 name="symbol"
+                
                 onFocus={() => handleFocus("symbol")}
                 value={formData.symbol}
                 onChange={handleChange}
                 type="text"
                 placeholder="enter symbol"
-                className="w-full p-2 py-3 border-2 border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none  focus:border-[#C42B1E]"
+                className="w-full p-2 py-3 border-2 border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none  focus:border-tertiary_clr"
               />
             </div>
           </div>
           <div className="mb-3 relative z-1">
             <label
-              onClick={() => handleFocus("entryPriceFrom")}
-              className={`mb-1 text-primary_clr  absolute left-2 z-10 duration-300 ${
+              id="dateTime"
+              onClick={() => handleFocus("dateTime")}
+              className={`mb-1 text-primary_clr  absolute left-2 duration-300 ${
                 isFocused.dateTime
-                  ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5"
+                  ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5  z-10 "
                   : " top-1/2 -translate-y-1/2 opacity-0"
               }`}
             >
@@ -421,7 +465,7 @@ const TradeEntryForm = ({ showToast }) => {
               onFocus={() => handleFocus("dateTime")}
               value={formData.dateTime}
               onChange={handleChange}
-              className="w-full p-2 py-3 border-2 border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none  focus:border-[#C42B1E]"
+              className="w-full p-2 py-3 border-2 border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none  focus:border-tertiary_clr"
             />
           </div>
           <div
@@ -430,9 +474,9 @@ const TradeEntryForm = ({ showToast }) => {
           >
             <label
               onClick={() => handleFocus("position")}
-              className={`mb-1 text-primary_clr  absolute left-2 z-20 duration-300 ${
+              className={`mb-1 text-primary_clr  absolute left-2  duration-300 ${
                 isFocused.position
-                  ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5"
+                  ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5 z-20"
                   : " top-1/2 -translate-y-1/2 opacity-0"
               } `}
               htmlFor="positon"
@@ -479,13 +523,13 @@ const TradeEntryForm = ({ showToast }) => {
           <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-3 ">
             <div className="relative">
               <label
+                htmlFor="entryPriceFrom"
                 onClick={() => handleFocus("entryPriceFrom")}
-                className={`mb-1 text-primary_clr  absolute left-2  duration-300 ${
+                className={`mb-1 text-primary_clr  absolute left-2 duration-300 ${
                   isFocused.entryPriceFrom
-                    ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5"
+                    ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5 z-10"
                     : " top-1/2 -translate-y-1/2 opacity-0"
                 }`}
-                htmlFor="entryPriceFrom"
               >
                 Entry Price From
               </label>
@@ -497,16 +541,16 @@ const TradeEntryForm = ({ showToast }) => {
                 value={formData.entryPriceFrom}
                 onChange={handleChange}
                 onFocus={() => handleFocus("entryPriceFrom")}
-                placeholder="price"
-                className="w-full p-2 border border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none "
+                placeholder="Entry Price From"
+                className="w-full p-2 border border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none z-[9] relative"
               />
             </div>
             <div className="relative">
               <label
                 onClick={() => handleFocus("entryPriceTo")}
-                className={`mb-1 text-primary_clr  absolute left-2 z-10 duration-300 ${
+                className={`mb-1 text-primary_clr  absolute left-2 duration-300 ${
                   isFocused.entryPriceTo
-                    ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5"
+                    ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5 z-10 "
                     : " top-1/2 -translate-y-1/2 opacity-0"
                 }`}
                 htmlFor="entryPriceTo"
@@ -521,8 +565,8 @@ const TradeEntryForm = ({ showToast }) => {
                 value={formData.entryPriceTo}
                 onFocus={() => handleFocus("entryPriceTo")}
                 onChange={handleChange}
-                placeholder="price"
-                className="w-full p-2 border border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none "
+                placeholder="Entry Price To"
+                className="w-full p-2 border border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none relative z-[9]"
               />
             </div>
           </div>
@@ -530,9 +574,9 @@ const TradeEntryForm = ({ showToast }) => {
             <div className="relative">
               <label
                 onClick={() => handleFocus("stopLoss")}
-                className={`mb-1 text-primary_clr absolute left-2 z-10 duration-300 ${
+                className={`mb-1 text-primary_clr absolute left-2 duration-300 ${
                   isFocused.stopLoss
-                    ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5"
+                    ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5  z-10"
                     : " top-1/2 -translate-y-1/2 opacity-0"
                 }`}
                 htmlFor="stopLoss"
@@ -549,7 +593,7 @@ const TradeEntryForm = ({ showToast }) => {
                   onChange={handleChange}
                   onFocus={() => handleFocus("stopLoss")}
                   placeholder="stop loss"
-                  className="w-full p-2 border-0 text-[#97514b] formInput rounded-md outline-none pe-2"
+                  className="w-full p-2 border-0 text-[#97514b] formInput rounded-md outline-none pe-2 relative z-[9]"
                 />{" "}
                 <input
                   className="w-[14px] h-[14px] absolute top-1/2 -translate-y-1/2 right-3"
@@ -563,10 +607,10 @@ const TradeEntryForm = ({ showToast }) => {
             <div className="flex items-end relative z-10">
               <label
                 for="completed"
-                className="w-full flex items-center !border border-primary_clr text-black/50 bg-[#C42B1E0A] px-3 rounded-md gap-2 cursor-default"
+                className="w-full flex items-center text-primary_clr !border border-primary_clr  bg-[#C42B1E0A] px-3 rounded-md gap-2 cursor-default"
               >
                 <input
-                  className="w-[14px] h-[14px]"
+                  className="w-[14px] h-[14px] "
                   type="checkbox"
                   name="completed"
                   id="completed"
@@ -583,9 +627,9 @@ const TradeEntryForm = ({ showToast }) => {
               <div key={target} className="relative">
                 <label
                   onClick={() => handleFocus(`target${target}`)}
-                  className={`mb-1 text-primary_clr absolute left-2 z-10 duration-300 ${
+                  className={`mb-1 text-primary_clr absolute left-2 duration-300 ${
                     isFocused.targetsChecked[`target${target}`]
-                      ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5 "
+                      ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5 z-10"
                       : " top-1/2 -translate-y-1/2 opacity-0"
                   }`}
                   htmlFor={`target${target}`}
@@ -601,8 +645,8 @@ const TradeEntryForm = ({ showToast }) => {
                     value={formData[`target${target}`]}
                     onChange={handleChange}
                     onFocus={() => handleFocus(`target${target}`)}
-                    placeholder="type here"
-                    className="w-full p-2 border border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none pe-2"
+                    placeholder={`target${target}`}
+                    className="w-full p-2 border border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none pe-2 realtive z-[9]"
                   />
                   <input
                     className="w-[14px] h-[14px] absolute top-1/2 -translate-y-1/2 right-3"
@@ -619,9 +663,9 @@ const TradeEntryForm = ({ showToast }) => {
           <div className="mb-3 relative">
             <label
               onClick={() => handleFocus("comment")}
-              className={`mb-1 text-primary_clr  absolute left-2 z-10 duration-300 ${
+              className={`mb-1 text-primary_clr  absolute left-2  duration-300 ${
                 isFocused.comment
-                  ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5"
+                  ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5 z-10"
                   : " top-0 translate-y-1/2 opacity-0"
               }`}
               htmlFor="comment"
@@ -636,7 +680,7 @@ const TradeEntryForm = ({ showToast }) => {
               onChange={handleChange}
               placeholder="comments"
               rows="4"
-              className="w-full h-[80px] p-2 !border !border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none resize-none"
+              className="w-full h-[80px] relative z-[9] p-2 !border !border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none resize-none"
             />
           </div>
 
@@ -647,7 +691,7 @@ const TradeEntryForm = ({ showToast }) => {
                 setUpdateBroker(null);
               }}
               type="button"
-              className="btn_light text-[#c42b1e] py-2 px-4 rounded-md  transition duration-300"
+              className="btn_light text-tertiary_clr py-2 px-4 rounded-md  transition duration-300"
             >
               cencel
             </button>

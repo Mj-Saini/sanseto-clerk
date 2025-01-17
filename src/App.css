@@ -5,6 +5,14 @@
   text-decoration: none !important;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+
 /* Dark Button */
 .btn_dark {
   background-color: #C42B1E;
@@ -201,6 +209,14 @@ input[type="checkbox"]{
 ::-webkit-scrollbar{
   display: none;
 }
+
+.modal-body:hover {
+  background-color: #f5f5f5 !important; /* Desired background color on hover */
+  transition: background-color 0.3s ease !important; /* Smooth transition */
+}
+
+
+
 
 
 @media (min-width: 320px) {

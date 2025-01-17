@@ -1,72 +1,77 @@
-/* eslint-disable react/prop-types */
+import { useState, useRef, useEffect } from "react";
+import { DropdownIcon } from "./common/Icons";
 
-import { useState } from "react";
-import { Modal, Button, Form } from "react-bootstrap";
+const ChangeParentPopup = () => {
+  const [selectedOption, setSelectedOption] = useState("No Parent"); // Default selected option
+  const [isOpen, setIsOpen] = useState(false); // Dropdown open/close state
+  const dropdownRef = useRef(null);
 
-const ChangeParentPopup = ({ show, setShow }) => {
-  // Close the modal
-  const handleClose = () => {
-    setShow(false);
+  const options = ["No Parent", "Parent 1", "Parent 2", "Parent 3"]; // Options list
+
+  const toggleDropdown = () => {
+    setIsOpen((prev) => !prev);
   };
 
-  // Manage focus state
-  const [isFocused, setIsFocused] = useState({
-    parentBroker: false,
-  });
-
-  // Handle focus for specific fields
-  const handleFocus = (field) => {
-    setIsFocused((prevState) => ({
-      ...Object.keys(prevState).reduce((acc, key) => {
-        acc[key] = false; // Reset all focus states
-        return acc;
-      }, {}),
-      [field]: true, // Set focus for the active field
-    }));
+  const handleSelect = (option) => {
+    setSelectedOption(option);
+    setIsOpen(false);
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
-    <div>
-      {/* Popup Modal */}
-      <Modal show={show} onHide={handleClose} centered>
-        <Modal.Body className="p-4">
-          <h5 className="mb-4">Change Parent User</h5>
-          <Form>
-            {/* Form Group for Parent Broker */}
-            <Form.Group controlId="parentBrokerSelect" className="mb-3 relative">
-              <Form.Label
-                className={`mb-1 text-primary_clr absolute left-2 z-10 duration-300 ${
-                  isFocused.parentBroker
-                    ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5"
-                    : "top-1/2 -translate-y-1/2 opacity-0"
-                }`}
+    <div
+      ref={dropdownRef}
+      className="relative px-3 py-3 bg-white shadow-lg rounded-lg w-1/3"
+    >
+      <div>
+        <h2 className="text-xl font-medium text-primary_clr">
+          Change parent user
+        </h2>
+      </div>
+      <div
+        onClick={toggleDropdown}
+        className="border p-2 rounded bg-white cursor-pointer flex justify-between items-center relative text-primary_clr"
+      >
+        <span>{selectedOption}</span>
+        <span
+          className={`transition-transform ${
+            isOpen ? "rotate-90" : "-rotate-90"
+          }`}
+        >
+          <DropdownIcon />
+        </span>
+        {/* Dropdown Options */}
+        {isOpen && (
+          <ul className="absolute w-full bg-white border rounded shadow mt-1 left-0 top-full z-10 p-0">
+            {options.map((option, index) => (
+              <li
+                key={index}
+                onClick={() => handleSelect(option)}
+                className="px-4 py-2 hover:bg-hover_secondry_clr text-primary_clr cursor-pointer"
               >
-                Select Parent Broker
-              </Form.Label>
-              <Form.Select
-                onFocus={() => handleFocus("parentBroker")}
-                onBlur={() =>
-                  setIsFocused((prevState) => ({
-                    ...prevState,
-                    parentBroker: false,
-                  }))
-                }
-              >
-                <option>No Parent</option>
-                <option>Parent 1</option>
-                <option>Parent 2</option>
-                <option>Parent 3</option>
-              </Form.Select>
-            </Form.Group>
-          </Form>
-          <div className="d-flex justify-content-end gap-2">
-            <Button variant="outline-danger" onClick={handleClose}>
-              No
-            </Button>
-            <Button variant="danger">Yes, Change Broker</Button>
-          </div>
-        </Modal.Body>
-      </Modal>
+                {option}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+      <div className="flex justify-end gap-3 mt-3">
+        <button className="btn_light uppercase !text-sm">no</button>
+        <button className="btn_dark uppercase text-sm">
+          yes,change broker
+        </button>
+      </div>
     </div>
   );
 };

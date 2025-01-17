@@ -18,11 +18,11 @@ const CommonTable = ({ tabledata }) => {
     setUpdateBroker(id);
     setAddBroker(true);
   };
-  const handleUpdateClick = (id) => {
-    setCurrentId(id);
-    setActionType('update');
-    setIsPopupVisible(true);
-  };
+  // const handleUpdateClick = (id) => {
+  //   setCurrentId(id);
+  //   setActionType('update');
+  //   setIsPopupVisible(true);
+  // };
 
   const handleDeleteClick = (id) => {
     setCurrentId(id);
@@ -33,7 +33,7 @@ const CommonTable = ({ tabledata }) => {
 
   const handleConfirm = () => {
     if (actionType === 'update') {
-      UpdateUserData(currentId);
+      // UpdateUserData(currentId);
     } else if (actionType === 'delete') {
       deleteData(currentId);
     }
@@ -344,7 +344,7 @@ const CommonTable = ({ tabledata }) => {
                   </td>
                   <td
                     className={` ${
-                      item?.targetsChecked?.target1 ? "!bg-[#4caf5029]" : ""
+                      item?.targetsChecked?.target1 ? "!bg-light_success_clr" : ""
                     }`}
                     style={{
                       textAlign: "start",
@@ -359,7 +359,7 @@ const CommonTable = ({ tabledata }) => {
                   </td>
                   <td
                     className={` ${
-                      item?.targetsChecked?.target2 ? "!bg-[#4caf5029]" : ""
+                      item?.targetsChecked?.target2 ? "!bg-light_success_clr" : ""
                     }`}
                     style={{
                       textAlign: "start",
@@ -374,7 +374,7 @@ const CommonTable = ({ tabledata }) => {
                   </td>
                   <td
                     className={` ${
-                      item?.targetsChecked?.target3 ? "!bg-[#4caf5029]" : ""
+                      item?.targetsChecked?.target3 ? "!bg-light_success_clr" : ""
                     }`}
                     style={{
                       textAlign: "start",
@@ -389,7 +389,7 @@ const CommonTable = ({ tabledata }) => {
                   </td>
                   <td
                     className={` ${
-                      item?.targetsChecked?.target4 ? "!bg-[#4caf5029]" : ""
+                      item?.targetsChecked?.target4 ? "!bg-light_success_clr" : ""
                     }`}
                     style={{
                       textAlign: "start",
@@ -452,7 +452,7 @@ const CommonTable = ({ tabledata }) => {
                     >
                       <div className="d-flex gap-1 cursor-pointer mx-auto justify-items-center">
                         <button
-                           onClick={() => handleUpdateClick(item.id)}
+                           onClick={() => UpdateUserData(item.id)}
                           className="w-full px-2 py-2 text-left text-sm text-primary_clr flex"
                         >
                           <EditIcon />
