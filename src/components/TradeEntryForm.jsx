@@ -656,7 +656,7 @@ const TradeEntryForm = () => {
                     value={formData.stopLoss}
                     onChange={handleChange}
                     onFocus={() => handleFocus("stopLoss")}
-                    placeholder="Stop Loss"
+                    placeholder={`${isFocused.stopLoss ? " " : "Stop Loss"}`}
                     className="w-full p-2 border-0 text-[#97514b] formInput rounded-md outline-none pe-2 relative z-[9]"
                   />{" "}
                   <input
@@ -712,7 +712,7 @@ const TradeEntryForm = () => {
                       value={formData[`target${target}`]}
                       onChange={handleChange}
                       onFocus={() => handleFocus(`target${target}`)}
-                      placeholder={`target${target}`}
+                      placeholder={`${isFocused.targetsChecked[`target${target}`]? " " : `target${target}`}`}
                       className="w-full p-2 border border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none pe-2 realtive z-[9]"
                     />
                     <input
@@ -748,7 +748,7 @@ const TradeEntryForm = () => {
                 value={formData.comment}
                 onFocus={() => handleFocus("comment")}
                 onChange={handleChange}
-                placeholder="comments"
+                placeholder={`${isFocused.comment ? " " : "comment"}`}
                 rows="4"
                 className="w-full h-[80px] relative z-[9] p-2 !border !border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none resize-none"
               />
