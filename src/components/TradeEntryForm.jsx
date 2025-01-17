@@ -531,7 +531,7 @@ const TradeEntryForm = ({ showToast }) => {
             </div>
             <div
               onClick={() => setAddPosition(true)}
-              className="mb-3 relative z-20"
+              className="mb-3 relative z-10"
             >
               <label
                 onClick={() => handleFocus("position")}

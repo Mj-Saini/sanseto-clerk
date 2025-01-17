@@ -7,9 +7,15 @@ import TradeEntryForm from "../TradeEntryForm";
 import { useState } from "react";
 import ConfirmationPopup from "../ConfirmationPopup";
 
-const CommonTable = ({ tabledata, loading }) => {
-  const { formatDate, addBroker, setAddBroker, deleteData, setUpdateBroker } =
-    useContextProvider();
+const CommonTable = ({ tabledata }) => {
+  const {
+    formatDate,
+    addBroker,
+    setAddBroker,
+    deleteData,
+    setUpdateBroker,
+    loading,
+  } = useContextProvider();
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [actionType, setActionType] = useState(null); // 'update' or 'delete'
   const [currentId, setCurrentId] = useState(null);
@@ -44,7 +50,7 @@ const CommonTable = ({ tabledata, loading }) => {
   };
 
   const isAdminDashboard = location.pathname.startsWith("/admin-dashboard");
-console.log(loading,'Loading admin dashboard')
+  console.log(loading, "Loading admin dashboard");
   return (
     <div className="py-3 ">
       {/* Table Section */}
@@ -223,7 +229,7 @@ console.log(loading,'Loading admin dashboard')
                 </th>
               )}
             </tr>
-                 
+            {!tabledata && loading}
           </thead>
           <tbody>
             {Array.isArray(tabledata) && tabledata.length > 0 ? (
@@ -474,7 +480,9 @@ console.log(loading,'Loading admin dashboard')
                 </tr>
               ))
             ) : (
-              <tr>
+              <tr 
+              // className={`${loading ? "loader":""}`}
+              >
                 <td
                   colSpan="14"
                   style={{
@@ -484,6 +492,7 @@ console.log(loading,'Loading admin dashboard')
                   }}
                   className="text-center border-0"
                 >
+                  {loading && <h2>data loading</h2>}
                 </td>
               </tr>
             )}

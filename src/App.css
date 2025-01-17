@@ -214,6 +214,28 @@ input[type="checkbox"]{
 }
 
 
+/* LOADING ANIMATION */
+
+
+/* The actual line that gets filled */
+.loader {
+  width: 0%;
+  height: 100%;
+  background-color: #007BFF; /* Color of the filling */
+  animation: fillLine 3s linear infinite; /* Adjust duration as needed */
+}
+
+/* Keyframes for the animation */
+@keyframes fillLine {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+
 
 
 @media (min-width: 320px) {
