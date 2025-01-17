@@ -81,22 +81,22 @@ const DashBoard = () => {
 
   return (
     <>
-      <div className="bg-[#F5F5F9] w-full flex justify-end px-3 lg:pe-3 relative min-h-screen">
+      <div className="bg-[#F5F5F9] w-full flex justify-end px-3 xl:pe-3 relative min-h-screen">
         <div
-          className={` w-[260px]  group lg:hover:w-1/5 duration-300 bg-white fixed left-0 top-0 h-full z-20 
-        ${openSideBar ? "left-0" : "max-lg:-left-full"}
-        ${sidebarFixed ? "lg:w-1/5 " : "lg:w-[84px] "}
+          className={` w-[260px]  group xl:hover:w-1/5 duration-300 bg-white fixed left-0 top-0 h-full z-20 
+        ${openSideBar ? "left-0" : "max-xl:-left-full"}
+        ${sidebarFixed ? "xl:w-1/5 " : "xl:w-[84px] "}
           `}
         >
           <div
             onClick={toggleSideBar}
-            className={`fixed top-0 left-0 h-screen w-full flex justify-center items-center bg-black/50 lg:hidden ${
-              openSideBar ? "left-0" : "max-lg:-left-full "
+            className={`fixed top-0 left-0 h-screen w-full flex justify-center items-center bg-black/50 xl:hidden ${
+              openSideBar ? "left-0" : "max-xl:-left-full "
             }`}
           ></div>
           <span
             onClick={() => setSidebarFixed(!sidebarFixed)}
-            className={`w-[36px] h-[36px] rounded-full bg-[#F5F5F9] justify-center items-center absolute top-6 -right-3 lg:group-hover:flex duration-300 z-10 ${
+            className={`w-[36px] h-[36px] rounded-full bg-[#F5F5F9] justify-center items-center absolute top-6 -right-3 xl:group-hover:flex duration-300 z-10 ${
               sidebarFixed ? "flex" : "hidden"
             }`}
           >
@@ -104,7 +104,7 @@ const DashBoard = () => {
           </span>
           <span
             onClick={toggleSideBar}
-            className={`w-[36px] h-[36px] rounded-full bg-[#F5F5F9] flex justify-center items-center absolute top-6 -right-3 duration-300 z-10 lg:hidden`}
+            className={`w-[36px] h-[36px] rounded-full bg-[#F5F5F9] flex justify-center items-center absolute top-6 -right-3 duration-300 z-10 xl:hidden`}
           >
             <RedArrowIcon />
           </span>
@@ -117,15 +117,15 @@ const DashBoard = () => {
         {/* Main Content */}
         <div
           className={` pb-3 duration-300 flex flex-col justify-between ${
-            sidebarFixed ? "w-full lg:w-4/5 ps-2" : "w-full lg:w-[calc(100%-84px)]"
+            sidebarFixed ? "w-full xl:w-4/5 ps-2" : "w-full xl:w-[calc(100%-84px)]"
           }`}
         >
           <div>
             
-              <div className="flex justify-between rounded-lg backdrop_blur sticky top-3 bg-white/90 shadow-sm lg:justify-end items-center p-2 !z-10">
+              <div className="flex justify-between rounded-lg backdrop_blur sticky top-3 bg-white/90 shadow-sm xl:justify-end items-center p-2 !z-10">
                 <div
                   onClick={toggleSideBar}
-                  className="cursor-pointer lg:hidden"
+                  className="cursor-pointer xl:hidden"
                 >
                   <MenuIcon />
                 </div>

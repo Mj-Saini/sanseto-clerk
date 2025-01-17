@@ -13,7 +13,7 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
         <div className="px-3 relative z-50">
           {/* {sidebarFixed ? */}
           <img
-            className={` hidden group-hover:lg:hidden lg:flex ${
+            className={` hidden group-hover:xl:hidden xl:flex ${
               sidebarFixed ? "!hidden" : "flex"
             }`}
             width={40}
@@ -22,8 +22,8 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
             alt="logo"
           />
           <img
-            className={`flex lg:hidden group-hover:lg:flex ${
-              sidebarFixed ? "lg:!flex" : "lg:hidden"
+            className={`flex xl:hidden group-hover:xl:flex ${
+              sidebarFixed ? "xl:!flex" : "xl:hidden"
             }`}
             width={150}
             height={70}
@@ -35,7 +35,7 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
         </div>
         <span
           onClick={sideMenu}
-          className="text-3xl cursor-pointer text-tertiary_clr block lg:hidden "
+          className="text-3xl cursor-pointer text-tertiary_clr block xl:hidden "
         >
           &times;
         </span>
@@ -55,7 +55,7 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                 <Link
                   onClick={sideMenu}
                   to={""}
-                  className={`flex items-center py-2.5 text-primary_clr font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] hover:text-tertiary_clr ${
+                  className={`flex items-center py-2.5 text-primary_clr font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-hover_secondry_clr hover:text-tertiary_clr ${
                     location.pathname === "/admin-dashboard"
                       ? "bg-secondry_clr hover:!bg-[#C42B1E30] text-tertiary_clr"
                       : ""
@@ -65,8 +65,8 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                     <DashBoardIcon />
                   </span>{" "}
                   <span
-                    className={` duration-200 group-hover:lg:-translate-x-3 ${
-                      sidebarFixed ? "-translate-x-3" : "lg:translate-x-3"
+                    className={` duration-200 group-hover:xl:-translate-x-3 ${
+                      sidebarFixed ? "-translate-x-3" : "xl:translate-x-3"
                     }`}
                   >
                     DashBoard
@@ -84,7 +84,7 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                 <Link
                   onClick={sideMenu}
                   to={"pricing"}
-                  className={`flex items-center py-2.5 text-primary_clr font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] hover:text-tertiary_clr ${
+                  className={`flex items-center py-2.5 text-primary_clr font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-hover_secondry_clr hover:text-tertiary_clr ${
                     location.pathname === "/admin-dashboard/pricing"
                       ? "bg-secondry_clr hover:!bg-[#C42B1E30] text-tertiary_clr"
                       : ""
@@ -94,8 +94,8 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                     <ShareIcon />
                   </span>
                   <span
-                    className={` duration-200 group-hover:lg:-translate-x-3 ${
-                      sidebarFixed ? "-translate-x-3" : "lg:translate-x-3"
+                    className={` duration-200 group-hover:xl:-translate-x-3 ${
+                      sidebarFixed ? "-translate-x-3" : "xl:translate-x-3"
                     }`}
                   >
                     1Cliq Plan
@@ -113,7 +113,7 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                 <Link
                   onClick={sideMenu}
                   to={"detto-settings"}
-                  className={`flex items-center py-2.5 text-primary_clr font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] hover:text-tertiary_clr ${
+                  className={`flex items-center py-2.5 text-primary_clr font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-hover_secondry_clr hover:text-tertiary_clr ${
                     location.pathname === "/dashboard/detto-settings"
                       ? "bg-secondry_clr hover:!bg-[#C42B1E30] text-tertiary_clr"
                       : ""
@@ -123,8 +123,8 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                     <DittoSettings />
                   </span>{" "}
                   <span
-                    className={` duration-200 group-hover:lg:-translate-x-3 ${
-                      sidebarFixed ? "-translate-x-3" : "lg:translate-x-3"
+                    className={` duration-200 group-hover:xl:-translate-x-3 ${
+                      sidebarFixed ? "-translate-x-3" : "xl:translate-x-3"
                     }`}
                   >
                     ditto setting
@@ -142,7 +142,7 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                 <Link
                   onClick={sideMenu}
                   to={"settings"}
-                  className={`flex items-center py-2.5 text-primary_clr font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] hover:text-tertiary_clr ${
+                  className={`flex items-center py-2.5 text-primary_clr font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-hover_secondry_clr hover:text-tertiary_clr ${
                     location.pathname === "/dashboard/settings"
                       ? "bg-secondry_clr hover:!bg-[#C42B1E30] text-tertiary_clr"
                       : ""
@@ -152,8 +152,8 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                     <Settings />
                   </span>{" "}
                   <span
-                    className={` duration-200 group-hover:lg:-translate-x-3 ${
-                      sidebarFixed ? "-translate-x-3" : "lg:translate-x-3"
+                    className={` duration-200 group-hover:xl:-translate-x-3 ${
+                      sidebarFixed ? "-translate-x-3" : "xl:translate-x-3"
                     }`}
                   >
                     favourite setting
@@ -174,7 +174,7 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                 <Link
                   onClick={sideMenu}
                   to={""}
-                  className={`flex items-center py-2.5 text-primary_clr font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] group-hover: hover:text-tertiary_clr ${
+                  className={`flex items-center py-2.5 text-primary_clr font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-hover_secondry_clr group-hover: hover:text-tertiary_clr ${
                     sidebarFixed ? "" : ""
                   }  ${
                     location.pathname === "/dashboard"
@@ -186,8 +186,8 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                     <DashBoardIcon />
                   </span>
                   <span
-                    className={` duration-200 group-hover:lg:-translate-x-3 ${
-                      sidebarFixed ? "-translate-x-3" : "lg:translate-x-3"
+                    className={` duration-200 group-hover:xl:-translate-x-3 ${
+                      sidebarFixed ? "-translate-x-3" : "xl:translate-x-3"
                     }`}
                   >
                     {" "}
@@ -206,7 +206,7 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                 <Link
                   onClick={sideMenu}
                   to={"pricing"}
-                  className={`flex items-center py-2.5 text-primary_clr font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] hover:text-tertiary_clr ${
+                  className={`flex items-center py-2.5 text-primary_clr font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-hover_secondry_clr hover:text-tertiary_clr ${
                     location.pathname === "/dashboard/pricing"
                       ? "bg-secondry_clr hover:!bg-[#C42B1E30] text-tertiary_clr"
                       : ""
@@ -216,8 +216,8 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                     <ShareIcon />
                   </span>
                   <span
-                    className={` duration-200 group-hover:lg:-translate-x-3 ${
-                      sidebarFixed ? "-translate-x-3" : "lg:translate-x-3"
+                    className={` duration-200 group-hover:xl:-translate-x-3 ${
+                      sidebarFixed ? "-translate-x-3" : "xl:translate-x-3"
                     }`}
                   >
                     1Cliq Plan
@@ -235,7 +235,7 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                 <Link
                   onClick={sideMenu}
                   to={"detto-settings"}
-                  className={`flex items-center py-2.5 text-primary_clr font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] hover:text-tertiary_clr ${
+                  className={`flex items-center py-2.5 text-primary_clr font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-hover_secondry_clr hover:text-tertiary_clr ${
                     location.pathname === "/dashboard/detto-settings"
                       ? "bg-secondry_clr hover:!bg-[#C42B1E30] text-tertiary_clr"
                       : ""
@@ -245,8 +245,8 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                     <DittoSettings />
                   </span>{" "}
                   <span
-                    className={` duration-200 group-hover:lg:-translate-x-3 ${
-                      sidebarFixed ? "-translate-x-3" : "lg:translate-x-3"
+                    className={` duration-200 group-hover:xl:-translate-x-3 ${
+                      sidebarFixed ? "-translate-x-3" : "xl:translate-x-3"
                     }`}
                   >
                     ditto setting
@@ -264,7 +264,7 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                 <Link
                   onClick={sideMenu}
                   to={"settings"}
-                  className={`flex items-center py-2.5 text-primary_clr font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-[#C42B1E09] hover:text-tertiary_clr ${
+                  className={`flex items-center py-2.5 text-primary_clr font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-hover_secondry_clr hover:text-tertiary_clr ${
                     location.pathname === "/dashboard/settings"
                       ? "bg-secondry_clr hover:!bg-[#C42B1E30] text-tertiary_clr"
                       : ""
@@ -274,8 +274,8 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                     <Settings />
                   </span>{" "}
                   <span
-                    className={` duration-200 group-hover:lg:-translate-x-3 ${
-                      sidebarFixed ? "-translate-x-3" : "lg:translate-x-3"
+                    className={` duration-200 group-hover:xl:-translate-x-3 ${
+                      sidebarFixed ? "-translate-x-3" : "xl:translate-x-3"
                     }`}
                   >
                     favourite setting
