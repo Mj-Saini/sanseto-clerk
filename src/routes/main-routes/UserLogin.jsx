@@ -31,10 +31,10 @@ const UserLogin = () => {
     if (isSignedIn) {
       navigate("/dashboard");
     }
-    if(token){
-      navigate('/admin-dashboard');
-    }
-  }, [isSignedIn, navigate,token]);
+    // if(token){
+    //   navigate('/admin-dashboard');
+    // }
+  }, [isSignedIn, navigate,]);
 
   const [isToastVisible, setIsToastVisible] = useState(false);
 

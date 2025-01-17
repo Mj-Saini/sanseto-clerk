@@ -387,7 +387,6 @@ const TradeEntryForm = () => {
     }));
   };
 
-
   return (
     <>
       <div
@@ -411,7 +410,8 @@ const TradeEntryForm = () => {
         )}
         <div
           onClick={() => {
-            handleFocus(false);setAddPosition(false)
+            handleFocus(false);
+            setAddPosition(false);
           }}
           className="fixed top-0 left-0 h-screen w-full flex justify-center items-center z-0"
         ></div>
@@ -496,11 +496,14 @@ const TradeEntryForm = () => {
                 <input
                   id="symbol"
                   name="symbol"
-                  onFocus={() => handleFocus("symbol")}
+                  onFocus={(e) => {
+                    handleFocus("symbol");
+                    e.target.placeholder = "";
+                  }}
                   value={formData.symbol}
                   onChange={handleChange}
                   type="text"
-                  placeholder="enter symbol"
+                  placeholder={`${isFocused.symbol ? " " : "choose symbol"}`}
                   className="w-full p-2 py-3 border-2 border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none  focus:border-tertiary_clr uppercase "
                 />
               </div>
@@ -535,7 +538,7 @@ const TradeEntryForm = () => {
               <label
                 onClick={() => handleFocus("position")}
                 className={`mb-1 text-primary_clr  absolute left-2  duration-300 ${
-                  isFocused.position  || updateBroker
+                  isFocused.position || updateBroker
                     ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5 z-20 "
                     : " top-1/2 -translate-y-1/2 opacity-0"
                 } `}
@@ -551,7 +554,7 @@ const TradeEntryForm = () => {
                 value={formData.position}
                 onChange={handleChange}
                 onFocus={() => handleFocus("position")}
-                placeholder="Position"
+                placeholder={`${isFocused.position ? " " : "choose Position"}`}
                 className="w-full p-2 border border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none uppercase"
               />
               {addPosition && (
@@ -601,7 +604,7 @@ const TradeEntryForm = () => {
                   value={formData.entryPriceFrom}
                   onChange={handleChange}
                   onFocus={() => handleFocus("entryPriceFrom")}
-                  placeholder="Entry Price From"
+                  placeholder={`${isFocused.entryPriceFrom ? " " : " Entry Price From"}`}
                   className="w-full p-2 border border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none z-[9] relative"
                 />
               </div>
@@ -625,7 +628,8 @@ const TradeEntryForm = () => {
                   value={formData.entryPriceTo}
                   onFocus={() => handleFocus("entryPriceTo")}
                   onChange={handleChange}
-                  placeholder="Entry Price To"
+                
+                  placeholder={`${isFocused.entryPriceTo ? " " : "Entry Price To"}`}
                   className="w-full p-2 border border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none relative z-[9]"
                 />
               </div>

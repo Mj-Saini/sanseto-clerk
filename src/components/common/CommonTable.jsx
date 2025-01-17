@@ -427,8 +427,8 @@ const CommonTable = ({ tabledata }) => {
                       <span
                         className={` px-2 py-1.5 rounded-md w-24 text-xs text-center ${
                           item.completed
-                            ? "bg-[#f4433729] text-[#f44337]"
-                            : "bg-[#8592a3] text-white"
+                            ? "bg-light_success_clr text-[#4caf50]"
+                            : "bg-[yellow]/20 text-primary_clr "
                         } `}
                       >
                         {" "}
