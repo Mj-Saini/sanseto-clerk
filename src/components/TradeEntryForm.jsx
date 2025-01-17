@@ -412,7 +412,7 @@ const TradeEntryForm = ({ showToast }) => {
         )}
         <div
           onClick={() => {
-            handleFocus(false);
+            handleFocus(false);setAddPosition(false)
           }}
           className="fixed top-0 left-0 h-screen w-full flex justify-center items-center z-0"
         ></div>
@@ -437,7 +437,7 @@ const TradeEntryForm = ({ showToast }) => {
                 onClick={() => handleFocus("symbol")}
                 className={`mb-1 text-primary_clr  absolute left-2 duration-300 ${
                   isFocused.symbol || updateBroker
-                    ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5  z-10 "
+                    ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5  z-[15] "
                     : " top-1/2 -translate-y-1/2 opacity-0 z-0"
                 }`}
                 htmlFor="symbol"
@@ -531,7 +531,7 @@ const TradeEntryForm = ({ showToast }) => {
             </div>
             <div
               onClick={() => setAddPosition(true)}
-              className="mb-3 relative z-10"
+              className="mb-3 relative z-[11]"
             >
               <label
                 onClick={() => handleFocus("position")}
@@ -556,7 +556,7 @@ const TradeEntryForm = ({ showToast }) => {
                 className="w-full p-2 border border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none uppercase"
               />
               {addPosition && (
-                <div className="border border-primary_clr absolute top-full mt-1 w-full bg-white rounded-md overflow-hidden z-[8]">
+                <div className="border border-primary_clr absolute top-full mt-1 w-full bg-white rounded-md overflow-hidden z-[11]">
                   <p
                     onClick={(e) => {
                       e.stopPropagation(); // Prevents event from reaching parent
@@ -657,7 +657,7 @@ const TradeEntryForm = ({ showToast }) => {
                     className="w-full p-2 border-0 text-[#97514b] formInput rounded-md outline-none pe-2 relative z-[9]"
                   />{" "}
                   <input
-                    className="w-[14px] h-[14px] absolute top-1/2 -translate-y-1/2 right-3"
+                    className="w-[14px] h-[14px] absolute top-1/2 -translate-y-1/2 right-3 z-10"
                     type="checkbox"
                     name="stopLossEnabled"
                     checked={formData.stopLossEnabled}
@@ -713,7 +713,7 @@ const TradeEntryForm = ({ showToast }) => {
                       className="w-full p-2 border border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none pe-2 realtive z-[9]"
                     />
                     <input
-                      className="w-[14px] h-[14px] absolute top-1/2 -translate-y-1/2 right-3"
+                      className="w-[14px] h-[14px] absolute top-1/2 -translate-y-1/2 right-3  z-10"
                       type="checkbox"
                       // checked={!!formData.targetsChecked[target${target}]}
                       onChange={(e) =>
