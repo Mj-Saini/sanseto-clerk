@@ -1,17 +1,9 @@
 /* eslint-disable react/prop-types */
-import { useEffect } from "react";
 
 
-const CustomToast = ({ message, show, onClose }) => {
-  useEffect(() => {
-    if (show) {
-      const timer = setTimeout(() => {
-        onClose(); 
-      }, 2000);
 
-      return () => clearTimeout(timer); 
-    }
-  }, [show, onClose]);
+const CustomToast = ({ message, show, }) => {
+  
 
   return (
     <div

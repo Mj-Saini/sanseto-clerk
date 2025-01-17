@@ -2,6 +2,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import { db, realtimeDb } from "./firebase";
 import { push, set, ref, onValue, update, remove } from "firebase/database";
 import { useNavigate } from "react-router-dom";
@@ -28,6 +29,8 @@ const TradeEntryForm = ({ showToast }) => {
       target4: false,
     },
   });
+  let messageId;
+
   const id = updateBroker;
   const navigate = useNavigate();
   const [symbols, setSymbols] = useState([]);
@@ -52,6 +55,8 @@ const TradeEntryForm = ({ showToast }) => {
     target4: "",
     comment: "",
     position: "",
+    messageId: "",
+    uuid: "",
     stopLossEnabled: false,
     completed: false,
     targetsChecked: {
@@ -87,7 +92,7 @@ const TradeEntryForm = ({ showToast }) => {
                   dateTime: formattedDateTime,
                 });
               }
-              showToast();
+              // showToast();
             }
           } else {
             console.log("No data available");
@@ -164,11 +169,62 @@ const TradeEntryForm = ({ showToast }) => {
       }
     }
   };
+  const sendMessage = async () => {
+    const botToken1 = "7561749170:AAGKilLQVCXiW9z5SK2VEHJdpgXHzUuzUZY"; // Replace with your bot token
 
-  const botToken1 = "7775810841:AAHC-3a43B3jK_lskNdSWiASWXTE9CKi2SM";
-  const apiUrl = "https://api.telegram.org/bot${botToken1}/sendMessage";
+    const apiUrl = `https://api.telegram.org/bot${botToken1}/sendMessage`;
 
+    try {
+      const res = await axios.post(apiUrl, {
+        chat_id: "-1002266171260",
+        text: `TRADE CALL ALERT 📢
+  🔹 Action: ${formData.position}
+  🔹 Symbol: ${formData.symbol}
+  🔹 Entry Zone: ${formData.entryPriceFrom} to ${formData.entryPriceTo}
+  🔹 Stop Loss: ${formData.stopLoss}
+  🎯 Targets:
+  ✅ T1: ${formData.target1}
+  ✅ T2:  ${formData.target2}
+  ✅ T3:  ${formData.target3}
+  ✅ T4:  ${formData.target4}
+  📝 Note: ${formData.comment}`,
+      
+      });
+      return res.data.result.message_id;
+    } catch (error) {
+      console.error("Error sending Telegram message: ", error);
+    }
+  };
+  const UpdateTelegramMessage = async () => {
+    const botToken1 = "7561749170:AAGKilLQVCXiW9z5SK2VEHJdpgXHzUuzUZY"; // Replace with your bot token
+    const apiUrl = `https://api.telegram.org/bot${botToken1}/sendMessage`;
+
+    try {
+      const res = await axios.post(apiUrl, {
+        chat_id: "-1002266171260",
+        text: `TRADE CALL ALERT 📢
+  🔹 Action: ${formData.position}
+  🔹 Symbol: ${formData.symbol}
+  🔹 Entry Zone: ${formData.entryPriceFrom} to ${formData.entryPriceTo}
+  🔹 Stop Loss: ${formData.stopLoss}
+  🎯 Targets:
+  ✅ T1: ${formData.target1}
+  ✅ T2:  ${formData.target2}
+  ✅ T3:  ${formData.target3}
+  ✅ T4:  ${formData.target4}
+  📝 Note: ${formData.comment}`,
+        reply_to_message_id: formData.messageId,
+      });
+
+     
+      return messageId;
+    } catch (error) {
+      console.error("Error sending Telegram message: ", error);
+    }
+  };
   const updateDataInRealtimeDB = async (data) => {
+   UpdateTelegramMessage();
+    
     try {
       const tradeRef = ref(realtimeDb, `trades/${id}`);
       await update(tradeRef, data);
@@ -179,25 +235,14 @@ const TradeEntryForm = ({ showToast }) => {
   };
 
   const saveDataToRealtimeDB = async (data) => {
-    const res = await axios.post(apiUrl, {
-      chat_id: "-1002437061530",
-      text: `TRADE CALL ALERT 📢
-      🔹 Action: ${formData.position}
-      🔹 Symbol: ${formData.symbol}
-      🔹 Entry Zone: ${formData.entryPriceFrom} to ${formData.entryPriceTo}
-      🔹 Stop Loss: ${formData.stopLoss}
-      🎯 Targets:
-      ✅ T1: ${formData.target1}
-      ✅ T2:  ${formData.target2}
-      ✅ T3:  ${formData.target3}
-      ✅ T4:  ${formData.target4}
-      📝 Note: ${formData.comment}`,
-    });
-    console.log(res, "response");
+   
+    const first = await sendMessage();
+    data.messageId= first;
+    data.uniqueId=uuidv4()
     try {
-      // const newTradeRef = push(ref(realtimeDb, "trades"));
-      // await set(newTradeRef, data);
-      // console.log("Data saved to Realtime Database with key:", newTradeRef.key);
+      const newTradeRef = push(ref(realtimeDb, "trades"));
+      await set(newTradeRef, data);
+      console.log("Data saved to Realtime Database with key:", newTradeRef.key);
     } catch (e) {
       console.error("Error saving data to Realtime Database: ", e);
     }
@@ -205,9 +250,7 @@ const TradeEntryForm = ({ showToast }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
     //  TELEGRAM MESSAGE
-
     if (!formData.dateTime) {
       const currentDateTime = new Date();
       const formattedDateTime = currentDateTime.toISOString();
@@ -220,12 +263,11 @@ const TradeEntryForm = ({ showToast }) => {
         currentDateTime.toLocaleString()
       );
     }
-
+   
     const dataToSave = {
       ...formData,
       dateTime: formData.dateTime || new Date().toISOString(),
     };
-
     if (id) {
       await updateDataInRealtimeDB(dataToSave);
       setAddBroker(false);
@@ -247,6 +289,8 @@ const TradeEntryForm = ({ showToast }) => {
       target4: "",
       comment: "",
       position: "",
+      uuid: "",
+      massage_Id: "",
       stopLossEnabled: false,
       completed: false,
       targetsChecked: {
@@ -374,7 +418,7 @@ const TradeEntryForm = ({ showToast }) => {
             <label
               onClick={() => handleFocus("symbol")}
               className={`mb-1 text-primary_clr  absolute left-2 duration-300 ${
-                isFocused.symbol
+                isFocused.symbol || updateBroker
                   ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5  z-10 "
                   : " top-1/2 -translate-y-1/2 opacity-0 z-0"
               }`}
@@ -435,13 +479,12 @@ const TradeEntryForm = ({ showToast }) => {
               <input
                 id="symbol"
                 name="symbol"
-                
                 onFocus={() => handleFocus("symbol")}
                 value={formData.symbol}
                 onChange={handleChange}
                 type="text"
                 placeholder="enter symbol"
-                className="w-full p-2 py-3 border-2 border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none  focus:border-tertiary_clr"
+                className="w-full p-2 py-3 border-2 border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none  focus:border-tertiary_clr uppercase "
               />
             </div>
           </div>
@@ -450,7 +493,7 @@ const TradeEntryForm = ({ showToast }) => {
               id="dateTime"
               onClick={() => handleFocus("dateTime")}
               className={`mb-1 text-primary_clr  absolute left-2 duration-300 ${
-                isFocused.dateTime
+                isFocused.dateTime || updateBroker
                   ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5  z-10 "
                   : " top-1/2 -translate-y-1/2 opacity-0"
               }`}
@@ -476,7 +519,7 @@ const TradeEntryForm = ({ showToast }) => {
               onClick={() => handleFocus("position")}
               className={`mb-1 text-primary_clr  absolute left-2  duration-300 ${
                 isFocused.position
-                  ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5 z-20"
+                  ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5 z-20 "
                   : " top-1/2 -translate-y-1/2 opacity-0"
               } `}
               htmlFor="positon"
@@ -492,7 +535,7 @@ const TradeEntryForm = ({ showToast }) => {
               onChange={handleChange}
               onFocus={() => handleFocus("position")}
               placeholder="Position"
-              className="w-full p-2 border border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none "
+              className="w-full p-2 border border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none uppercase"
             />
             {addPosition && (
               <div className="border border-primary_clr absolute top-full mt-1 w-full bg-white rounded-md overflow-hidden">
@@ -526,7 +569,7 @@ const TradeEntryForm = ({ showToast }) => {
                 htmlFor="entryPriceFrom"
                 onClick={() => handleFocus("entryPriceFrom")}
                 className={`mb-1 text-primary_clr  absolute left-2 duration-300 ${
-                  isFocused.entryPriceFrom
+                  isFocused.entryPriceFrom || updateBroker
                     ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5 z-10"
                     : " top-1/2 -translate-y-1/2 opacity-0"
                 }`}
@@ -549,7 +592,7 @@ const TradeEntryForm = ({ showToast }) => {
               <label
                 onClick={() => handleFocus("entryPriceTo")}
                 className={`mb-1 text-primary_clr  absolute left-2 duration-300 ${
-                  isFocused.entryPriceTo
+                  isFocused.entryPriceTo || updateBroker
                     ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5 z-10 "
                     : " top-1/2 -translate-y-1/2 opacity-0"
                 }`}
@@ -575,7 +618,7 @@ const TradeEntryForm = ({ showToast }) => {
               <label
                 onClick={() => handleFocus("stopLoss")}
                 className={`mb-1 text-primary_clr absolute left-2 duration-300 ${
-                  isFocused.stopLoss
+                  isFocused.stopLoss || updateBroker
                     ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5  z-10"
                     : " top-1/2 -translate-y-1/2 opacity-0"
                 }`}
@@ -628,7 +671,7 @@ const TradeEntryForm = ({ showToast }) => {
                 <label
                   onClick={() => handleFocus(`target${target}`)}
                   className={`mb-1 text-primary_clr absolute left-2 duration-300 ${
-                    isFocused.targetsChecked[`target${target}`]
+                    isFocused.targetsChecked[`target${target}`] || updateBroker
                       ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5 z-10"
                       : " top-1/2 -translate-y-1/2 opacity-0"
                   }`}
@@ -664,7 +707,7 @@ const TradeEntryForm = ({ showToast }) => {
             <label
               onClick={() => handleFocus("comment")}
               className={`mb-1 text-primary_clr  absolute left-2  duration-300 ${
-                isFocused.comment
+                isFocused.comment || updateBroker
                   ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5 z-10"
                   : " top-0 translate-y-1/2 opacity-0"
               }`}
