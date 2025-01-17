@@ -216,17 +216,22 @@ input[type="checkbox"]{
 
 /* LOADING ANIMATION */
 
-
-/* The actual line that gets filled */
 .loader {
-  width: 0%;
-  height: 100%;
-  background-color: #007BFF; /* Color of the filling */
-  animation: fillLine 3s linear infinite; /* Adjust duration as needed */
+  position: relative;
 }
 
-/* Keyframes for the animation */
-@keyframes fillLine {
+.loader::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background-color: #c42b1e; 
+  animation: growBar 1s linear infinite;
+}
+
+@keyframes growBar {
   0% {
     width: 0%;
   }

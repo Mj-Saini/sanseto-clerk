@@ -301,6 +301,7 @@ const TradeEntryForm = () => {
   };
 
   const handleFocus = (field) => {
+    setAddPosition(false);
     setIsFocused((prevState) => {
       const resetFields = Object.keys(prevState).reduce((acc, key) => {
         if (key !== "targetsChecked") {

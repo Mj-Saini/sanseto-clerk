@@ -80,7 +80,7 @@ const CommonTable = ({ tabledata }) => {
         </div>
       )}
 
-      <div className="w-[1100px] xl:w-full px-3">
+      <div className="w-[1100px] lg:w-full px-3">
         <Table responsive="sm" className="mb-0">
           <thead>
             <tr>
@@ -432,7 +432,7 @@ const CommonTable = ({ tabledata }) => {
                         } `}
                       >
                         {" "}
-                        {item.completed ? "COMPLETED" : "PROGRESS"}
+                        {item.completed ? "COMPLETED" : "PROGRESS" }
                       </span>
                     </div>
                   </td>
@@ -481,7 +481,7 @@ const CommonTable = ({ tabledata }) => {
               ))
             ) : (
               <tr 
-              // className={`${loading ? "loader":""}`}
+              className={`${loading ? "loader":""}`}
               >
                 <td
                   colSpan="14"

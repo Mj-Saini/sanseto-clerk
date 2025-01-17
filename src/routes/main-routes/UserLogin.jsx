@@ -31,10 +31,11 @@ const UserLogin = () => {
     if (isSignedIn) {
       navigate("/dashboard");
     }
-    // if(token){
-    //   navigate('/admin-dashboard');
-    // }
-  }, [isSignedIn, navigate,]);
+    if (token && window.location.pathname === "/admin-login") {
+      navigate("/admin-dashboard");
+    }
+ 
+  }, [isSignedIn, navigate,token]);
 
   const [isToastVisible, setIsToastVisible] = useState(false);
 
@@ -111,10 +112,10 @@ const RedirectToSignIn = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    navigate("/sign-up"); // Redirect to sign-in page
+    navigate("/sign-up"); 
   }, [navigate]);
 
-  return null; // Return nothing since we just redirect
+  return null; 
 };
 
 export default UserLogin;
