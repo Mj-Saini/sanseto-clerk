@@ -44,7 +44,7 @@ const CommonTable = ({ tabledata, loading }) => {
   };
 
   const isAdminDashboard = location.pathname.startsWith("/admin-dashboard");
-console.log(loading,'loading')
+console.log(loading,'Loading admin dashboard')
   return (
     <div className="py-3 ">
       {/* Table Section */}

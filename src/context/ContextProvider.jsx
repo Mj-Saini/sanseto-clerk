@@ -23,7 +23,7 @@ export const ContextProvider = ({ children }) => {
   const [isToastVisible, setIsToastVisible] = useState(false);
   const [addBroker, setAddBroker] = useState(false);
   const [updateBroker, setUpdateBroker] = useState(null);
- const [loading,setloading]=useState(false)
+ const [loading,setLoading]=useState(true)
 
 
   const showToast = () => {
@@ -57,17 +57,18 @@ export const ContextProvider = ({ children }) => {
             //   (v) => v.completed === true
             // );
             setData(tradeData);
+            setLoading(false)
             // setCompleteData(filtercompletedata);
           } else {
             console.log("No data available");
             setData([]);
-            setloading(true)
+
             // setCompleteData([]);
           }
         },
         (error) => {
           console.error("Error fetching data from Realtime Database: ", error);
-          setloading(true)
+ 
         }
       );
     };

@@ -171,7 +171,7 @@ const TradeEntryForm = ({ showToast }) => {
     }
   };
   const sendMessage = async () => {
-    const botToken1 = "7561749170:AAGKilLQVCXiW9z5SK2VEHJdpgXHzUuzUZY"; // Replace with your bot token
+    const botToken1 = "7775810841:AAHC-3a43B3jK_lskNdSWiASWXTE9CKi2SM"; // Replace with your bot token
 
     const apiUrl = `https://api.telegram.org/bot${botToken1}/sendMessage`;
 
@@ -387,6 +387,8 @@ const TradeEntryForm = ({ showToast }) => {
     }));
   };
 
+  console.log(formData,"formdata")
+
   return (
     <>
       <div
@@ -429,7 +431,7 @@ const TradeEntryForm = ({ showToast }) => {
         </h2>
 
         <form onSubmit={handleSubmit}>
-          <div className="overflow-auto h-[400px] ">
+          <div className="overflow-auto h-[400px] py-2">
             <div className="mb-3 relative">
               <label
                 onClick={() => handleFocus("symbol")}
@@ -534,7 +536,7 @@ const TradeEntryForm = ({ showToast }) => {
               <label
                 onClick={() => handleFocus("position")}
                 className={`mb-1 text-primary_clr  absolute left-2  duration-300 ${
-                  isFocused.position
+                  isFocused.position  || updateBroker
                     ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5 z-20 "
                     : " top-1/2 -translate-y-1/2 opacity-0"
                 } `}
@@ -544,7 +546,7 @@ const TradeEntryForm = ({ showToast }) => {
               </label>
               <input
                 required
-                type="number"
+                type="text"
                 id="position"
                 name="position"
                 value={formData.position}
