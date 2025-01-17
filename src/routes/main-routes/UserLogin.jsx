@@ -20,19 +20,21 @@ import Settings from "../../components/Settings";
 import PricePlan from "../../components/PricePlan";
 import PriceSettings from "../../components/PriceSettings";
 import DittoSettings from "../../components/DittoSettings";
-import AddSymbol from "../../components/AddSymbol";
 
 const UserLogin = () => {
   const navigate = useNavigate();
   const { isSignedIn } = useClerk();
 
+  
+  const token = localStorage.getItem("token");
   useEffect(() => {
     if (isSignedIn) {
       navigate("/dashboard");
     }
-  }, [isSignedIn, navigate]);
-
-  const token = localStorage.getItem("token");
+    if(token){
+      navigate('/admin-dashboard');
+    }
+  }, [isSignedIn, navigate,token]);
 
   const [isToastVisible, setIsToastVisible] = useState(false);
 
