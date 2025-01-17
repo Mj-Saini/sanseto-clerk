@@ -4,10 +4,10 @@ const ConfirmationPopup = ({ actionType, onConfirm, onCancel }) => {
   return (
     <div className="popup-overlay bg-white p-5 rounded-lg relative z-30">
       <div className="popup-content">
-        <h2>{actionType === "update" ? "Update" : "Delete"} Confirmation</h2>
-        <p>
+        <h2 className="text-primary_clr text-center">{actionType === "update" ? "Update" : "Delete"} Confirmation</h2>
+        <p className="text-primary_clr text-center">
           Are you sure you want to{" "}
-          {actionType === "update" ? "update" : "delete"} this item?
+          {actionType === "update" ? "update" : "delete"} ?
         </p>
         <div className="popup-buttons flex gap-3 justify-center">
           <button
