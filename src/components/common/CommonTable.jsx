@@ -241,7 +241,7 @@ const CommonTable = ({ tabledata }) => {
                       color: "#6e3b37",
                       fontSize: "14px",
                       fontWeight: "400",
-                      padding: "10px",
+                      padding: "5px 10px",
                       borderRight:"1px solid #ccc"
                     }}
                   >
@@ -256,7 +256,7 @@ const CommonTable = ({ tabledata }) => {
                       color: "#6e3b37",
                       fontSize: "14px",
                       fontWeight: "400",
-                      padding: "10px",
+                      padding: "5px 10px",
                       borderRight:"1px solid #ccc"
                       
                     }}
@@ -273,7 +273,7 @@ const CommonTable = ({ tabledata }) => {
                       color: "#6e3b37",
                       fontSize: "14px",
                       fontWeight: "400",
-                      padding: "10px",
+                      padding: "5px 10px",
                       borderRight:"1px solid #ccc",
                       textTransform:"uppercase",
 
@@ -290,7 +290,7 @@ const CommonTable = ({ tabledata }) => {
                       color: "#6e3b37",
                       fontSize: "14px",
                       fontWeight: "400",
-                      padding: "10px",
+                      padding: "5px 10px",
                       borderRight:"1px solid #ccc ",
                       textTransform:"uppercase",
                     }}
@@ -306,7 +306,7 @@ const CommonTable = ({ tabledata }) => {
                       color: "#6e3b37",
                       fontSize: "14px",
                       fontWeight: "400",
-                      padding: "10px",
+                      padding: "5px 10px",
                       borderRight:"1px solid #ccc"
                     }}
                   >
@@ -321,7 +321,7 @@ const CommonTable = ({ tabledata }) => {
                       color: "#6e3b37",
                       fontSize: "14px",
                       fontWeight: "400",
-                      padding: "10px",
+                      padding: "5px 10px",
                       borderRight:"1px solid #ccc"
                     }}
                   >
@@ -336,7 +336,7 @@ const CommonTable = ({ tabledata }) => {
                       color: "#6e3b37",
                       fontSize: "14px",
                       fontWeight: "400",
-                      padding: "10px",
+                      padding: "5px 10px",
                       borderRight:"1px solid #ccc"
                     }}
                   >
@@ -351,7 +351,7 @@ const CommonTable = ({ tabledata }) => {
                       color: "#6e3b37",
                       fontSize: "14px",
                       fontWeight: "400",
-                      padding: "10px",
+                      padding: "5px 10px",
                       borderRight:"1px solid #ccc"
                     }}
                   >
@@ -366,7 +366,7 @@ const CommonTable = ({ tabledata }) => {
                       color: "#6e3b37",
                       fontSize: "14px",
                       fontWeight: "400",
-                      padding: "10px",
+                      padding: "5px 10px",
                       borderRight:"1px solid #ccc"
                     }}
                   >
@@ -381,7 +381,7 @@ const CommonTable = ({ tabledata }) => {
                       color: "#6e3b37",
                       fontSize: "14px",
                       fontWeight: "400",
-                      padding: "10px",
+                      padding: "5px 10px",
                       borderRight:"1px solid #ccc"
                     }}
                   >
@@ -396,7 +396,7 @@ const CommonTable = ({ tabledata }) => {
                       color: "#6e3b37",
                       fontSize: "14px",
                       fontWeight: "400",
-                      padding: "10px",
+                      padding: "5px 10px",
                       borderRight:"1px solid #ccc"
                     }}
                   >
@@ -411,7 +411,7 @@ const CommonTable = ({ tabledata }) => {
                       color: "#6e3b37",
                       fontSize: "14px",
                       fontWeight: "400",
-                      padding: "10px",
+                      padding: "5px 10px",
                       borderRight:"1px solid #ccc"
                     }}
                   >
@@ -435,7 +435,7 @@ const CommonTable = ({ tabledata }) => {
                       color: "#6e3b37",
                       fontSize: "14px",
                       fontWeight: "400",
-                      padding: "10px",
+                      padding: "5px 10px",
                       borderRight:"1px solid #ccc"
                     }}
                   >
@@ -453,14 +453,14 @@ const CommonTable = ({ tabledata }) => {
                       <div className="d-flex gap-1 cursor-pointer mx-auto justify-items-center">
                         <button
                            onClick={() => UpdateUserData(item.id)}
-                          className="w-full px-2 py-2 text-left text-sm text-primary_clr flex"
+                          className="w-full px-2 pt-2 text-left text-sm text-primary_clr flex"
                         >
                           <EditIcon />
                         </button>
 
                         <button
                           onClick={() => handleDeleteClick(item.id)}
-                          className="w-full px-2 py-2 text-left text-sm text-primary_clr"
+                          className="w-full px-2 pt-2 text-left text-sm text-primary_clr"
                         >
                           <DeleteIcon />
                         </button>
@@ -472,7 +472,7 @@ const CommonTable = ({ tabledata }) => {
             ) : (
               <tr>
                 <td
-                  colSpan="6"
+                  colSpan="14"
                   style={{
                     textAlign: "start",
                     color: "#6e3b37",

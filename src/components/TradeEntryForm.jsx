@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unknown-property */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { db, realtimeDb } from "./firebase";
 import { push, set, ref, onValue, update, remove } from "firebase/database";
@@ -13,6 +13,7 @@ import axios from "axios";
 import ConfirmationPopup from "./ConfirmationPopup";
 
 const TradeEntryForm = ({ showToast }) => {
+  const checkedInput = useRef(null);
   const { setAddBroker, updateBroker, setUpdateBroker } = useContextProvider();
   const [isFocused, setIsFocused] = useState({
     symbol: false,
@@ -188,7 +189,6 @@ const TradeEntryForm = ({ showToast }) => {
   ✅ T3:  ${formData.target3}
   ✅ T4:  ${formData.target4}
   📝 Note: ${formData.comment}`,
-      
       });
       return res.data.result.message_id;
     } catch (error) {
@@ -216,15 +216,14 @@ const TradeEntryForm = ({ showToast }) => {
         reply_to_message_id: formData.messageId,
       });
 
-     
       return messageId;
     } catch (error) {
       console.error("Error sending Telegram message: ", error);
     }
   };
   const updateDataInRealtimeDB = async (data) => {
-   UpdateTelegramMessage();
-    
+    UpdateTelegramMessage();
+
     try {
       const tradeRef = ref(realtimeDb, `trades/${id}`);
       await update(tradeRef, data);
@@ -235,10 +234,9 @@ const TradeEntryForm = ({ showToast }) => {
   };
 
   const saveDataToRealtimeDB = async (data) => {
-   
     const first = await sendMessage();
-    data.messageId= first;
-    data.uniqueId=uuidv4()
+    data.messageId = first;
+    data.uniqueId = uuidv4();
     try {
       const newTradeRef = push(ref(realtimeDb, "trades"));
       await set(newTradeRef, data);
@@ -263,7 +261,7 @@ const TradeEntryForm = ({ showToast }) => {
         currentDateTime.toLocaleString()
       );
     }
-   
+
     const dataToSave = {
       ...formData,
       dateTime: formData.dateTime || new Date().toISOString(),
@@ -382,11 +380,18 @@ const TradeEntryForm = ({ showToast }) => {
     setComformationPopup(false);
   };
 
+  const handleLabelClick = () => {
+    setFormData((prev) => ({
+      ...prev,
+      completed: !prev.completed,
+    }));
+  };
+
   return (
     <>
       <div
         id="TradeForm"
-        className="w-full md:w-2/5 mx-auto p-[20px] bg-white shadow-lg rounded-lg z-[50] relative overflow-auto h-[600px] "
+        className="w-full md:w-2/5 mx-auto p-[20px] bg-white shadow-lg rounded-lg z-[50] relative "
       >
         {comformationPopup && (
           <div className="fixed top-0 left-0 w-full h-screen z-20 bg-black/50 flex justify-center items-center">
@@ -409,322 +414,340 @@ const TradeEntryForm = ({ showToast }) => {
           }}
           className="fixed top-0 left-0 h-screen w-full flex justify-center items-center z-0"
         ></div>
-        <h2 className="font-bold text-lg lg:text-xl text-black mb-6 z-10 relative">
+        <h2 className="font-bold text-lg lg:text-xl text-black mb-6 z-10 relative flex justify-between">
           Add Broker
+          <span
+            onClick={() => {
+              setAddBroker(false);
+              setUpdateBroker(null);
+            }}
+            className="text-4xl text-primary_clr cursor-pointer "
+          >
+            {" "}
+            &times;
+          </span>
         </h2>
 
         <form onSubmit={handleSubmit}>
-          <div className="mb-3 relative">
-            <label
-              onClick={() => handleFocus("symbol")}
-              className={`mb-1 text-primary_clr  absolute left-2 duration-300 ${
-                isFocused.symbol || updateBroker
-                  ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5  z-10 "
-                  : " top-1/2 -translate-y-1/2 opacity-0 z-0"
-              }`}
-              htmlFor="symbol"
-            >
-              Choose Symbol
-            </label>
-            <div className="relative">
-              {showTable && (
-                <div className="absolute top-full left-0 w-full h-[200px] bg-white z-20 mt-1 rounded-lg !border-2 !border-tertiary_clr overflow-auto p-2">
-                  {filterSymbol.length === 0 && (
-                    <div className="w-full mt-3">
-                      <div className="flex items-center justify-between  gap-4 rounded px-3 py-1 !border border-[#C42B1E45] text-tertiary_clr hover:bg-[#C42B1E29] relative group h-10 uppercase w-full">
+          <div className="overflow-auto h-[400px] ">
+            <div className="mb-3 relative">
+              <label
+                onClick={() => handleFocus("symbol")}
+                className={`mb-1 text-primary_clr  absolute left-2 duration-300 ${
+                  isFocused.symbol || updateBroker
+                    ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5  z-10 "
+                    : " top-1/2 -translate-y-1/2 opacity-0 z-0"
+                }`}
+                htmlFor="symbol"
+              >
+                Choose Symbol
+              </label>
+              <div className="relative">
+                {showTable && (
+                  <div className="absolute top-full left-0 w-full max-h-[200px] bg-white z-20 mt-1 rounded-lg !border !border-primary_clr overflow-auto">
+                    {filterSymbol.length === 0 && (
+                      <div className="w-full">
+                        <div className="flex items-center justify-between  gap-4 px-2 py-1 !border-b border-[#C42B1E45] text-primary_clr hover:bg-[#C42B1E1f] relative group h-10 uppercase w-full">
+                          <div
+                            onClick={() =>
+                              alert("Please Add This Entry In Database First")
+                            }
+                            className="w-full text-xs"
+                          >
+                            {formData.symbol}
+                          </div>
+                          <div className="hidden justify-start p-0 group-hover:flex">
+                            <span
+                              onClick={() => handleAddSymbol()}
+                              className="text-[10px] cursor-pointer whitespace-nowrap"
+                            >
+                              Click Here To Add
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                    {filterSymbol.map((symbol) => (
+                      <div key={symbol.id} className="w-full">
                         <div
-                          onClick={() =>
-                            alert("Please Add This Entry In Database First")
-                          }
-                          className="w-full text-xs"
+                          onClick={() => {
+                            setFinalSymbol(symbol.value);
+                            setShowTable(false);
+                            setFormData({ ...formData, symbol: symbol.value });
+                            console.log(formData, "formdata");
+                          }}
+                          className="flex items-center justify-between !border-b border-[#C42B1E45] hover:bg-[#C42B1E1f] gap-4 px-2 py-1 text-primary_clr relative group h-10 uppercase w-full text-xs"
                         >
-                          {formData.symbol}
-                        </div>
-                        <div className="hidden justify-start p-0 group-hover:flex">
-                          <span
-                            onClick={() => handleAddSymbol()}
-                            className="text-[10px] cursor-pointer whitespace-nowrap"
-                          >
-                            Click Here To Add
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                  {filterSymbol.map((symbol) => (
-                    <div key={symbol.id} className="w-full mt-3">
-                      <div
-                        onClick={() => {
-                          setFinalSymbol(symbol.value);
-                          setShowTable(false);
-                          setFormData({ ...formData, symbol: symbol.value });
-                          console.log(formData, "formdata");
-                        }}
-                        className="flex items-center justify-between !border border-[#C42B1E45] hover:bg-[#C42B1E29] gap-4 rounded px-3 py-1 text-tertiary_clr relative group h-10 uppercase w-full text-xs"
-                      >
-                        <span>{symbol.value}</span>
-                        <div className="hidden justify-start p-0 group-hover:flex">
-                          <span
-                            onClick={() => handleDeleteClick(symbol.id)}
-                            className="ml-2 text-[#6b3e37] flex items-center cursor-pointer"
-                          >
-                            <DeleteIcon />
-                          </span>
+                          <span>{symbol.value}</span>
+                          <div className="hidden justify-start p-0 group-hover:flex">
+                            <span
+                              onClick={() => handleDeleteClick(symbol.id)}
+                              className="ml-2 text-[#6b3e37] flex items-center cursor-pointer"
+                            >
+                              <DeleteIcon />
+                            </span>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
+                )}
+                <input
+                  id="symbol"
+                  name="symbol"
+                  onFocus={() => handleFocus("symbol")}
+                  value={formData.symbol}
+                  onChange={handleChange}
+                  type="text"
+                  placeholder="enter symbol"
+                  className="w-full p-2 py-3 border-2 border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none  focus:border-tertiary_clr uppercase "
+                />
+              </div>
+            </div>
+            <div className="mb-3 relative z-1">
+              <label
+                id="dateTime"
+                onClick={() => handleFocus("dateTime")}
+                className={`mb-1 text-primary_clr  absolute left-2 duration-300 ${
+                  isFocused.dateTime || updateBroker
+                    ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5  z-10 "
+                    : " top-1/2 -translate-y-1/2 opacity-0"
+                }`}
+              >
+                Date & Time
+              </label>
+              <input
+                // required
+                type="datetime-local"
+                id="dateTime"
+                name="dateTime"
+                onFocus={() => handleFocus("dateTime")}
+                value={formData.dateTime}
+                onChange={handleChange}
+                className="w-full p-2 py-3 border-2 border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none  focus:border-tertiary_clr"
+              />
+            </div>
+            <div
+              onClick={() => setAddPosition(true)}
+              className="mb-3 relative z-10"
+            >
+              <label
+                onClick={() => handleFocus("position")}
+                className={`mb-1 text-primary_clr  absolute left-2  duration-300 ${
+                  isFocused.position
+                    ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5 z-20 "
+                    : " top-1/2 -translate-y-1/2 opacity-0"
+                } `}
+                htmlFor="positon"
+              >
+                Position
+              </label>
+              <input
+                required
+                type="number"
+                id="position"
+                name="position"
+                value={formData.position}
+                onChange={handleChange}
+                onFocus={() => handleFocus("position")}
+                placeholder="Position"
+                className="w-full p-2 border border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none uppercase"
+              />
+              {addPosition && (
+                <div className="border border-primary_clr absolute top-full mt-1 w-full bg-white rounded-md overflow-hidden">
+                  <p
+                    onClick={(e) => {
+                      e.stopPropagation(); // Prevents event from reaching parent
+                      setAddPosition(false);
+                      setFormData({ ...formData, position: "sell" });
+                    }}
+                    className="text-primary_clr text-sm hover:bg-[#C42B1E1F] mb-0 p-2 capitalize"
+                  >
+                    sell
+                  </p>
+                  <p
+                    onClick={(e) => {
+                      e.stopPropagation(); // Prevents event from reaching parent
+                      setAddPosition(false);
+                      setFormData({ ...formData, position: "buy" });
+                    }}
+                    className="text-primary_clr text-sm hover:bg-[#C42B1E1F] mb-0 p-2 capitalize "
+                  >
+                    buy
+                  </p>
                 </div>
               )}
-              <input
-                id="symbol"
-                name="symbol"
-                onFocus={() => handleFocus("symbol")}
-                value={formData.symbol}
-                onChange={handleChange}
-                type="text"
-                placeholder="enter symbol"
-                className="w-full p-2 py-3 border-2 border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none  focus:border-tertiary_clr uppercase "
-              />
             </div>
-          </div>
-          <div className="mb-3 relative z-1">
-            <label
-              id="dateTime"
-              onClick={() => handleFocus("dateTime")}
-              className={`mb-1 text-primary_clr  absolute left-2 duration-300 ${
-                isFocused.dateTime || updateBroker
-                  ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5  z-10 "
-                  : " top-1/2 -translate-y-1/2 opacity-0"
-              }`}
-            >
-              Date & Time
-            </label>
-            <input
-              // required
-              type="datetime-local"
-              id="dateTime"
-              name="dateTime"
-              onFocus={() => handleFocus("dateTime")}
-              value={formData.dateTime}
-              onChange={handleChange}
-              className="w-full p-2 py-3 border-2 border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none  focus:border-tertiary_clr"
-            />
-          </div>
-          <div
-            onClick={() => setAddPosition(true)}
-            className="mb-3 relative z-10"
-          >
-            <label
-              onClick={() => handleFocus("position")}
-              className={`mb-1 text-primary_clr  absolute left-2  duration-300 ${
-                isFocused.position
-                  ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5 z-20 "
-                  : " top-1/2 -translate-y-1/2 opacity-0"
-              } `}
-              htmlFor="positon"
-            >
-              Position
-            </label>
-            <input
-              required
-              type="text"
-              id="position"
-              name="position"
-              value={formData.position}
-              onChange={handleChange}
-              onFocus={() => handleFocus("position")}
-              placeholder="Position"
-              className="w-full p-2 border border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none uppercase"
-            />
-            {addPosition && (
-              <div className="border border-primary_clr absolute top-full mt-1 w-full bg-white rounded-md overflow-hidden">
-                <p
-                  onClick={(e) => {
-                    e.stopPropagation(); // Prevents event from reaching parent
-                    setAddPosition(false);
-                    setFormData({ ...formData, position: "sell" });
-                  }}
-                  className="text-primary_clr text-sm hover:bg-[#C42B1E1F] mb-0 p-2 capitalize"
-                >
-                  sell
-                </p>
-                <p
-                  onClick={(e) => {
-                    e.stopPropagation(); // Prevents event from reaching parent
-                    setAddPosition(false);
-                    setFormData({ ...formData, position: "buy" });
-                  }}
-                  className="text-primary_clr text-sm hover:bg-[#C42B1E1F] mb-0 p-2 capitalize "
-                >
-                  buy
-                </p>
-              </div>
-            )}
-          </div>
 
-          <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-3 ">
-            <div className="relative">
-              <label
-                htmlFor="entryPriceFrom"
-                onClick={() => handleFocus("entryPriceFrom")}
-                className={`mb-1 text-primary_clr  absolute left-2 duration-300 ${
-                  isFocused.entryPriceFrom || updateBroker
-                    ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5 z-10"
-                    : " top-1/2 -translate-y-1/2 opacity-0"
-                }`}
-              >
-                Entry Price From
-              </label>
-              <input
-                required
-                type="text"
-                id="entryPriceFrom"
-                name="entryPriceFrom"
-                value={formData.entryPriceFrom}
-                onChange={handleChange}
-                onFocus={() => handleFocus("entryPriceFrom")}
-                placeholder="Entry Price From"
-                className="w-full p-2 border border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none z-[9] relative"
-              />
-            </div>
-            <div className="relative">
-              <label
-                onClick={() => handleFocus("entryPriceTo")}
-                className={`mb-1 text-primary_clr  absolute left-2 duration-300 ${
-                  isFocused.entryPriceTo || updateBroker
-                    ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5 z-10 "
-                    : " top-1/2 -translate-y-1/2 opacity-0"
-                }`}
-                htmlFor="entryPriceTo"
-              >
-                Entry Price To
-              </label>
-              <input
-                required
-                type="text"
-                id="entryPriceTo"
-                name="entryPriceTo"
-                value={formData.entryPriceTo}
-                onFocus={() => handleFocus("entryPriceTo")}
-                onChange={handleChange}
-                placeholder="Entry Price To"
-                className="w-full p-2 border border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none relative z-[9]"
-              />
-            </div>
-          </div>
-          <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-3">
-            <div className="relative">
-              <label
-                onClick={() => handleFocus("stopLoss")}
-                className={`mb-1 text-primary_clr absolute left-2 duration-300 ${
-                  isFocused.stopLoss || updateBroker
-                    ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5  z-10"
-                    : " top-1/2 -translate-y-1/2 opacity-0"
-                }`}
-                htmlFor="stopLoss"
-              >
-                Stop Loss
-              </label>
-              <div className="d-flex align-items-center gap-2 relative text-[#97514b] formInput rounded-md">
-                <input
-                  required
-                  type="text"
-                  id="stopLoss"
-                  name="stopLoss"
-                  value={formData.stopLoss}
-                  onChange={handleChange}
-                  onFocus={() => handleFocus("stopLoss")}
-                  placeholder="stop loss"
-                  className="w-full p-2 border-0 text-[#97514b] formInput rounded-md outline-none pe-2 relative z-[9]"
-                />{" "}
-                <input
-                  className="w-[14px] h-[14px] absolute top-1/2 -translate-y-1/2 right-3"
-                  type="checkbox"
-                  name="stopLossEnabled"
-                  checked={formData.stopLossEnabled}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-            <div className="flex items-end relative z-10">
-              <label
-                for="completed"
-                className="w-full flex items-center text-primary_clr !border border-primary_clr  bg-[#C42B1E0A] px-3 rounded-md gap-2 cursor-default"
-              >
-                <input
-                  className="w-[14px] h-[14px] "
-                  type="checkbox"
-                  name="completed"
-                  id="completed"
-                  checked={formData.completed}
-                  onChange={handleChange}
-                />
-                Completed
-              </label>
-            </div>
-          </div>
-
-          <div className="mb-3 grid grid-cols-2 gap-x-4 gap-y-4">
-            {[1, 2, 3, 4].map((target) => (
-              <div key={target} className="relative">
+            <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-3 ">
+              <div className="relative">
                 <label
-                  onClick={() => handleFocus(`target${target}`)}
-                  className={`mb-1 text-primary_clr absolute left-2 duration-300 ${
-                    isFocused.targetsChecked[`target${target}`] || updateBroker
+                  htmlFor="entryPriceFrom"
+                  onClick={() => handleFocus("entryPriceFrom")}
+                  className={`mb-1 text-primary_clr  absolute left-2 duration-300 ${
+                    isFocused.entryPriceFrom || updateBroker
                       ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5 z-10"
                       : " top-1/2 -translate-y-1/2 opacity-0"
                   }`}
-                  htmlFor={`target${target}`}
                 >
-                  Target {target}
+                  Entry Price From
                 </label>
-                <div className="d-flex align-items-center gap-2 text-[#97514b] formInput rounded-md target_box1 relative">
+                <input
+                  required
+                  type="number"
+                  id="entryPriceFrom"
+                  name="entryPriceFrom"
+                  value={formData.entryPriceFrom}
+                  onChange={handleChange}
+                  onFocus={() => handleFocus("entryPriceFrom")}
+                  placeholder="Entry Price From"
+                  className="w-full p-2 border border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none z-[9] relative"
+                />
+              </div>
+              <div className="relative">
+                <label
+                  onClick={() => handleFocus("entryPriceTo")}
+                  className={`mb-1 text-primary_clr  absolute left-2 duration-300 ${
+                    isFocused.entryPriceTo || updateBroker
+                      ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5 z-10 "
+                      : " top-1/2 -translate-y-1/2 opacity-0"
+                  }`}
+                  htmlFor="entryPriceTo"
+                >
+                  Entry Price To
+                </label>
+                <input
+                  required
+                  type="number"
+                  id="entryPriceTo"
+                  name="entryPriceTo"
+                  value={formData.entryPriceTo}
+                  onFocus={() => handleFocus("entryPriceTo")}
+                  onChange={handleChange}
+                  placeholder="Entry Price To"
+                  className="w-full p-2 border border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none relative z-[9]"
+                />
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-3">
+              <div className="relative">
+                <label
+                  onClick={() => handleFocus("stopLoss")}
+                  className={`mb-1 text-primary_clr absolute left-2 duration-300 ${
+                    isFocused.stopLoss || updateBroker
+                      ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5  z-10"
+                      : " top-1/2 -translate-y-1/2 opacity-0"
+                  }`}
+                  htmlFor="stopLoss"
+                >
+                  Stop Loss
+                </label>
+                <div className="d-flex align-items-center gap-2 relative text-[#97514b] formInput rounded-md">
                   <input
-                    required={target === 1}
-                    type="text"
-                    id={`target${target}`}
-                    name={`target${target}`}
-                    value={formData[`target${target}`]}
+                    required
+                    type="number"
+                    id="stopLoss"
+                    name="stopLoss"
+                    value={formData.stopLoss}
                     onChange={handleChange}
-                    onFocus={() => handleFocus(`target${target}`)}
-                    placeholder={`target${target}`}
-                    className="w-full p-2 border border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none pe-2 realtive z-[9]"
-                  />
+                    onFocus={() => handleFocus("stopLoss")}
+                    placeholder="Stop Loss"
+                    className="w-full p-2 border-0 text-[#97514b] formInput rounded-md outline-none pe-2 relative z-[9]"
+                  />{" "}
                   <input
                     className="w-[14px] h-[14px] absolute top-1/2 -translate-y-1/2 right-3"
                     type="checkbox"
-                    // checked={!!formData.targetsChecked[target${target}]}
-                    onChange={(e) =>
-                      handleCheckboxChange(`target${target}`, e.target.checked)
-                    }
+                    name="stopLossEnabled"
+                    checked={formData.stopLossEnabled}
+                    onChange={handleChange}
                   />
                 </div>
               </div>
-            ))}
-          </div>
-          <div className="mb-3 relative">
-            <label
-              onClick={() => handleFocus("comment")}
-              className={`mb-1 text-primary_clr  absolute left-2  duration-300 ${
-                isFocused.comment || updateBroker
-                  ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5 z-10"
-                  : " top-0 translate-y-1/2 opacity-0"
-              }`}
-              htmlFor="comment"
-            >
-              Comment
-            </label>
-            <textarea
-              id="comment"
-              name="comment"
-              value={formData.comment}
-              onFocus={() => handleFocus("comment")}
-              onChange={handleChange}
-              placeholder="comments"
-              rows="4"
-              className="w-full h-[80px] relative z-[9] p-2 !border !border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none resize-none"
-            />
+              <div className="flex items-end z-[5]">
+                <label
+                  onClick={handleLabelClick}
+                  htmlFor="completed"
+                  className="w-full flex items-center text-primary_clr !border border-primary_clr  bg-[#C42B1E0A] px-3 rounded-md gap-2 cursor-default z-[5]"
+                >
+                  <input
+                    ref={checkedInput}
+                    className="w-[14px] h-[14px] "
+                    type="checkbox"
+                    name="completed"
+                    id="completed"
+                    checked={formData.completed}
+                    onChange={handleChange}
+                  />
+                  Completed
+                </label>
+              </div>
+            </div>
+
+            <div className="mb-3 grid grid-cols-2 gap-x-4 gap-y-4">
+              {[1, 2, 3, 4].map((target) => (
+                <div key={target} className="relative">
+                  <label
+                    onClick={() => handleFocus(`target${target}`)}
+                    className={`mb-1 text-primary_clr absolute left-2 duration-300 ${
+                      isFocused.targetsChecked[`target${target}`] ||
+                      updateBroker
+                        ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5 z-10"
+                        : " top-1/2 -translate-y-1/2 opacity-0"
+                    }`}
+                    htmlFor={`target${target}`}
+                  >
+                    Target {target}
+                  </label>
+                  <div className="d-flex align-items-center gap-2 text-[#97514b] formInput rounded-md target_box1 relative">
+                    <input
+                      required={target === 1}
+                      type="number"
+                      id={`target${target}`}
+                      name={`target${target}`}
+                      value={formData[`target${target}`]}
+                      onChange={handleChange}
+                      onFocus={() => handleFocus(`target${target}`)}
+                      placeholder={`target${target}`}
+                      className="w-full p-2 border border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none pe-2 realtive z-[9]"
+                    />
+                    <input
+                      className="w-[14px] h-[14px] absolute top-1/2 -translate-y-1/2 right-3"
+                      type="checkbox"
+                      // checked={!!formData.targetsChecked[target${target}]}
+                      onChange={(e) =>
+                        handleCheckboxChange(
+                          `target${target}`,
+                          e.target.checked
+                        )
+                      }
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="mb-3 relative">
+              <label
+                onClick={() => handleFocus("comment")}
+                className={`mb-1 text-primary_clr  absolute left-2  duration-300 ${
+                  isFocused.comment || updateBroker
+                    ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5 z-10"
+                    : " top-0 translate-y-1/2 opacity-0"
+                }`}
+                htmlFor="comment"
+              >
+                Comment
+              </label>
+              <textarea
+                id="comment"
+                name="comment"
+                value={formData.comment}
+                onFocus={() => handleFocus("comment")}
+                onChange={handleChange}
+                placeholder="comments"
+                rows="4"
+                className="w-full h-[80px] relative z-[9] p-2 !border !border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none resize-none"
+              />
+            </div>
           </div>
 
           <div className="flex gap-3 justify-end mt-4 relative z-10">

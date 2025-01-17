@@ -23,6 +23,7 @@ const DashboardTable = () => {
     totalPages,
     handlePageChange,
     handleItemsPerPageChange,
+    currentProgressData,
     isToastVisible,
     addBroker, setAddBroker
   } = useContextProvider();
@@ -108,7 +109,7 @@ const DashboardTable = () => {
                     isAdminDashboard ? "pb-8" : ""
                   }`}
                 >
-                  <CommonTable tabledata={data} />
+                  <CommonTable tabledata={currentProgressData} />
                 </div>
                 {/* Pagination Controls */}
                 <div className="d-flex flex-col sm:flex-row justify-end items-end sm:items-center gap-3 py-3 px-3">

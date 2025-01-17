@@ -71,10 +71,6 @@ export const ContextProvider = ({ children }) => {
     fetchData();
   }, []);
 
-  // const formatDate = (dateTime) => {
-  //   const date = new Date(dateTime);
-  //   return isNaN(date.getTime()) ? "Invalid Date" : date.toLocaleDateString();
-  // };
 
   const formatDate = (dateTime) => {
     const date = new Date(dateTime);
@@ -95,33 +91,34 @@ export const ContextProvider = ({ children }) => {
   
  
   // // progress table
-  // const handleItemsPerPageChange = (num) => {
-  //   setItemsPerPage(num);
-  //   setCurrentPage(1);
-  // };
+  const handleItemsPerPageChange = (num) => {
+    setItemsPerPage(num);
+    setCurrentPage(1);
+  };
 
-  // const currentProgressData = data.slice(
-  //   (currentPage - 1) * itemsPerPage,
-  //   currentPage * itemsPerPage
-  // );
+  const currentProgressData = data.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
 
-  //  const handlePageChange = (page) => {
-  //    if (page >= 1 && page <= totalPages) {
-  //      setCurrentPage(page);
-  //    }
-  //  };
+
+   const handlePageChange = (page) => {
+     if (page >= 1 && page <= totalPages) {
+       setCurrentPage(page);
+     }
+   };
 
   // // Complete table
-  // const handleItemsPerCompletePageChange = (num) => {
-  //   setItemsPerCompletePage(num);
-  //   setCurrentCompletePage(1);
-  // };
+  const handleItemsPerCompletePageChange = (num) => {
+    setItemsPerCompletePage(num);
+    setCurrentCompletePage(1);
+  };
 
-  //    const handleCompletePageChange = (page) => {
-  //      if (page >= 1 && page <= totalCompletePages) {
-  //        setCurrentCompletePage(page);
-  //      }
-  //    };
+     const handleCompletePageChange = (page) => {
+       if (page >= 1 && page <= totalCompletePages) {
+         setCurrentCompletePage(page);
+       }
+     };
 
   //   const currentCompleteData = completedata.slice(
   //     (currentCompletePage - 1) * itemsPerCompletePage,
@@ -147,11 +144,13 @@ export const ContextProvider = ({ children }) => {
     setData,
     itemsPerPage,
     itemsPerCompletePage,
-    
+    handleItemsPerCompletePageChange,
+    handleCompletePageChange,
+    handlePageChange,
     currentCompletePage,
     totalCompletePages,
     setItemsPerPage,
-    setItemsPerCompletePage,
+    setItemsPerCompletePage,handleItemsPerPageChange,
     updateBroker, setUpdateBroker,
     currentPage,
     setCurrentPage,
@@ -159,7 +158,7 @@ export const ContextProvider = ({ children }) => {
     formatDate,
     totalPages,
     deleteData,
-    addBroker, setAddBroker
+    addBroker, setAddBroker,currentProgressData
   };
 
   return <MyContext.Provider value={value}>{children}</MyContext.Provider>;

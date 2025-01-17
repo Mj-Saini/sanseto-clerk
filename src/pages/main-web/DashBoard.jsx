@@ -129,7 +129,7 @@ const DashBoard = () => {
                 >
                   <MenuIcon />
                 </div>
-                <div className="relative p-2">
+                <div className="relative p-1.5">
                   <div className="flex items-center space-x-2 text-gray-700 hover:text-gray-900">
                     {isAdminDashboard ? (
                       <button
@@ -145,7 +145,7 @@ const DashBoard = () => {
                       <>
                         <button
                           onClick={toggleDropdown}
-                          className="block w-full text-center whitespace-nowrap ps-2 sm:ps-4 py-1.5 text-base text-gray-700 "
+                          className="block w-full text-center whitespace-nowrap ps-2 sm:ps-4 text-base text-gray-700 "
                         >
                           {isLoaded && user ? (
                             <img

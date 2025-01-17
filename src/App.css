@@ -178,6 +178,9 @@ input:-webkit-autofill:active{
 #TradeForm textarea:focus {
   border: 2px solid #C42B1E !important;
 } 
+#TradeForm textarea {
+  border: 1px solid #6e3b37 !important;
+} 
 
 .form-select:focus {
   border:2px solid #C42B1E !important;
