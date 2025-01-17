@@ -177,7 +177,7 @@ const TradeEntryForm = ({ showToast }) => {
 
     try {
       const res = await axios.post(apiUrl, {
-        chat_id: "-1002266171260",
+        chat_id: "-1002437061530",
         text: `TRADE CALL ALERT 📢
   🔹 Action: ${formData.position}
   🔹 Symbol: ${formData.symbol}
@@ -196,12 +196,12 @@ const TradeEntryForm = ({ showToast }) => {
     }
   };
   const UpdateTelegramMessage = async () => {
-    const botToken1 = "7561749170:AAGKilLQVCXiW9z5SK2VEHJdpgXHzUuzUZY"; // Replace with your bot token
+    const botToken1 = "7775810841:AAHC-3a43B3jK_lskNdSWiASWXTE9CKi2SM"; // Replace with your bot token
     const apiUrl = `https://api.telegram.org/bot${botToken1}/sendMessage`;
 
     try {
       const res = await axios.post(apiUrl, {
-        chat_id: "-1002266171260",
+        chat_id: "-1002437061530",
         text: `TRADE CALL ALERT 📢
   🔹 Action: ${formData.position}
   🔹 Symbol: ${formData.symbol}

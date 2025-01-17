@@ -23,6 +23,8 @@ export const ContextProvider = ({ children }) => {
   const [isToastVisible, setIsToastVisible] = useState(false);
   const [addBroker, setAddBroker] = useState(false);
   const [updateBroker, setUpdateBroker] = useState(null);
+ const [loading,setloading]=useState(false)
+
 
   const showToast = () => {
     setIsToastVisible(true);
@@ -59,17 +61,21 @@ export const ContextProvider = ({ children }) => {
           } else {
             console.log("No data available");
             setData([]);
+            setloading(true)
             // setCompleteData([]);
           }
         },
         (error) => {
           console.error("Error fetching data from Realtime Database: ", error);
+          setloading(true)
         }
       );
     };
 
     fetchData();
   }, []);
+
+  console.log(loading,"Loading")
 
 
   const formatDate = (dateTime) => {
@@ -120,11 +126,6 @@ export const ContextProvider = ({ children }) => {
        }
      };
 
-  //   const currentCompleteData = completedata.slice(
-  //     (currentCompletePage - 1) * itemsPerCompletePage,
-  //     currentCompletePage * itemsPerCompletePage
-  //   );
-
 
 
   const deleteData = async (id) => {
@@ -157,7 +158,7 @@ export const ContextProvider = ({ children }) => {
     isToastVisible,
     formatDate,
     totalPages,
-    deleteData,
+    deleteData,loading,
     addBroker, setAddBroker,currentProgressData
   };
 
