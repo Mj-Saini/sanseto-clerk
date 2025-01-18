@@ -249,6 +249,13 @@ input[type="checkbox"] {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+
+td{
+  align-content: center !important;
+}
+
+
 /* LOADING ANIMATION */
 
 .loader {

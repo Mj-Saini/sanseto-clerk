@@ -460,17 +460,17 @@ const CommonTable = ({ tabledata }) => {
                       }}
                       className="ps-3 sticky right-0"
                     >
-                      <div className="d-flex gap-1 cursor-pointer mx-auto justify-items-center">
+                      <div className="d-flex gap-2 mx-auto justify-items-center">
                         <button
                           onClick={() => UpdateUserData(item.id)}
-                          className="w-full px-2 pt-2 text-left text-sm text-primary_clr flex"
+                          className="w-full ps-2 text-left text-sm text-primary_clr flex"
                         >
                           <EditIcon />
                         </button>
 
                         <button
                           onClick={() => handleDeleteClick(item.id)}
-                          className="w-full px-2 pt-2 text-left text-sm text-primary_clr"
+                          className="w-full ps-2 text-left text-sm text-primary_clr"
                         >
                           <DeleteIcon />
                         </button>

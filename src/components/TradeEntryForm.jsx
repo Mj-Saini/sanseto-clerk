@@ -224,7 +224,7 @@ const TradeEntryForm = () => {
     }
   };
   const updateDataInRealtimeDB = async (data) => {
-    // UpdateTelegramMessage();
+    UpdateTelegramMessage();
 
     try {
       const tradeRef = ref(realtimeDb, `trades/${id}`);
@@ -236,9 +236,9 @@ const TradeEntryForm = () => {
   };
 
   const saveDataToRealtimeDB = async (data) => {
-    // const first = await sendMessage();
-    // data.messageId = first;
-    // data.uniqueId = uuidv4();
+    const first = await sendMessage();
+    data.messageId = first;
+    data.uniqueId = uuidv4();
     try {
       const newTradeRef = push(ref(realtimeDb, "trades"));
       await set(newTradeRef, data);
@@ -707,7 +707,7 @@ const TradeEntryForm = () => {
                     onClick={() => handleFocus(`target${target}`)}
                     className={`mb-1 text-primary_clr absolute left-2 duration-300 ${
                       isFocused.targetsChecked[`target${target}`] ||
-                      updateBroker
+                      updateBroker || formData[`target${target}`]
                         ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5 z-10"
                         : " top-1/2 -translate-y-1/2 opacity-0"
                     }`}
