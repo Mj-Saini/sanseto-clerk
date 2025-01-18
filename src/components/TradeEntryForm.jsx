@@ -392,7 +392,7 @@ const TradeEntryForm = () => {
     <>
       <div
         id="TradeForm"
-        className="w-full md:w-2/5 mx-auto p-[20px] bg-white shadow-lg rounded-lg z-[50] relative "
+        className="w-full md:w-2/3 lg:w-2/5 mx-auto p-[20px] bg-white shadow-lg rounded-lg z-[50] relative "
       >
         {comformationPopup && (
           <div className="fixed top-0 left-0 w-full h-screen z-20 bg-black/50 flex justify-center items-center">
