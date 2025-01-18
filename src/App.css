@@ -1,46 +1,45 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
 
-*{
+* {
   font-family: "Nunito", sans-serif;
   text-decoration: none !important;
 }
 
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active{
-    -webkit-box-shadow: 0 0 0 30px white inset !important;
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
-
 
 /* Dark Button */
 .btn_dark {
-  background-color: #C42B1E!important;
-  color: white!important;
+  background-color: #c42b1e;
+  color: white !important;
   padding: 0.45rem 1rem;
-  border-radius: 6px!important;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2)!important;
+  border-radius: 6px !important;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2) !important;
   transition: background-color 0.3s ease;
-  font-weight: 700!important;
-  letter-spacing: .025rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.025rem !important;
 }
 
 .btn_dark:hover {
-  background-color: #c42c1ec4!important; /* Darker shade for hover */
+  background-color: #c42c1ec4 !important; /* Darker shade for hover */
 }
 
 .btn_light {
   background-color: transparent !important;
-  color: #C42B1E!important;
-  border: 1px solid #C42B1E!important;
-  font-size: 12px!important;
+  color: #c42b1e !important;
+  border: 1px solid #c42b1e !important;
+  font-size: 12px !important;
   padding: 0rem 1rem;
   border-radius: 0.25rem;
-  border-radius: 6px!important;
-  transition: background-color 0.3s ease!important;
-  text-transform: uppercase!important;
+  border-radius: 6px !important;
+  transition: background-color 0.3s ease !important;
+  text-transform: uppercase !important;
   font-weight: 700 !important;
-  letter-spacing: .025rem
+  letter-spacing: 0.025rem;
 }
 
 .btn_light:hover {
@@ -54,7 +53,7 @@ input:-webkit-autofill:active{
   --bs-btn-border-color: #6e3b37 !important;
 }
 .btn-secondary:hover {
-  --bs-btn-hover-color: none !important;;
+  --bs-btn-hover-color: none !important;
   --bs-btn-hover-bg: none !important;
 }
 
@@ -67,7 +66,7 @@ input:-webkit-autofill:active{
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease;
 }
-
+/* 
 .btn-primary {
   --bs-btn-color: #6e3b37 !important;
   --bs-btn-bg: #fff !important;
@@ -87,14 +86,14 @@ input:-webkit-autofill:active{
 .btn-primary:focus {
   box-shadow: var(--mdb-btn-box-shadow-state);
   background-color: none !important;
-}
-.dropdown-toggle{
-  border: 1px solid #C6B6B4 !important;
+} */
+.dropdown-toggle {
+  border: 1px solid #c6b6b4 !important;
   padding: 4px 14px !important;
 }
-.dropdown-toggle:hover{
+.dropdown-toggle:hover {
   border: 1px solid #6e3b37 !important;
-  color:  #6e3b37 !important;
+  color: #6e3b37 !important;
 }
 
 .dropdown-toggle::after {
@@ -102,7 +101,7 @@ input:-webkit-autofill:active{
 }
 
 .btn_secondary:hover {
-  background-color: #e2e6ea; 
+  background-color: #e2e6ea;
 }
 
 /* Link Button */
@@ -128,7 +127,6 @@ input:-webkit-autofill:active{
 .text_color_brown {
   color: #6e3b37;
 }
-
 
 .custom-select {
   position: relative;
@@ -158,11 +156,11 @@ input:-webkit-autofill:active{
 }
 
 .backdrop_blur {
-  backdrop-filter: blur(10px); 
-  z-index: 1000; 
+  backdrop-filter: blur(10px);
+  z-index: 1000;
 }
 
-.box_shadow_tabel{
+.box_shadow_tabel {
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -172,48 +170,51 @@ input:-webkit-autofill:active{
   --bs-dropdown-link-color: #6e3b37 !important;
   --bs-dropdown-link-hover-color: #c42b1e !important;
   --bs-dropdown-link-hover-bg: #c42b1e29 !important;
-  --bs-dropdown-link-active-color: #c42b1e !important;}
-
-  .btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active {
-    color: #6e3b37 !important;
-    background-color: transparent !important;
-    border-color: #6e3b37 !important;
+  --bs-dropdown-link-active-color: #c42b1e !important;
 }
 
+.btn-check:checked + .btn,
+.btn.active,
+.btn.show,
+.btn:first-child:active,
+:not(.btn-check) + .btn:active {
+  color: #6e3b37 !important;
+  background-color: transparent !important;
+  border-color: #6e3b37 !important;
+}
 
-#TradeForm select,#TradeForm input{
+#TradeForm select,
+#TradeForm input {
   border: 1px solid #6e3b37 !important;
   color: #6e3b37;
   font-size: 14px;
   height: 40px;
 }
 
- 
 #TradeForm .formInput:focus {
-  border: 2px solid #C42B1E !important;
-} 
+  border: 2px solid #c42b1e !important;
+}
 #TradeForm textarea:focus {
-  border: 2px solid #C42B1E !important;
-} 
+  border: 2px solid #c42b1e !important;
+}
 #TradeForm textarea {
   border: 1px solid #6e3b37 !important;
-} 
+}
 
 .form-select:focus {
-  border:2px solid #C42B1E !important;
+  border: 2px solid #c42b1e !important;
   outline: 0;
-  box-shadow: none !important 
+  box-shadow: none !important;
 }
-select option{
+select option {
   color: #6c757d !important;
 }
 
-input::placeholder{
-  color: #97514b; 
+input::placeholder {
+  color: #97514b;
 }
-textarea::placeholder{
-  color: #97514b; 
-
+textarea::placeholder {
+  color: #97514b;
 }
 input[type="datetime-local"]::-webkit-datetime-edit {
   color: #97514b; /* Hides the date input text (if empty) */
@@ -223,14 +224,31 @@ input[type="datetime-local"]:focus::-webkit-datetime-edit {
   color: #97514b; /* Text color when focused */
 }
 
-input[type="checkbox"]{
+input[type="checkbox"] {
   accent-color: #c43b1e;
 }
-::-webkit-scrollbar{
-  display: none;
+
+/* Scrollbar overall width */
+::-webkit-scrollbar {
+  width: 10px; /* Total scrollbar width */
 }
 
+/* Scrollbar track */
+::-webkit-scrollbar-track {
+  background: white;
+}
 
+/* Scrollbar thumb */
+::-webkit-scrollbar-thumb {
+  background: #c43b1e;
+  border-radius: 10px;
+  border: 3px solid white; /* Creates the difference in width */
+}
+
+/* Thumb hover effect */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
 /* LOADING ANIMATION */
 
 .loader {
@@ -244,7 +262,7 @@ input[type="checkbox"]{
   left: 0;
   height: 2px;
   width: 0%;
-  background-color: #c42b1e; 
+  background-color: #c42b1e;
   animation: growBar 1s linear infinite;
 }
 
@@ -256,9 +274,6 @@ input[type="checkbox"]{
     width: 100%;
   }
 }
-
-
-
 
 @media (min-width: 320px) {
   .custom-grid {
@@ -323,7 +338,7 @@ input[type="checkbox"]{
     display: flex;
   }
 
-  .items_xxl_end{
+  .items_xxl_end {
     align-items: end;
   }
 }

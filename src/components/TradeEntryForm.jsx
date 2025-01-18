@@ -14,6 +14,7 @@ import ConfirmationPopup from "./ConfirmationPopup";
 
 const TradeEntryForm = () => {
   const checkedInput = useRef(null);
+  const [isChanged, setIsChanged] = useState(false);
   const { setAddBroker, updateBroker, setUpdateBroker } = useContextProvider();
   const [isFocused, setIsFocused] = useState({
     symbol: false,
@@ -169,6 +170,7 @@ const TradeEntryForm = () => {
         setFilterSymbol([]);
       }
     }
+    setIsChanged(true);
   };
   const sendMessage = async () => {
     const botToken1 = "7775810841:AAHC-3a43B3jK_lskNdSWiASWXTE9CKi2SM"; // Replace with your bot token
@@ -222,7 +224,7 @@ const TradeEntryForm = () => {
     }
   };
   const updateDataInRealtimeDB = async (data) => {
-    UpdateTelegramMessage();
+    // UpdateTelegramMessage();
 
     try {
       const tradeRef = ref(realtimeDb, `trades/${id}`);
@@ -234,9 +236,9 @@ const TradeEntryForm = () => {
   };
 
   const saveDataToRealtimeDB = async (data) => {
-    const first = await sendMessage();
-    data.messageId = first;
-    data.uniqueId = uuidv4();
+    // const first = await sendMessage();
+    // data.messageId = first;
+    // data.uniqueId = uuidv4();
     try {
       const newTradeRef = push(ref(realtimeDb, "trades"));
       await set(newTradeRef, data);
@@ -267,10 +269,13 @@ const TradeEntryForm = () => {
       dateTime: formData.dateTime || new Date().toISOString(),
     };
     if (id) {
-      await updateDataInRealtimeDB(dataToSave);
-      setAddBroker(false);
-      navigate(`/admin-dashboard`);
-      setUpdateBroker(null);
+      if (isChanged) {
+        await updateDataInRealtimeDB(dataToSave);
+        setAddBroker(false);
+        navigate(`/admin-dashboard`);
+        setUpdateBroker(null);
+        setIsChanged(false);
+      }
     } else {
       await saveDataToRealtimeDB(dataToSave);
       setAddBroker(false);
@@ -392,7 +397,7 @@ const TradeEntryForm = () => {
     <>
       <div
         id="TradeForm"
-        className="w-full md:w-2/3 lg:w-2/5 mx-auto p-[20px] bg-white shadow-lg rounded-lg z-[50] relative "
+        className="w-full md:w-2/3 lg:w-2/5 mx-auto px-[20px] pb-[20px] pt-2.5 bg-white shadow-lg rounded-lg z-[50] relative "
       >
         {comformationPopup && (
           <div className="fixed top-0 left-0 w-full h-screen z-20 bg-black/50 flex justify-center items-center">
@@ -416,22 +421,24 @@ const TradeEntryForm = () => {
           }}
           className="fixed top-0 left-0 h-screen w-full flex justify-center items-center z-0"
         ></div>
-   
-         <span className="font-bold text-lg lg:text-xl text-black mb-0 relative z-[1] "> Add Broker</span>
-         
-         <span
-            onClick={() => {
-              setAddBroker(false);
-              setUpdateBroker(null);
-            }}
-            className="text-3xl text-primary_clr cursor-pointer absolute top-2 right-4"
-          >
-            {" "}
-            &times;
-          </span>
 
-        <form onSubmit={handleSubmit} className="relative">
-     
+        <span className="font-bold text-lg lg:text-xl text-black mb-0 relative z-[1] ">
+          {" "}
+          Add Broker
+        </span>
+
+        <span
+          onClick={() => {
+            setAddBroker(false);
+            setUpdateBroker(null);
+          }}
+          className="text-3xl text-primary_clr cursor-pointer absolute top-2 right-4"
+        >
+          {" "}
+          &times;
+        </span>
+
+        <form onSubmit={handleSubmit} className="relative pt-2">
           <div className="overflow-auto h-[400px] py-2">
             <div className="mb-3 relative">
               <label
@@ -776,8 +783,9 @@ const TradeEntryForm = () => {
               cancel
             </button>
             <button
+              disabled={!isChanged} 
               type="submit"
-              className="btn_dark text-white py-2 px-4 rounded-md  transition duration-300"
+              className={`btn_dark text-white py-2 px-4 rounded-md  transition duration-300 ${!isChanged ? "pointer-events-none !bg-[gray]":"opacity-100"}`}
             >
               Submit
             </button>
