@@ -50,7 +50,7 @@ const CommonTable = ({ tabledata }) => {
   };
 
   const isAdminDashboard = location.pathname.startsWith("/admin-dashboard");
-  console.log(loading, "Loading admin dashboard");
+
   return (
     <div className="py-3 ">
       {/* Table Section */}
@@ -492,7 +492,7 @@ const CommonTable = ({ tabledata }) => {
                   }}
                   className="text-center border-0"
                 >
-                  {loading && <h2>data loading</h2>}
+                  {loading && <h2></h2>}
                 </td>
               </tr>
             )}

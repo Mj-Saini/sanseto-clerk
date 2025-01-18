@@ -76,7 +76,6 @@ export const ContextProvider = ({ children }) => {
     fetchData();
   }, []);
 
-  console.log(loading,"Loading")
 
 
   const formatDate = (dateTime) => {
@@ -159,7 +158,7 @@ export const ContextProvider = ({ children }) => {
     isToastVisible,
     formatDate,
     totalPages,
-    deleteData,loading,
+    deleteData,loading, setLoading,
     addBroker, setAddBroker,currentProgressData
   };
 

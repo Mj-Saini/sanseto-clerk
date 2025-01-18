@@ -15,7 +15,8 @@ import ConfirmationPopup from "./ConfirmationPopup";
 const TradeEntryForm = () => {
   const checkedInput = useRef(null);
   const [isChanged, setIsChanged] = useState(false);
-  const { setAddBroker, updateBroker, setUpdateBroker } = useContextProvider();
+  const { setAddBroker, updateBroker, setUpdateBroker } =
+    useContextProvider();
   const [isFocused, setIsFocused] = useState({
     symbol: false,
     dataTime: false,
@@ -43,7 +44,7 @@ const TradeEntryForm = () => {
   const [comformationPopup, setComformationPopup] = useState(false);
   const [actionType, setActionType] = useState(null); // 'update' or 'delete'
   const [currentId, setCurrentId] = useState(null);
-
+  const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
   const [formData, setFormData] = useState({
     symbol: "",
@@ -224,7 +225,7 @@ const TradeEntryForm = () => {
     }
   };
   const updateDataInRealtimeDB = async (data) => {
-    UpdateTelegramMessage();
+    // UpdateTelegramMessage();
 
     try {
       const tradeRef = ref(realtimeDb, `trades/${id}`);
@@ -236,9 +237,9 @@ const TradeEntryForm = () => {
   };
 
   const saveDataToRealtimeDB = async (data) => {
-    const first = await sendMessage();
-    data.messageId = first;
-    data.uniqueId = uuidv4();
+    // const first = await sendMessage();
+    // data.messageId = first;
+    // data.uniqueId = uuidv4();
     try {
       const newTradeRef = push(ref(realtimeDb, "trades"));
       await set(newTradeRef, data);
@@ -250,59 +251,68 @@ const TradeEntryForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    //  TELEGRAM MESSAGE
-    if (!formData.dateTime) {
-      const currentDateTime = new Date();
-      const formattedDateTime = currentDateTime.toISOString();
-      setFormData((prev) => ({
-        ...prev,
-        dateTime: formattedDateTime,
-      }));
-      console.log(
-        "Formatted DateTime with Timezone:",
-        currentDateTime.toLocaleString()
-      );
-    }
-
-    const dataToSave = {
-      ...formData,
-      dateTime: formData.dateTime || new Date().toISOString(),
-    };
-    if (id) {
-      if (isChanged) {
-        await updateDataInRealtimeDB(dataToSave);
-        setAddBroker(false);
-        navigate(`/admin-dashboard`);
-        setUpdateBroker(null);
-        setIsChanged(false);
+    setLoading(true);
+  
+    try {
+      if (!formData.dateTime) {
+        const currentDateTime = new Date();
+        const formattedDateTime = currentDateTime.toISOString();
+        setFormData((prev) => ({
+          ...prev,
+          dateTime: formattedDateTime,
+        }));
+        console.log(
+          "Formatted DateTime with Timezone:",
+          currentDateTime.toLocaleString()
+        );
       }
-    } else {
-      await saveDataToRealtimeDB(dataToSave);
-      setAddBroker(false);
-    }
-    setFormData({
-      symbol: "XAUUSD",
-      dateTime: "",
-      entryPriceFrom: "",
-      entryPriceTo: "",
-      stopLoss: "",
-      target1: "",
-      target2: "",
-      target3: "",
-      target4: "",
-      comment: "",
-      position: "",
-      uuid: "",
-      massage_Id: "",
-      stopLossEnabled: false,
-      completed: false,
-      targetsChecked: {
+
+      const dataToSave = {
+        ...formData,
+        dateTime: formData.dateTime || new Date().toISOString(),
+      };
+      if (id) {
+        if (isChanged) {
+          await updateDataInRealtimeDB(dataToSave);
+          setAddBroker(false);
+          navigate(`/admin-dashboard`);
+          setUpdateBroker(null);
+          setIsChanged(false);
+        }
+      } else {
+        await saveDataToRealtimeDB(dataToSave);
+        setAddBroker(false);
+      }
+      setFormData({
+        symbol: "XAUUSD",
+        dateTime: "",
+        entryPriceFrom: "",
+        entryPriceTo: "",
+        stopLoss: "",
         target1: "",
         target2: "",
         target3: "",
         target4: "",
-      },
-    });
+        comment: "",
+        position: "",
+        uuid: "",
+        massage_Id: "",
+        stopLossEnabled: false,
+        completed: false,
+        targetsChecked: {
+          target1: "",
+          target2: "",
+          target3: "",
+          target4: "",
+        },
+      });
+    } catch (error) {
+      console.error("Error during data save:", error);
+    } finally {
+      // Set loading to false when the operation is complete
+      setLoading(false);
+      console.log("After operation - Loading state:", loading);
+    }
   };
 
   const handleFocus = (field) => {
@@ -399,6 +409,11 @@ const TradeEntryForm = () => {
         id="TradeForm"
         className="w-full md:w-2/3 lg:w-2/5 mx-auto px-[20px] pb-[20px] pt-2.5 bg-white shadow-lg rounded-lg z-[50] relative "
       >
+        {loading && (
+          <div className="fixed top-0 left-0 w-full h-screen z-[100] bg-black/50 flex justify-center items-center">
+            <div className="spinner"></div>
+          </div>
+        )}
         {comformationPopup && (
           <div className="fixed top-0 left-0 w-full h-screen z-20 bg-black/50 flex justify-center items-center">
             <div
@@ -484,7 +499,7 @@ const TradeEntryForm = () => {
                             setFinalSymbol(symbol.value);
                             setShowTable(false);
                             setFormData({ ...formData, symbol: symbol.value });
-                            console.log(formData, "formdata");
+                            
                           }}
                           className="flex items-center justify-between !border-b border-[#C42B1E45] hover:bg-[#C42B1E1f] gap-4 px-2 py-1 text-primary_clr relative group h-10 uppercase w-full text-xs"
                         >
@@ -559,6 +574,8 @@ const TradeEntryForm = () => {
                 required
                 type="text"
                 id="position"
+                readOnly
+
                 name="position"
                 value={formData.position}
                 onChange={handleChange}
@@ -592,7 +609,8 @@ const TradeEntryForm = () => {
               )}
             </div>
 
-            <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-3 ">
+            <div
+             className="grid grid-cols-2 gap-x-4 gap-y-2 mb-3 ">
               <div className="relative">
                 <label
                   htmlFor="entryPriceFrom"
@@ -607,6 +625,7 @@ const TradeEntryForm = () => {
                 </label>
                 <input
                   required
+                  onWheel={formData.entryPriceFrom}
                   type="number"
                   id="entryPriceFrom"
                   name="entryPriceFrom"
@@ -707,7 +726,8 @@ const TradeEntryForm = () => {
                     onClick={() => handleFocus(`target${target}`)}
                     className={`mb-1 text-primary_clr absolute left-2 duration-300 ${
                       isFocused.targetsChecked[`target${target}`] ||
-                      updateBroker || formData[`target${target}`]
+                      updateBroker ||
+                      formData[`target${target}`]
                         ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5 z-10"
                         : " top-1/2 -translate-y-1/2 opacity-0"
                     }`}
@@ -783,9 +803,11 @@ const TradeEntryForm = () => {
               cancel
             </button>
             <button
-              disabled={!isChanged} 
+              disabled={!isChanged}
               type="submit"
-              className={`btn_dark text-white py-2 px-4 rounded-md  transition duration-300 ${!isChanged ? "pointer-events-none !bg-[gray]":"opacity-100"}`}
+              className={`btn_dark text-white py-2 px-4 rounded-md  transition duration-300 ${
+                !isChanged ? "pointer-events-none !bg-[gray]" : "opacity-100"
+              }`}
             >
               Submit
             </button>
