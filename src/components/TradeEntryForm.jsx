@@ -15,8 +15,7 @@ import ConfirmationPopup from "./ConfirmationPopup";
 const TradeEntryForm = () => {
   const checkedInput = useRef(null);
   const [isChanged, setIsChanged] = useState(false);
-  const { setAddBroker, updateBroker, setUpdateBroker } =
-    useContextProvider();
+  const { setAddBroker, updateBroker, setUpdateBroker } = useContextProvider();
   const [isFocused, setIsFocused] = useState({
     symbol: false,
     dataTime: false,
@@ -42,7 +41,7 @@ const TradeEntryForm = () => {
   const [finalSymbol, setFinalSymbol] = useState("");
   const [addPosition, setAddPosition] = useState(false);
   const [comformationPopup, setComformationPopup] = useState(false);
-  const [actionType, setActionType] = useState(null); // 'update' or 'delete'
+  const [actionType, setActionType] = useState(null);
   const [currentId, setCurrentId] = useState(null);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
@@ -240,10 +239,23 @@ const TradeEntryForm = () => {
     // const first = await sendMessage();
     // data.messageId = first;
     // data.uniqueId = uuidv4();
+
     try {
-      const newTradeRef = push(ref(realtimeDb, "trades"));
-      await set(newTradeRef, data);
-      console.log("Data saved to Realtime Database with key:", newTradeRef.key);
+      let getsymbolvalue = symbols.map((value) => value.value.toLowerCase());
+      console.log(getsymbolvalue);
+
+      if (getsymbolvalue.includes(data.symbol.toLowerCase())) {
+        const newTradeRef = push(ref(realtimeDb, "trades"));
+        await set(newTradeRef, data);
+        console.log(
+          "Data saved to Realtime Database with key:",
+          newTradeRef.key
+        );
+        setAddBroker(false);
+
+      } else {
+        alert("Symbol not found in the database");
+      }
     } catch (e) {
       console.error("Error saving data to Realtime Database: ", e);
     }
@@ -252,7 +264,7 @@ const TradeEntryForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-  
+
     try {
       if (!formData.dateTime) {
         const currentDateTime = new Date();
@@ -281,7 +293,6 @@ const TradeEntryForm = () => {
         }
       } else {
         await saveDataToRealtimeDB(dataToSave);
-        setAddBroker(false);
       }
       setFormData({
         symbol: "XAUUSD",
@@ -499,7 +510,6 @@ const TradeEntryForm = () => {
                             setFinalSymbol(symbol.value);
                             setShowTable(false);
                             setFormData({ ...formData, symbol: symbol.value });
-                            
                           }}
                           className="flex items-center justify-between !border-b border-[#C42B1E45] hover:bg-[#C42B1E1f] gap-4 px-2 py-1 text-primary_clr relative group h-10 uppercase w-full text-xs"
                         >
@@ -518,6 +528,7 @@ const TradeEntryForm = () => {
                   </div>
                 )}
                 <input
+                  required
                   id="symbol"
                   name="symbol"
                   onFocus={(e) => {
@@ -575,7 +586,6 @@ const TradeEntryForm = () => {
                 type="text"
                 id="position"
                 readOnly
-
                 name="position"
                 value={formData.position}
                 onChange={handleChange}
@@ -609,8 +619,7 @@ const TradeEntryForm = () => {
               )}
             </div>
 
-            <div
-             className="grid grid-cols-2 gap-x-4 gap-y-2 mb-3 ">
+            <div className="grid grid-cols-2 gap-x-3 gap-y-2 mb-3 ">
               <div className="relative">
                 <label
                   htmlFor="entryPriceFrom"
@@ -665,7 +674,7 @@ const TradeEntryForm = () => {
                 />
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-3">
+            <div className="grid grid-cols-2 gap-x-3 gap-y-2 mb-3">
               <div className="relative">
                 <label
                   onClick={() => handleFocus("stopLoss")}
@@ -719,7 +728,7 @@ const TradeEntryForm = () => {
               </div>
             </div>
 
-            <div className="mb-3 grid grid-cols-2 gap-x-4 gap-y-4">
+            <div className="mb-3 grid grid-cols-2 gap-x-3 gap-y-4">
               {[1, 2, 3, 4].map((target) => (
                 <div key={target} className="relative">
                   <label
