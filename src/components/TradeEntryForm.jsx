@@ -4,7 +4,15 @@
 import { useEffect, useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { db, realtimeDb } from "./firebase";
-import { push, set, ref, onValue, update, remove } from "firebase/database";
+import {
+  push,
+  set,
+  ref,
+  onValue,
+  update,
+  remove,
+  get,
+} from "firebase/database";
 import { useNavigate } from "react-router-dom";
 import { useContextProvider } from "../context/ContextProvider";
 import "../index.css";
@@ -31,6 +39,7 @@ const TradeEntryForm = () => {
       target4: false,
     },
   });
+
   let messageId;
 
   const id = updateBroker;
@@ -154,7 +163,7 @@ const TradeEntryForm = () => {
     const { name, value, type, checked } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: type === "checkbox" ? checked : value, // Handle checkbox and text input
+      [name]: type === "checkbox" ? checked : value,
     }));
     if (name === "symbol") {
       if (value.length > 0) {
@@ -170,7 +179,6 @@ const TradeEntryForm = () => {
         setFilterSymbol([]);
       }
     }
-    setIsChanged(true);
   };
   const sendMessage = async () => {
     const botToken1 = "7775810841:AAHC-3a43B3jK_lskNdSWiASWXTE9CKi2SM"; // Replace with your bot token
@@ -223,17 +231,153 @@ const TradeEntryForm = () => {
       console.error("Error sending Telegram message: ", error);
     }
   };
-  const updateDataInRealtimeDB = async (data) => {
-    // UpdateTelegramMessage();
+  // const updateDataInRealtimeDB = async (data) => {
+  //   // UpdateTelegramMessage();
 
+  //   try {
+  //     const tradeRef = ref(realtimeDb, `trades/${id}`);
+  //     await update(tradeRef, data);
+  //     setPreviouseObj(tradeRef)
+  //     console.log("Data updated in Realtime Database for ID:", id);
+  //   } catch (e) {
+  //     console.error("Error updating data in Realtime Database: ", e);
+  //   }
+  // };
+
+  // const updateDataInRealtimeDB = async (data) => {
+  //   try {
+  //     const tradeRef = ref(realtimeDb, `trades/${id}`);
+
+  //     // Step 1: Retrieve the previous data
+  //     const snapshot = await get(tradeRef);
+  //     if (!snapshot.exists()) {
+  //       console.error("No data found for the given ID:", id);
+  //       return;
+  //     }
+  //     const previousData = snapshot.val();
+  //     console.log("Previous Object:", previousData);
+
+  //     await update(tradeRef, data);
+  //     console.log("Data updated in Realtime Database for ID:", id);
+
+  //     const updatedSnapshot = await get(tradeRef);
+  //     const newData = updatedSnapshot.val();
+  //     console.log("Updated Object:", newData);
+
+  //     setPreviouseObj(previousData);
+  //     setUpdatedObj(newData);
+  //     const common = getCommonKeys(previousData, newData);
+  //     setCommonKeys(common);
+  //     console.log("Common Keys:", common);
+  //   } catch (e) {
+  //     console.error("Error updating data in Realtime Database: ", e);
+  //   }
+  // };
+
+  // const updateDataInRealtimeDB = async (data) => {
+  //   try {
+  //     const tradeRef = ref(realtimeDb, `trades/${id}`);
+
+  //     const snapshot = await get(tradeRef);
+  //     if (!snapshot.exists()) {
+  //       console.error("No data found for the given ID:", id);
+  //       return;
+  //     }
+  //     const previousData = snapshot.val();
+
+  //     const getCommonKeys = (obj1, obj2) => {
+  //       const keys1 = Object.keys(obj1);
+  //       const keys2 = Object.keys(obj2);
+  //       return keys1.filter((key) => keys2.includes(key));
+  //     };
+
+  //     const commonKeys = getCommonKeys(previousData, data);
+  //     console.log(commonKeys, "updateDataInRealtimeDB");
+  //     if (commonKeys.length === 0) {
+  //       console.log("No common keys found. Update operation skipped.");
+  //       return;
+  //     }
+  //     const filteredData = commonKeys.reduce((acc, key) => {
+  //       acc[key] = data[key];
+  //       return acc;
+  //     }, {});
+
+  //     await update(tradeRef, filteredData);
+  //     console.log(
+  //       "Data updated in Realtime Database for common keys:",
+  //       filteredData
+  //     );
+
+  //     const updatedSnapshot = await get(tradeRef);
+  //     const newData = updatedSnapshot.val();
+  //   } catch (e) {
+  //     console.error("Error updating data in Realtime Database:", e);
+  //   }
+  // };
+
+
+  const updateDataInRealtimeDB = async (data) => {
     try {
       const tradeRef = ref(realtimeDb, `trades/${id}`);
-      await update(tradeRef, data);
-      console.log("Data updated in Realtime Database for ID:", id);
+  
+      const snapshot = await get(tradeRef);
+      if (!snapshot.exists()) {
+        console.error("No data found for the given ID:", id);
+        return;
+      }
+  
+      const previousData = snapshot.val();
+      const getChangedKeys = (prev, curr) => {
+        return Object.keys(prev).filter((key) => {
+          if (key === "dateTime") return false; 
+  
+          if (typeof prev[key] === "object" && typeof curr[key] === "object") {
+            return JSON.stringify(prev[key]) !== JSON.stringify(curr[key]);
+          }
+          return prev[key] !== curr[key];
+        });
+      };
+  
+      const keysWithDifferences = getChangedKeys(previousData, data);
+  
+      if (keysWithDifferences.length === 0) {
+        alert("No changes detected. Update operation skipped.");
+        console.log("No changes detected between previousData and data.");
+        return;
+      }
+      const filteredData = keysWithDifferences.reduce((acc, key) => {
+        acc[key] = data[key];
+        return acc;
+      }, {});
+      keysWithDifferences.forEach((key) => {
+        if (typeof previousData[key] === "object" && typeof data[key] === "object") {
+          console.log(
+            `Key "${key}" changed from`,
+            JSON.stringify(previousData[key], null, 2),
+            "to",
+            JSON.stringify(data[key], null, 2)
+          );
+        } else {
+          console.log(
+            `Key "${key}" changed from "${previousData[key]}" to "${data[key]}"`
+          );
+        }
+      });
+  
+      await update(tradeRef, filteredData);
+      console.log(
+        "Data updated in Realtime Database for changed keys:",
+        filteredData
+      );
+      const updatedSnapshot = await get(tradeRef);
+      const newData = updatedSnapshot.val();
+      console.log("Updated data in Realtime Database:", newData);
+  
     } catch (e) {
-      console.error("Error updating data in Realtime Database: ", e);
+      console.error("Error updating data in Realtime Database:", e);
     }
   };
+  
 
   const saveDataToRealtimeDB = async (data) => {
     // const first = await sendMessage();
@@ -277,45 +421,47 @@ const TradeEntryForm = () => {
           currentDateTime.toLocaleString()
         );
       }
-
       const dataToSave = {
         ...formData,
         dateTime: formData.dateTime || new Date().toISOString(),
       };
+
+      let isSavedOrUpdated = false;
       if (id) {
-        if (isChanged) {
-          await updateDataInRealtimeDB(dataToSave);
-          setAddBroker(false);
-          navigate(`/admin-dashboard`);
-          setUpdateBroker(null);
-          setIsChanged(false);
-        }
+        await updateDataInRealtimeDB(dataToSave);
+        isSavedOrUpdated = true;
+        setAddBroker(false);
+        navigate(`/admin-dashboard`);
+        setUpdateBroker(null);
       } else {
         await saveDataToRealtimeDB(dataToSave);
+        isSavedOrUpdated = true;
       }
-      setFormData({
-        symbol: "XAUUSD",
-        dateTime: "",
-        entryPriceFrom: "",
-        entryPriceTo: "",
-        stopLoss: "",
-        target1: "",
-        target2: "",
-        target3: "",
-        target4: "",
-        comment: "",
-        position: "",
-        uuid: "",
-        massage_Id: "",
-        stopLossEnabled: false,
-        completed: false,
-        targetsChecked: {
+      if (isSavedOrUpdated) {
+        setFormData({
+          symbol: "XAUUSD",
+          dateTime: "",
+          entryPriceFrom: "",
+          entryPriceTo: "",
+          stopLoss: "",
           target1: "",
           target2: "",
           target3: "",
           target4: "",
-        },
-      });
+          comment: "",
+          position: "",
+          uuid: "",
+          massage_Id: "",
+          stopLossEnabled: false,
+          completed: false,
+          targetsChecked: {
+            target1: "",
+            target2: "",
+            target3: "",
+            target4: "",
+          },
+        });
+      }
     } catch (error) {
       console.error("Error during data save:", error);
     } finally {
@@ -415,59 +561,11 @@ const TradeEntryForm = () => {
 
   // compare objects
 
-  const handleCompare = () => {
-    let obj1 = {
-      symbol: formData.symbol,
-      dateTime: formData.dateTime,
-      entryPriceFrom: formData.entryPriceFrom,
-      entryPriceTo: formData.entryPriceTo,
-      stopLoss: formData.stopLoss,
-      target1: formData.target1,
-      target2: formData.target2,
-      target3: formData.target3,
-      target4: formData.target4,
-      comment: formData.comment,
-      position: formData.position,
-      stopLossEnabled: formData.stopLossEnabled,
-      completed: formData.completed,
-      targetsChecked: {
-        target1: "",
-        target2: "",
-        target3: "",
-        target4: "",
-      },
-    };
-
-    let obj2 = {
-      symbol: formData.symbol,
-      dateTime: formData.dateTime,
-      entryPriceFrom: formData.entryPriceFrom,
-      entryPriceTo: formData.entryPriceTo,
-      stopLoss: formData.stopLoss,
-      target1: formData.target1,
-      target2: formData.target2,
-      target3: formData.target3,
-      target4: formData.target4,
-      comment: formData.comment,
-      position: formData.position,
-      stopLossEnabled: formData.stopLossEnabled,
-      completed: formData.completed,
-      targetsChecked: {
-        target1: "",
-        target2: "",
-        target3: "",
-        target4: "",
-      },
-    };
-
-    let different = {};
-    for (let key in obj1) {
-      if (obj1[key] !== obj2[key]) {
-        different[key] = obj2[key];
-      }
-    }
-
-    console.log("Different:", different);
+  const getCommonKeys = (obj1, obj2) => {
+    const keys1 = Object.keys(obj1);
+    const keys2 = Object.keys(obj2);
+    const commonKeys = keys1.filter((key) => keys2.includes(key));
+    return commonKeys;
   };
 
   return (
