@@ -252,7 +252,6 @@ const TradeEntryForm = () => {
           newTradeRef.key
         );
         setAddBroker(false);
-
       } else {
         alert("Symbol not found in the database");
       }
@@ -412,6 +411,63 @@ const TradeEntryForm = () => {
       ...prev,
       completed: !prev.completed,
     }));
+  };
+
+  // compare objects
+
+  const handleCompare = () => {
+    let obj1 = {
+      symbol: formData.symbol,
+      dateTime: formData.dateTime,
+      entryPriceFrom: formData.entryPriceFrom,
+      entryPriceTo: formData.entryPriceTo,
+      stopLoss: formData.stopLoss,
+      target1: formData.target1,
+      target2: formData.target2,
+      target3: formData.target3,
+      target4: formData.target4,
+      comment: formData.comment,
+      position: formData.position,
+      stopLossEnabled: formData.stopLossEnabled,
+      completed: formData.completed,
+      targetsChecked: {
+        target1: "",
+        target2: "",
+        target3: "",
+        target4: "",
+      },
+    };
+
+    let obj2 = {
+      symbol: formData.symbol,
+      dateTime: formData.dateTime,
+      entryPriceFrom: formData.entryPriceFrom,
+      entryPriceTo: formData.entryPriceTo,
+      stopLoss: formData.stopLoss,
+      target1: formData.target1,
+      target2: formData.target2,
+      target3: formData.target3,
+      target4: formData.target4,
+      comment: formData.comment,
+      position: formData.position,
+      stopLossEnabled: formData.stopLossEnabled,
+      completed: formData.completed,
+      targetsChecked: {
+        target1: "",
+        target2: "",
+        target3: "",
+        target4: "",
+      },
+    };
+
+    let different = {};
+    for (let key in obj1) {
+      if (obj1[key] !== obj2[key]) {
+        different[key] = obj2[key];
+      }
+    }
+
+    console.log("Different:", different);
   };
 
   return (
@@ -812,11 +868,8 @@ const TradeEntryForm = () => {
               cancel
             </button>
             <button
-              disabled={!isChanged}
               type="submit"
-              className={`btn_dark text-white py-2 px-4 rounded-md  transition duration-300 ${
-                !isChanged ? "pointer-events-none !bg-[gray]" : "opacity-100"
-              }`}
+              className={`btn_dark text-white py-2 px-4 rounded-md  transition duration-300 `}
             >
               Submit
             </button>
