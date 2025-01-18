@@ -51,6 +51,7 @@ const DashboardTable = () => {
           ></div>
 
           <TradeEntryForm setAddBroker={setAddBroker} />
+          {/* <TradeEntryForm setAddBroker={setAddBroker} /> */}
         </div>
       )}
       {location.pathname.endsWith("/dashboard/user-profile") && (

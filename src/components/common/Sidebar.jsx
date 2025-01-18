@@ -114,7 +114,7 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                   onClick={sideMenu}
                   to={"detto-settings"}
                   className={`flex items-center py-2.5 text-primary_clr font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-hover_secondry_clr hover:text-tertiary_clr ${
-                    location.pathname === "/dashboard/detto-settings"
+                    location.pathname === "/admin-dashboard/detto-settings"
                       ? "bg-secondry_clr hover:!bg-[#C42B1E30] text-tertiary_clr"
                       : ""
                   }`}
@@ -134,7 +134,7 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
 
               <div
                 className={` px-3 ${
-                  location.pathname === "/dashboard/settings"
+                  location.pathname === "/admin-dashboard/settings"
                     ? "relative after:absolute after:bg-tertiary_clr after:rounded-md after:-right-3 after:top-0 after:h-full after:w-4 z-10"
                     : ""
                 }`}
@@ -143,7 +143,7 @@ const Sidebar = ({ sideMenu, sidebarFixed }) => {
                   onClick={sideMenu}
                   to={"settings"}
                   className={`flex items-center py-2.5 text-primary_clr font-medium rounded-lg no-underline whitespace-nowrap capitalize px-2 hover:bg-hover_secondry_clr hover:text-tertiary_clr ${
-                    location.pathname === "/dashboard/settings"
+                    location.pathname === "/admin-dashboard/settings"
                       ? "bg-secondry_clr hover:!bg-[#C42B1E30] text-tertiary_clr"
                       : ""
                   }`}

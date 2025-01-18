@@ -416,21 +416,22 @@ const TradeEntryForm = () => {
           }}
           className="fixed top-0 left-0 h-screen w-full flex justify-center items-center z-0"
         ></div>
-        <h2 className="font-bold text-lg lg:text-xl text-black mb-6 z-10 relative flex justify-between">
-          Add Broker
-          <span
+   
+         <span className="font-bold text-lg lg:text-xl text-black mb-0 relative z-[1] "> Add Broker</span>
+         
+         <span
             onClick={() => {
               setAddBroker(false);
               setUpdateBroker(null);
             }}
-            className="text-4xl text-primary_clr cursor-pointer "
+            className="text-3xl text-primary_clr cursor-pointer absolute top-2 right-4"
           >
             {" "}
             &times;
           </span>
-        </h2>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="relative">
+     
           <div className="overflow-auto h-[400px] py-2">
             <div className="mb-3 relative">
               <label
@@ -513,7 +514,7 @@ const TradeEntryForm = () => {
               <label
                 id="dateTime"
                 onClick={() => handleFocus("dateTime")}
-                className={`mb-1 text-primary_clr  absolute left-2 duration-300 ${
+                className={`mb-1 text-primary_clr absolute left-2 duration-300 ${
                   isFocused.dateTime || updateBroker
                     ? "text-xs top-0 -translate-y-1/2 bg-white text-primary_clr opacity-100 px-1.5  z-10 "
                     : " top-1/2 -translate-y-1/2 opacity-0"
@@ -523,13 +524,13 @@ const TradeEntryForm = () => {
               </label>
               <input
                 // required
-                type="datetime-local"
+                type="date"
                 id="dateTime"
                 name="dateTime"
                 onFocus={() => handleFocus("dateTime")}
                 value={formData.dateTime}
                 onChange={handleChange}
-                className="w-full p-2 py-3 border-2 border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none  focus:border-tertiary_clr"
+                className="w-full p-2 py-3 border-2 border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none  focus:border-tertiary_clr relative z-[9] "
               />
             </div>
             <div
@@ -605,7 +606,9 @@ const TradeEntryForm = () => {
                   value={formData.entryPriceFrom}
                   onChange={handleChange}
                   onFocus={() => handleFocus("entryPriceFrom")}
-                  placeholder={`${isFocused.entryPriceFrom ? " " : " Entry Price From"}`}
+                  placeholder={`${
+                    isFocused.entryPriceFrom ? " " : " Entry Price From"
+                  }`}
                   className="w-full p-2 border border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none z-[9] relative"
                 />
               </div>
@@ -629,8 +632,9 @@ const TradeEntryForm = () => {
                   value={formData.entryPriceTo}
                   onFocus={() => handleFocus("entryPriceTo")}
                   onChange={handleChange}
-                
-                  placeholder={`${isFocused.entryPriceTo ? " " : "Entry Price To"}`}
+                  placeholder={`${
+                    isFocused.entryPriceTo ? " " : "Entry Price To"
+                  }`}
                   className="w-full p-2 border border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none relative z-[9]"
                 />
               </div>
@@ -713,7 +717,11 @@ const TradeEntryForm = () => {
                       value={formData[`target${target}`]}
                       onChange={handleChange}
                       onFocus={() => handleFocus(`target${target}`)}
-                      placeholder={`${isFocused.targetsChecked[`target${target}`]? " " : `target${target}`}`}
+                      placeholder={`${
+                        isFocused.targetsChecked[`target${target}`]
+                          ? " "
+                          : `target${target}`
+                      }`}
                       className="w-full p-2 border border-[#C42B1E1F] text-[#97514b] formInput rounded-md outline-none pe-2 realtive z-[9]"
                     />
                     <input
@@ -765,7 +773,7 @@ const TradeEntryForm = () => {
               type="button"
               className="btn_light text-tertiary_clr py-2 px-4 rounded-md  transition duration-300"
             >
-              cencel
+              cancel
             </button>
             <button
               type="submit"
