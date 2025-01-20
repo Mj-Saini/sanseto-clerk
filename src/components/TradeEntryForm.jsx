@@ -231,90 +231,69 @@ const TradeEntryForm = () => {
       console.error("Error sending Telegram message: ", error);
     }
   };
-  // const updateDataInRealtimeDB = async (data) => {
-  //   // UpdateTelegramMessage();
-
-  //   try {
-  //     const tradeRef = ref(realtimeDb, `trades/${id}`);
-  //     await update(tradeRef, data);
-  //     setPreviouseObj(tradeRef)
-  //     console.log("Data updated in Realtime Database for ID:", id);
-  //   } catch (e) {
-  //     console.error("Error updating data in Realtime Database: ", e);
-  //   }
-  // };
 
   // const updateDataInRealtimeDB = async (data) => {
   //   try {
   //     const tradeRef = ref(realtimeDb, `trades/${id}`);
-
-  //     // Step 1: Retrieve the previous data
+  
   //     const snapshot = await get(tradeRef);
   //     if (!snapshot.exists()) {
   //       console.error("No data found for the given ID:", id);
   //       return;
   //     }
+  
   //     const previousData = snapshot.val();
-  //     console.log("Previous Object:", previousData);
-
-  //     await update(tradeRef, data);
-  //     console.log("Data updated in Realtime Database for ID:", id);
-
-  //     const updatedSnapshot = await get(tradeRef);
-  //     const newData = updatedSnapshot.val();
-  //     console.log("Updated Object:", newData);
-
-  //     setPreviouseObj(previousData);
-  //     setUpdatedObj(newData);
-  //     const common = getCommonKeys(previousData, newData);
-  //     setCommonKeys(common);
-  //     console.log("Common Keys:", common);
-  //   } catch (e) {
-  //     console.error("Error updating data in Realtime Database: ", e);
-  //   }
-  // };
-
-  // const updateDataInRealtimeDB = async (data) => {
-  //   try {
-  //     const tradeRef = ref(realtimeDb, `trades/${id}`);
-
-  //     const snapshot = await get(tradeRef);
-  //     if (!snapshot.exists()) {
-  //       console.error("No data found for the given ID:", id);
-  //       return;
-  //     }
-  //     const previousData = snapshot.val();
-
-  //     const getCommonKeys = (obj1, obj2) => {
-  //       const keys1 = Object.keys(obj1);
-  //       const keys2 = Object.keys(obj2);
-  //       return keys1.filter((key) => keys2.includes(key));
+  //     const getChangedKeys = (prev, curr) => {
+  //       return Object.keys(prev).filter((key) => {
+  //         if (key === "dateTime") return false; 
+  
+  //         if (typeof prev[key] === "object" && typeof curr[key] === "object") {
+  //           return JSON.stringify(prev[key]) !== JSON.stringify(curr[key]);
+  //         }
+  //         return prev[key] !== curr[key];
+  //       });
   //     };
-
-  //     const commonKeys = getCommonKeys(previousData, data);
-  //     console.log(commonKeys, "updateDataInRealtimeDB");
-  //     if (commonKeys.length === 0) {
-  //       console.log("No common keys found. Update operation skipped.");
+  
+  //     const keysWithDifferences = getChangedKeys(previousData, data);
+  
+  //     if (keysWithDifferences.length === 0) {
+  //       alert("No changes detected. Update operation skipped.");
+  //       console.log("No changes detected between previousData and data.");
   //       return;
   //     }
-  //     const filteredData = commonKeys.reduce((acc, key) => {
+  //     const filteredData = keysWithDifferences.reduce((acc, key) => {
   //       acc[key] = data[key];
   //       return acc;
   //     }, {});
-
+  //     keysWithDifferences.forEach((key) => {
+  //       if (typeof previousData[key] === "object" && typeof data[key] === "object") {
+  //         console.log(
+  //           `Key "${key}" changed from`,
+  //           JSON.stringify(previousData[key], null, 2),
+  //           "to",
+  //           JSON.stringify(data[key], null, 2)
+  //         );
+  //       } else {
+  //         console.log(
+  //           `Key "${key}" changed from "${previousData[key]}" to "${data[key]}"`
+  //         );
+  //       }
+  //     });
+  
   //     await update(tradeRef, filteredData);
   //     console.log(
-  //       "Data updated in Realtime Database for common keys:",
+  //       "Data updated in Realtime Database for changed keys:",
   //       filteredData
   //     );
-
   //     const updatedSnapshot = await get(tradeRef);
   //     const newData = updatedSnapshot.val();
+  //     console.log("Updated data in Realtime Database:", newData);
+  
   //   } catch (e) {
   //     console.error("Error updating data in Realtime Database:", e);
   //   }
   // };
-
+  
 
   const updateDataInRealtimeDB = async (data) => {
     try {
@@ -327,14 +306,22 @@ const TradeEntryForm = () => {
       }
   
       const previousData = snapshot.val();
-      const getChangedKeys = (prev, curr) => {
-        return Object.keys(prev).filter((key) => {
-          if (key === "dateTime") return false; 
   
-          if (typeof prev[key] === "object" && typeof curr[key] === "object") {
-            return JSON.stringify(prev[key]) !== JSON.stringify(curr[key]);
+      // Compare two objects to find changed keys
+      const getChangedKeys = (prev, curr) => {
+        return Object.keys({ ...prev, ...curr }).filter((key) => {
+          if (key === "dateTime") return false; // Skip "dateTime" comparison
+  
+          const prevValue = prev[key];
+          const currValue = curr[key];
+  
+          // Handle nested objects with deep comparison
+          if (typeof prevValue === "object" && typeof currValue === "object") {
+            return JSON.stringify(prevValue) !== JSON.stringify(currValue);
           }
-          return prev[key] !== curr[key];
+  
+          // Explicitly check for differences, including falsy values
+          return prevValue !== currValue;
         });
       };
   
@@ -345,10 +332,12 @@ const TradeEntryForm = () => {
         console.log("No changes detected between previousData and data.");
         return;
       }
+  
       const filteredData = keysWithDifferences.reduce((acc, key) => {
         acc[key] = data[key];
         return acc;
       }, {});
+  
       keysWithDifferences.forEach((key) => {
         if (typeof previousData[key] === "object" && typeof data[key] === "object") {
           console.log(
@@ -369,6 +358,7 @@ const TradeEntryForm = () => {
         "Data updated in Realtime Database for changed keys:",
         filteredData
       );
+  
       const updatedSnapshot = await get(tradeRef);
       const newData = updatedSnapshot.val();
       console.log("Updated data in Realtime Database:", newData);

@@ -1,34 +1,30 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-import { useEffect, useState } from "react";
-import { Container, Table, Button, Form, Dropdown } from "react-bootstrap";
+import { useState } from "react";
+import { Dropdown } from "react-bootstrap";
 import ChangeParentPopup from "./ChangeParentPopup";
 import { NextPageIcon, PrevArrowIcon, PrevPageIcon } from "./common/Icons";
-import dittoPlan from "../assets/images/png/ditto-plan-img.png";
-import { Link } from "react-router-dom";
-import { onValue, ref } from "firebase/database";
-import { realtimeDb } from "./firebase";
 import CommonTable from "./common/CommonTable";
 import { useContextProvider } from "../context/ContextProvider";
-import AdminDashboard from '../routes/admin-routes/AdminDashboard';
+import AttechChildPopup from "./AttechChildPopup";
 
 const DittoSettings = () => {
-  const {data,
-    itemsPerPage, 
-    currentPage, 
+  const {
+    data,
+    itemsPerPage,
+    currentPage,
     totalPages,
     handlePageChange,
     handleItemsPerPageChange,
-    } =useContextProvider()
+  } = useContextProvider();
   const [show, setShow] = useState(false);
-  const [addParents, setAddParents] = useState(false);
+  const [attachChildPopup, setAttachChildPopup] = useState(false);
 
   const handleRefresh = () => {
     window.location.reload();
   };
 
   const isAdminDashboard = location.pathname.startsWith("/admin-dashboard");
-
 
   return (
     <div className="py-2">
@@ -40,6 +36,19 @@ const DittoSettings = () => {
           ></div>
 
           <ChangeParentPopup setShow={setShow} show={show} />
+        </div>
+      )}
+      {attachChildPopup && (
+        <div className="fixed top-0 left-0 h-screen w-full flex justify-center items-center z-50">
+          <div
+            onClick={() => setAttachChildPopup(false)}
+            className="fixed top-0 left-0 h-screen w-full flex justify-center items-center bg-black/50 "
+          ></div>
+
+          <AttechChildPopup
+            setShow={setAttachChildPopup}
+            show={attachChildPopup}
+          />
         </div>
       )}
       {/* Parent Broker Section */}
@@ -72,12 +81,18 @@ const DittoSettings = () => {
             </div>
             {/* Functional Buttons */}
             <div className=" p-[6px]">
-              <button onClick={()=>setShow(true)} className="bg-[#F6E7E5] hover:bg-[#F1DAD6] uppercase text-tertiary_clr  font-bold whitespace-nowrap border-red-400 px-4 py-[10px] rounded  w-full text-sm">
+              <button
+                onClick={() => setShow(true)}
+                className="bg-[#F6E7E5] hover:bg-[#F1DAD6] uppercase text-tertiary_clr  font-bold whitespace-nowrap border-red-400 px-4 py-[10px] rounded  w-full text-sm"
+              >
                 Change Parent
               </button>
             </div>
             <div className=" p-[6px]">
-              <button className="bg-[#F6E7E5] hover:bg-[#F1DAD6] uppercase text-tertiary_clr text-sm  font-bold whitespace-nowrap border-red-400 px-4 py-[10px] rounded  w-full">
+              <button
+                onClick={() => setAttachChildPopup(true)}
+                className="bg-[#F6E7E5] hover:bg-[#F1DAD6] uppercase text-tertiary_clr text-sm  font-bold whitespace-nowrap border-red-400 px-4 py-[10px] rounded  w-full"
+              >
                 Attach Child
               </button>
             </div>
