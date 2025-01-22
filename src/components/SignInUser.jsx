@@ -4,6 +4,7 @@ const customAppearance = {
   variables: {
     colorPrimary: "#c43b1e", 
     colorText: "#6e3b37", 
+    
   },
   elements: {
     card: {

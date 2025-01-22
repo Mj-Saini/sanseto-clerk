@@ -270,6 +270,27 @@ td{
 }
 
 
+/* USERPROFILE CUSTOM CLASS */
+.cl-button {
+  color: #6e3b37!important;
+}
+.cl-internal-av4ev0{
+  opacity: 1 !important;
+}
+.cl-active {
+  background-color: #c42b1e29!important;
+  color: #c42b1e!important;
+}
+
+.clerk-logo {
+  background-image: url('/vite.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 150px; /* Adjust the logo height */
+  width: 250px;  /* Adjust the logo width */
+  margin: 0 auto; /* Center the logo */
+}
+
 /* LOADING ANIMATION */
 
 .loader {
