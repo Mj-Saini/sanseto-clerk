@@ -235,27 +235,27 @@ const TradeEntryForm = () => {
   // const updateDataInRealtimeDB = async (data) => {
   //   try {
   //     const tradeRef = ref(realtimeDb, `trades/${id}`);
-  
+
   //     const snapshot = await get(tradeRef);
   //     if (!snapshot.exists()) {
   //       console.error("No data found for the given ID:", id);
   //       return;
   //     }
-  
+
   //     const previousData = snapshot.val();
   //     const getChangedKeys = (prev, curr) => {
   //       return Object.keys(prev).filter((key) => {
-  //         if (key === "dateTime") return false; 
-  
+  //         if (key === "dateTime") return false;
+
   //         if (typeof prev[key] === "object" && typeof curr[key] === "object") {
   //           return JSON.stringify(prev[key]) !== JSON.stringify(curr[key]);
   //         }
   //         return prev[key] !== curr[key];
   //       });
   //     };
-  
+
   //     const keysWithDifferences = getChangedKeys(previousData, data);
-  
+
   //     if (keysWithDifferences.length === 0) {
   //       alert("No changes detected. Update operation skipped.");
   //       console.log("No changes detected between previousData and data.");
@@ -279,7 +279,7 @@ const TradeEntryForm = () => {
   //         );
   //       }
   //     });
-  
+
   //     await update(tradeRef, filteredData);
   //     console.log(
   //       "Data updated in Realtime Database for changed keys:",
@@ -288,58 +288,57 @@ const TradeEntryForm = () => {
   //     const updatedSnapshot = await get(tradeRef);
   //     const newData = updatedSnapshot.val();
   //     console.log("Updated data in Realtime Database:", newData);
-  
+
   //   } catch (e) {
   //     console.error("Error updating data in Realtime Database:", e);
   //   }
   // };
-  
 
   const updateDataInRealtimeDB = async (data) => {
     try {
       const tradeRef = ref(realtimeDb, `trades/${id}`);
-  
+
       const snapshot = await get(tradeRef);
       if (!snapshot.exists()) {
         console.error("No data found for the given ID:", id);
         return;
       }
-  
+
       const previousData = snapshot.val();
-  
-      // Compare two objects to find changed keys
+
       const getChangedKeys = (prev, curr) => {
         return Object.keys({ ...prev, ...curr }).filter((key) => {
-          if (key === "dateTime") return false; // Skip "dateTime" comparison
-  
+          if (key === "dateTime") return false;
+
           const prevValue = prev[key];
           const currValue = curr[key];
-  
-          // Handle nested objects with deep comparison
+
           if (typeof prevValue === "object" && typeof currValue === "object") {
             return JSON.stringify(prevValue) !== JSON.stringify(currValue);
           }
-  
-          // Explicitly check for differences, including falsy values
+
           return prevValue !== currValue;
         });
       };
-  
+
       const keysWithDifferences = getChangedKeys(previousData, data);
-  
+
       if (keysWithDifferences.length === 0) {
         alert("No changes detected. Update operation skipped.");
         console.log("No changes detected between previousData and data.");
         return;
       }
-  
+
       const filteredData = keysWithDifferences.reduce((acc, key) => {
         acc[key] = data[key];
         return acc;
       }, {});
-  
+
       keysWithDifferences.forEach((key) => {
-        if (typeof previousData[key] === "object" && typeof data[key] === "object") {
+        if (
+          typeof previousData[key] === "object" &&
+          typeof data[key] === "object"
+        ) {
           console.log(
             `Key "${key}" changed from`,
             JSON.stringify(previousData[key], null, 2),
@@ -352,22 +351,20 @@ const TradeEntryForm = () => {
           );
         }
       });
-  
+
       await update(tradeRef, filteredData);
       console.log(
         "Data updated in Realtime Database for changed keys:",
         filteredData
       );
-  
+
       const updatedSnapshot = await get(tradeRef);
       const newData = updatedSnapshot.val();
       console.log("Updated data in Realtime Database:", newData);
-  
     } catch (e) {
       console.error("Error updating data in Realtime Database:", e);
     }
   };
-  
 
   const saveDataToRealtimeDB = async (data) => {
     // const first = await sendMessage();

@@ -75,10 +75,10 @@ const UserLogin = () => {
             <Route path="price" element={<PriceSettings />} />
           </Route>
         </Route>
-        <Route path="/sign-in" element={<SignInUser />}>
+        <Route path="/signIn" element={<SignInUser />}>
           <Route path="factor-one" element={<FactorOne />} />
         </Route>
-        <Route path="/sign-up" element={<SignUpUser />}>
+        <Route path="/signUp" element={<SignUpUser />}>
           <Route path="verify-email-address" element={<VerifyEmailUser />} />
         </Route>
         <Route path="/admin-login" element={<AdminLogin />} />
@@ -112,7 +112,7 @@ const RedirectToSignIn = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    navigate("/sign-up"); 
+    navigate("/signUp"); 
   }, [navigate]);
 
   return null; 

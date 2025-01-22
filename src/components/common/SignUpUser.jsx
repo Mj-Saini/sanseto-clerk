@@ -26,7 +26,7 @@ const SignUpUser = () => {
       }}
     >
       <SignUp
-        path="/sign-up"
+        path="/signUp"
         routing="path"
         redirectUrl="/dashboard" 
         afterSignUpUrl="/dashboard" 

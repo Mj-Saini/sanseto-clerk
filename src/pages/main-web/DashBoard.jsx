@@ -56,7 +56,7 @@ const DashBoard = () => {
     try {
       await signOut();
       alert("Logged out successfully");
-      navigate("/sign-in");
+      navigate("/signIn");
     } catch (error) {
       console.error("Error during logout:", error);
     }
